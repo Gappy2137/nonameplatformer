@@ -6,7 +6,7 @@
 #macro GAME_HEIGHT 270
 
 #macro MAIN_VIEWPORT 0
-#macro MAIN_CAMERA view_camera[0]
+#macro MAIN_CAMERA view_camera[MAIN_VIEWPORT]
 
 // Glowne zmienne
 
@@ -58,7 +58,7 @@ for (var i = 1; i <= room_last; i++) {
 	
 		room_set_viewport(i, MAIN_VIEWPORT, true,
 		0, 0,
-		global.game.windowWidth, global.game.windowHeight);
+		GAME_WIDTH, GAME_HEIGHT);
 		
 		room_set_view_enabled(i, true);
 		
