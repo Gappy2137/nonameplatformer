@@ -1,0 +1,1 @@
+canCollide = true;
