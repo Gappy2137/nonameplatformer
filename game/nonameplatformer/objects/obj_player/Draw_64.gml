@@ -1,7 +1,10 @@
 
-draw_text(16,16 + (16*0),"x:" + string(x));
-draw_text(16,16 + (16*1),"y:" + string(y));
-draw_text(16,16 + (16*2),"hsp:" + string(hsp));
-draw_text(16,16 + (16*3),"vsp:" + string(vsp));
-draw_text(16,16 + (16*4),"gravDir:" + string(gravDir));
-draw_text(16,16 + (16*5),"isGrounded:" + string(isGrounded));
+var i = 0;
+draw_text(16,16 + (16*i++),"x:" + string(x));
+draw_text(16,16 + (16*i++),"y:" + string(y));
+draw_text(16,16 + (16*i++),"hsp:" + string(hsp));
+draw_text(16,16 + (16*i++),"vsp:" + string(vsp));
+draw_text(16,16 + (16*i++),"isJumping:" + string(isJumping));
+draw_text(16,16 + (16*i++),"isGrounded:" + string(isGrounded));
+draw_text(16,16 + (16*i++),"canJump:" + string(canJump));
+draw_text(16,16 + (16*i++),"isFalling:" + string(isFalling));

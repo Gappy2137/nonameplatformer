@@ -16,7 +16,7 @@ following = noone;
 follow_type = 0;
 
 camMoveBorderX = 32;
-camMoveBorderY = 32;
+camMoveBorderY = 128;
 
 // Ustaw kamere
 

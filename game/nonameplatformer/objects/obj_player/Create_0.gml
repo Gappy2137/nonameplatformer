@@ -1,30 +1,40 @@
 obj_camera.following = id;
 
-spdBase = 1;
+counter = 0;
+
+slopeup = 0;
+slopedown = 0;
+
+spdBase = 2;
 spd = spdBase;
 hsp = 0;
 vsp = 0;
-
-jumpForce = 2;
+jumpForce = 2.55;
 
 dir = 0;
 facing = 1;
 
-gravBase = 0.1;
+gravBase = 0.15;
 grav = gravBase;
 gravDir = 270;
 
 accel = 0.6;
 deccel = 0.3;
 
-hspMax = 20;
+hspMax = 8;
 vspMax = 9;
 
 canJump = true;
 isJumping = false;
-isFalling = false;
+isFalling = true;
 isGrounded = false;
-inAir = false;
+inAir = true;
+
+jumpTimeThreshold = 10;
+jumpTime = 0;
+
+jumpBufferMax = 8;
+jumpBuffer = 0;
 
 var _my_method = function(){
 	instance_create_layer(x,y,"Instances",obj_trail);
