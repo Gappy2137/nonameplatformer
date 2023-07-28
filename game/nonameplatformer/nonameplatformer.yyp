@@ -48,9 +48,13 @@
     "IDEVersion": "2023.6.0.92",
   },
   "resources": [
+    {"id":{"name":"obj_semisolid_8","path":"objects/obj_semisolid_8/obj_semisolid_8.yy",},},
+    {"id":{"name":"par_semisolid","path":"objects/par_semisolid/par_semisolid.yy",},},
     {"id":{"name":"obj_camera","path":"objects/obj_camera/obj_camera.yy",},},
+    {"id":{"name":"spr_semisolid_8","path":"sprites/spr_semisolid_8/spr_semisolid_8.yy",},},
     {"id":{"name":"par_collision","path":"objects/par_collision/par_collision.yy",},},
     {"id":{"name":"rm_devroom","path":"rooms/rm_devroom/rm_devroom.yy",},},
+    {"id":{"name":"par_solid","path":"objects/par_solid/par_solid.yy",},},
     {"id":{"name":"obj_slope_8_dl","path":"objects/obj_slope_8_dl/obj_slope_8_dl.yy",},},
     {"id":{"name":"obj_trail","path":"objects/obj_trail/obj_trail.yy",},},
     {"id":{"name":"obj_player","path":"objects/obj_player/obj_player.yy",},},

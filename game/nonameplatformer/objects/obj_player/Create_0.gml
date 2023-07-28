@@ -18,17 +18,20 @@ gravBase = 0.15;
 grav = gravBase;
 gravDir = 270;
 
-accel = 0.6;
-deccel = 0.3;
+accel = 0.4;
+deccel = 0.2;
 
 hspMax = 8;
-vspMax = 9;
+vspMin = -9;
+vspMax = 4.5;
 
 canJump = true;
 isJumping = false;
 isFalling = true;
 isGrounded = false;
 inAir = true;
+isSkidding = false;
+isTurning = false;
 
 jumpTimeThreshold = 10;
 jumpTime = 0;

@@ -28,7 +28,11 @@
     {"name":"Paths","order":1,"path":"folders/Third_Group/Paths.yy",},
   ],
   "ResourceOrderSettings": [
+    {"name":"obj_semisolid_8","order":5,"path":"objects/obj_semisolid_8/obj_semisolid_8.yy",},
+    {"name":"par_semisolid","order":4,"path":"objects/par_semisolid/par_semisolid.yy",},
     {"name":"obj_camera","order":1,"path":"objects/obj_camera/obj_camera.yy",},
+    {"name":"spr_semisolid_8","order":5,"path":"sprites/spr_semisolid_8/spr_semisolid_8.yy",},
+    {"name":"par_solid","order":5,"path":"objects/par_solid/par_solid.yy",},
     {"name":"obj_slope_8_dl","order":1,"path":"objects/obj_slope_8_dl/obj_slope_8_dl.yy",},
     {"name":"obj_trail","order":1,"path":"objects/obj_trail/obj_trail.yy",},
     {"name":"obj_slope_8_ul","order":3,"path":"objects/obj_slope_8_ul/obj_slope_8_ul.yy",},

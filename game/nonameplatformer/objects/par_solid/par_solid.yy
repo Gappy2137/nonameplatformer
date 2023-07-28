@@ -1,18 +1,17 @@
 {
   "resourceType": "GMObject",
   "resourceVersion": "1.0",
-  "name": "obj_solid_8",
-  "eventList": [],
+  "name": "par_solid",
+  "eventList": [
+    {"resourceType":"GMEvent","resourceVersion":"1.0","name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,},
+  ],
   "managed": true,
   "overriddenProperties": [],
   "parent": {
-    "name": "_DEV",
-    "path": "folders/Base_Group/Objects/_DEV.yy",
+    "name": "_PARENTS",
+    "path": "folders/Base_Group/Objects/_PARENTS.yy",
   },
-  "parentObjectId": {
-    "name": "par_solid",
-    "path": "objects/par_solid/par_solid.yy",
-  },
+  "parentObjectId": null,
   "persistent": false,
   "physicsAngularDamping": 0.1,
   "physicsDensity": 0.5,
@@ -28,10 +27,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_solid_8",
-    "path": "sprites/spr_solid_8/spr_solid_8.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": false,
 }

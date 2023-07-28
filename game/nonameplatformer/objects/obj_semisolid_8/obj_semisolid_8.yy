@@ -1,7 +1,7 @@
 {
   "resourceType": "GMObject",
   "resourceVersion": "1.0",
-  "name": "obj_solid_8",
+  "name": "obj_semisolid_8",
   "eventList": [],
   "managed": true,
   "overriddenProperties": [],
@@ -10,8 +10,8 @@
     "path": "folders/Base_Group/Objects/_DEV.yy",
   },
   "parentObjectId": {
-    "name": "par_solid",
-    "path": "objects/par_solid/par_solid.yy",
+    "name": "par_semisolid",
+    "path": "objects/par_semisolid/par_semisolid.yy",
   },
   "persistent": false,
   "physicsAngularDamping": 0.1,
@@ -29,8 +29,8 @@
   "properties": [],
   "solid": false,
   "spriteId": {
-    "name": "spr_solid_8",
-    "path": "sprites/spr_solid_8/spr_solid_8.yy",
+    "name": "spr_semisolid_8",
+    "path": "sprites/spr_semisolid_8/spr_semisolid_8.yy",
   },
   "spriteMaskId": null,
   "visible": false,

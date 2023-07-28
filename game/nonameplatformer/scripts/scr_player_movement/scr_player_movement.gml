@@ -14,6 +14,7 @@ function scr_player_movement() {
 	if (horKeypress != 0) {
 		
 		hsp = lerp(hsp, spd * horKeypress, accel);
+		facing = horKeypress;
 
 	} else {
 		
@@ -21,9 +22,11 @@ function scr_player_movement() {
 
 	}
 	
+	var semisolidCollision =  collision_rectangle(bbox_left, bbox_bottom, bbox_right, bbox_bottom + 1, par_semisolid, true, false);
 	
-	if (instance_place(x, y + 1, par_collision))
-	|| (collision_rectangle(bbox_left, bbox_bottom, bbox_right, bbox_bottom, par_slope, true, false)) {
+	if ( (instance_place(x, y + 1, par_solid))
+	|| (collision_rectangle(bbox_left, bbox_bottom, bbox_right, bbox_bottom, par_slope, true, false)) )
+	|| ( (vsp >= 0) && (semisolidCollision) && (bbox_bottom <= semisolidCollision.bbox_top) ) {
 		
 		isGrounded = true;
 		inAir = false;
@@ -31,8 +34,7 @@ function scr_player_movement() {
 		jumpThreshold = 0;
 		canJump = true;
 		jumpTime = 0;
-			
-	
+
 	} else {
 	
 		isGrounded = false;
@@ -40,11 +42,14 @@ function scr_player_movement() {
 	
 	}
 	
+	if (isGrounded) coyoteTime = coyoteMax;
+	
 	// Blisko scian nie uzywamy ulamkowych czesci pozycji zeby nie bylo problemow z kolizjami
 	
-	if (collision_rectangle(bbox_left - 1, bbox_bottom - 1, bbox_right + 1, bbox_bottom - 1, par_collision, true, false)) x = round(x);
+	if (collision_rectangle(bbox_left - 1, bbox_bottom - 2, bbox_right + 1, bbox_bottom - 1, par_solid, false, false)) x = round(x);
 	
-	if (collision_rectangle(bbox_left - 1, bbox_bottom, bbox_right + 1, bbox_bottom + 4, par_collision, true, false)) y = round(y);
+	if (collision_rectangle(bbox_left, bbox_bottom, bbox_right, bbox_bottom + 4, par_solid, false, false)) y = round(y);
+	if (collision_rectangle(bbox_left, bbox_bottom, bbox_right, bbox_bottom + 1, par_semisolid, true, false)) y = round(y);
 	
 	
 	isFalling = vsp > 0 ? true : false;
@@ -118,22 +123,19 @@ function scr_player_movement() {
 		
 		}
 	
-	} else {
-	
-		coyoteTime = coyoteMax;
-	
 	}
 	
 	hsp = clamp(hsp, -hspMax, hspMax);
-	vsp = clamp(vsp, -vspMax, vspMax);
+	vsp = clamp(vsp, vspMin, vspMax);
 	
-	var horCollision = instance_place(x + hsp, y, par_collision);
+	var horCollision = instance_place(x + hsp, y, par_solid);
 	
 	if (horCollision) 
 	&& (object_get_parent(horCollision.object_index) != par_slope)
-	&& (object_get_parent(horCollision.object_index) != par_slope_inv) {
+	&& (object_get_parent(horCollision.object_index) != par_slope_inv)
+	&& (object_get_parent(horCollision.object_index) != par_semisolid){
 
-		while (!instance_place(x + sign(hsp), y, par_collision)) {
+		while (!instance_place(x + sign(hsp), y, par_solid)) {
 			x += sign(hsp);
 		}
 			
@@ -152,7 +154,7 @@ function scr_player_movement() {
 		while ( (!instance_place(x + round(hsp), y + yplus + 1, par_slope)) && (yplus <= abs(2*round(hsp))) )
 			yplus++;
 	    
-		if !instance_place(x + hsp, y + yplus, par_collision) {
+		if !instance_place(x + hsp, y + yplus, par_solid) {
 			
 			y += yplus;
 
@@ -168,9 +170,9 @@ function scr_player_movement() {
 		while ( (instance_place(x + hsp, y - yplus, par_slope)) && (yplus <= abs(2*hsp)) )
 			yplus += 1;
 	    
-		if instance_place(x + hsp, y - yplus, par_collision) {
+		if instance_place(x + hsp, y - yplus, par_solid) {
 			
-			while (!instance_place(x + sign(hsp), y, par_collision)) {
+			while (!instance_place(x + sign(hsp), y, par_solid)) {
 				x += sign(hsp);
 			}
 			
@@ -193,9 +195,9 @@ function scr_player_movement() {
 		while ( (instance_place(x + hsp, y + yplus, par_slope_inv)) && (yplus <= abs(2*hsp)) )
 			yplus += 1;
 	    
-		if instance_place(x + hsp, y + yplus, par_collision) {
+		if instance_place(x + hsp, y + yplus, par_solid) {
 			
-			while (!instance_place(x + sign(hsp), y, par_collision)) {
+			while (!instance_place(x + sign(hsp), y, par_solid)) {
 				x += sign(hsp);
 			}
 			
@@ -215,23 +217,21 @@ function scr_player_movement() {
 		var wallPassThreshold = bbox_right - bbox_half;					// length
 		var topThreshold = abs(vsp/2) + 1;
 		var topThresholdBlock = abs(vsp/2) + 4;
-	/*
-		if (collision_rectangle(bbox_half - wallPassThreshold, bbox_top - 1, bbox_half, bbox_top - 1, par_collision, true, false))
-		&& (!collision_rectangle(bbox_half, bbox_top - top, bbox_half + wallPassThreshold, bbox_top - top, par_collision, true, false)) {
-	
-			x += wallPassThreshold;
-	
-		}
-	*/
-	
+
 		if (hsp <= 1) {
 			
-			if (!collision_rectangle(bbox_left - wallPassThreshold, bbox_top - topThreshold, bbox_right - wallPassThreshold, bbox_bottom, par_collision, true, false)) {
+			var blockCol = collision_rectangle(bbox_left - wallPassThreshold, bbox_top - topThreshold, bbox_right - wallPassThreshold, bbox_bottom, par_solid, true, false);
+			
+			if (!blockCol) {
 				
-				var col = (collision_rectangle(bbox_left + wallPassThreshold, bbox_top - topThreshold, bbox_right - 1, bbox_bottom, par_collision, true, false));
+				var emptyCol = (collision_rectangle(bbox_left + wallPassThreshold, bbox_top - topThreshold, bbox_right - 1, bbox_bottom, par_solid, true, false));
 				
-				if (col) && (object_get_parent(col.object_index) != par_slope)
-					x -= bbox_right - col.bbox_left;
+				if (emptyCol)
+				&& (object_get_parent(emptyCol.object_index) != par_semisolid)
+				&& (object_get_parent(emptyCol.object_index) != par_slope)
+				&& (object_get_parent(emptyCol.object_index) != par_slope_inv)
+				
+					x -= bbox_right - emptyCol.bbox_left;
 	
 			}
 			
@@ -239,29 +239,63 @@ function scr_player_movement() {
 		
 		if (hsp >= -1) {
 			
-			if (!collision_rectangle(bbox_left + wallPassThreshold, bbox_top - topThreshold, bbox_right + wallPassThreshold, bbox_bottom, par_collision, true, false)) {
+			var blockCol = collision_rectangle(bbox_left + wallPassThreshold, bbox_top - topThreshold, bbox_right + wallPassThreshold, bbox_bottom, par_solid, true, false);
+			
+			if (!blockCol) {
 				
-				var col = (collision_rectangle(bbox_left + 1, bbox_top - topThreshold, bbox_right - wallPassThreshold, bbox_bottom, par_collision, true, false));
+				var emptyCol = (collision_rectangle(bbox_left + 1, bbox_top - topThreshold, bbox_right - wallPassThreshold, bbox_bottom, par_solid, true, false));
 				
-				if (col) && (object_get_parent(col.object_index) != par_slope)
-					x += col.bbox_right - bbox_left;
+				if (emptyCol) 
+				&& (object_get_parent(emptyCol.object_index) != par_semisolid)
+				&& (object_get_parent(emptyCol.object_index) != par_slope)
+				&& (object_get_parent(emptyCol.object_index) != par_slope_inv)
+				
+					x += emptyCol.bbox_right - bbox_left;
 	
 			}
 			
 		}
 		
-
 	}
 	
-	var verCollision = instance_place(x, y + vsp, par_collision);
+	if (vsp > 0) {
+		
+		if collision_rectangle(bbox_left, bbox_bottom, bbox_right, bbox_bottom + vspMax, par_semisolid, true, false) if (vsp > 1) vsp = 1;
+		
+		if (collision_rectangle(bbox_left, bbox_bottom - 2.5, bbox_right, bbox_bottom, par_semisolid, true, false)) {
+			y--;
+			vsp = 0;
+		}
+		
+		if (semisolidCollision) 
+		&& (bbox_bottom <= semisolidCollision.bbox_top)
+		//&& (!collision_rectangle(bbox_left, bbox_top, bbox_right, semisolidCollision.y, par_solid, true, false))
+		{
+			
+			if (semisolidCollision.semiSolid) {
+			
+				vsp = 0;
+				
+			}
+	
+		}
+	
+	}
+
+	
+	var verCollision = instance_place(x, y + vsp, par_solid);
 	
 	if (verCollision) {
 		
-		while (!instance_place(x, y + sign(vsp), par_collision)) {
-			y += sign(vsp);
-		}
+		if ((object_get_parent(verCollision.object_index) != par_semisolid)) {
 			
-		vsp = 0;
+			while (!instance_place(x, y + sign(vsp), par_solid)) {
+				y += sign(vsp);
+			}
+			
+			vsp = 0;
+			
+		}
 			
 	}
 	
