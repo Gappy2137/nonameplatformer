@@ -33,8 +33,11 @@ inAir = true;
 jumpTimeThreshold = 10;
 jumpTime = 0;
 
-jumpBufferMax = 8;
+jumpBufferMax = 6;
 jumpBuffer = 0;
+
+coyoteTime = 0;
+coyoteMax = 6;
 
 var _my_method = function(){
 	instance_create_layer(x,y,"Instances",obj_trail);

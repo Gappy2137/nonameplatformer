@@ -30,8 +30,8 @@
   "properties": [],
   "solid": false,
   "spriteId": {
-    "name": "spr_player_idle",
-    "path": "sprites/spr_player_idle/spr_player_idle.yy",
+    "name": "spr_player_mask",
+    "path": "sprites/spr_player_mask/spr_player_mask.yy",
   },
   "spriteMaskId": null,
   "visible": true,

@@ -22,7 +22,7 @@ function scr_player_movement() {
 	}
 	
 	
-	if (collision_rectangle(bbox_left + 1, bbox_bottom, bbox_right - 1, bbox_bottom, par_collision, true, false))
+	if (instance_place(x, y + 1, par_collision))
 	|| (collision_rectangle(bbox_left, bbox_bottom, bbox_right, bbox_bottom, par_slope, true, false)) {
 		
 		isGrounded = true;
@@ -94,6 +94,34 @@ function scr_player_movement() {
 		inAir = true;
 		vsp += grav;
 		
+	}
+	
+	if (!isGrounded) {
+	
+		if (coyoteTime > 0) {
+		
+			coyoteTime--;
+			
+			if (!isJumping) {
+			
+				if (keyJump) {
+				
+					vsp = -jumpForce;
+					inAir = true;
+					isJumping = true;
+					isGrounded = false;
+					canJump = false;
+				
+				}
+				
+			}
+		
+		}
+	
+	} else {
+	
+		coyoteTime = coyoteMax;
+	
 	}
 	
 	hsp = clamp(hsp, -hspMax, hspMax);
@@ -181,29 +209,48 @@ function scr_player_movement() {
 	
 	x += hsp;
 	
-	if (isJumping) && (!isFalling) {
-		
-		if (abs(hsp) < 0.5) {
+	if (isJumping) && (!isFalling) && (vsp < -0.05) {
 			
-			var bbox_half = (bbox_left + (bbox_right - bbox_left) / 2);
-			var wallPassThreshold = 8;
-		
-			if (collision_rectangle(bbox_half - wallPassThreshold, bbox_top - 1, bbox_half, bbox_top - 1, par_collision, true, false))
-			&& (!collision_rectangle(bbox_half, bbox_top - vsp, bbox_half + wallPassThreshold, bbox_top - vsp, par_collision, true, false)) {
+		var bbox_half = (bbox_left + (bbox_right - bbox_left) / 2);		// position in world
+		var wallPassThreshold = bbox_right - bbox_half;					// length
+		var topThreshold = abs(vsp/2) + 1;
+		var topThresholdBlock = abs(vsp/2) + 4;
+	/*
+		if (collision_rectangle(bbox_half - wallPassThreshold, bbox_top - 1, bbox_half, bbox_top - 1, par_collision, true, false))
+		&& (!collision_rectangle(bbox_half, bbox_top - top, bbox_half + wallPassThreshold, bbox_top - top, par_collision, true, false)) {
 	
-				x += wallPassThreshold;
+			x += wallPassThreshold;
 	
-			}
-		
-			if (!collision_rectangle(bbox_half - wallPassThreshold, bbox_top - vsp, bbox_half, bbox_top - vsp, par_collision, true, false))
-			&& (collision_rectangle(bbox_half, bbox_top - 1, bbox_half + wallPassThreshold, bbox_top - 1, par_collision, true, false)) {
+		}
+	*/
 	
-				x -= 1;
+		if (hsp <= 1) {
+			
+			if (!collision_rectangle(bbox_left - wallPassThreshold, bbox_top - topThreshold, bbox_right - wallPassThreshold, bbox_bottom, par_collision, true, false)) {
+				
+				var col = (collision_rectangle(bbox_left + wallPassThreshold, bbox_top - topThreshold, bbox_right - 1, bbox_bottom, par_collision, true, false));
+				
+				if (col) && (object_get_parent(col.object_index) != par_slope)
+					x -= bbox_right - col.bbox_left;
 	
 			}
 			
 		}
 		
+		if (hsp >= -1) {
+			
+			if (!collision_rectangle(bbox_left + wallPassThreshold, bbox_top - topThreshold, bbox_right + wallPassThreshold, bbox_bottom, par_collision, true, false)) {
+				
+				var col = (collision_rectangle(bbox_left + 1, bbox_top - topThreshold, bbox_right - wallPassThreshold, bbox_bottom, par_collision, true, false));
+				
+				if (col) && (object_get_parent(col.object_index) != par_slope)
+					x += col.bbox_right - bbox_left;
+	
+			}
+			
+		}
+		
+
 	}
 	
 	var verCollision = instance_place(x, y + vsp, par_collision);
