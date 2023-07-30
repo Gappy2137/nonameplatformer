@@ -9,7 +9,9 @@ spdBase = 2;
 spd = spdBase;
 hsp = 0;
 vsp = 0;
-jumpForce = 2.55;
+jumpForceBase = 2.55;
+jumpForce = jumpForceBase;
+jumpForceMultiplier = 1;
 
 dir = 0;
 facing = 1;
@@ -41,6 +43,12 @@ jumpBuffer = 0;
 
 coyoteTime = 0;
 coyoteMax = 6;
+
+justJumped = false;
+jumpAccel = 0.4;
+jumpAccelThreshold = 10;
+jumpAccelTime = jumpAccelThreshold;
+jumpAccelTimeMax = -10;
 
 var _my_method = function(){
 	instance_create_layer(x,y,"Instances",obj_trail);

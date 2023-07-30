@@ -1,2 +1,2 @@
 canCollide = true;
-semiSolid = true;
+semiSolid = false;

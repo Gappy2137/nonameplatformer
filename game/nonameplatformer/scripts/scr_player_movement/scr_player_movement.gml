@@ -7,6 +7,7 @@ function scr_player_movement() {
 
 	var keyJump =			keyboard_check_pressed(vk_space);
 	var keyJumpReleased =	keyboard_check_released(vk_space);
+	var keyJumpDown =		keyboard_check(vk_space);
 
 	var horKeypress = keyRight - keyLeft;
 	//var verKeypress = keyUp - keyDown;
@@ -25,15 +26,15 @@ function scr_player_movement() {
 	var semisolidCollision =  collision_rectangle(bbox_left, bbox_bottom, bbox_right, bbox_bottom + 1, par_semisolid, true, false);
 	
 	if ( (instance_place(x, y + 1, par_solid))
-	|| (collision_rectangle(bbox_left, bbox_bottom, bbox_right, bbox_bottom, par_slope, true, false)) )
+	|| (collision_rectangle(bbox_left, bbox_bottom, bbox_right, bbox_bottom + 1, par_slope, true, false)) )
 	|| ( (vsp >= 0) && (semisolidCollision) && (bbox_bottom <= semisolidCollision.bbox_top) ) {
 		
 		isGrounded = true;
 		inAir = false;
-		isJumping = false;
 		jumpThreshold = 0;
 		canJump = true;
 		jumpTime = 0;
+		isJumping = false;
 
 	} else {
 	
@@ -51,11 +52,11 @@ function scr_player_movement() {
 	if (collision_rectangle(bbox_left, bbox_bottom, bbox_right, bbox_bottom + 4, par_solid, false, false)) y = round(y);
 	if (collision_rectangle(bbox_left, bbox_bottom, bbox_right, bbox_bottom + 1, par_semisolid, true, false)) y = round(y);
 	
-	
 	isFalling = vsp > 0 ? true : false;
 	
-	
-	
+	if (!isJumping)
+		jumpForce = jumpForceBase * ((abs(hsp * hsp) / 50) + 1);
+
 	if (keyJump) {
 		
 		jumpBuffer = jumpBufferMax;
@@ -68,41 +69,29 @@ function scr_player_movement() {
 	
 		if (canJump) {
 			
-			vsp = -jumpForce;
+			y--;
+			justJumped = true;
 			inAir = true;
 			isJumping = true;
 			isGrounded = false;
+			isFalling = false;
 			canJump = false;
 			
 		}
 	
 	}
 	
-	
 	if (isJumping) jumpTime++;
 	
-	
-	if (keyJumpReleased) {
+	if (!isGrounded) {
 		
-		if (isJumping) && (!isFalling) && (!isGrounded) {
-	
-			jumpTime = jumpTimeThreshold;
+		if ((jumpTime >= jumpTimeThreshold) || (!isJumping)) {
+			
 			inAir = true;
-			vsp /= 2;
-	
+			vsp += grav;
+			
 		}
 		
-	}
-	
-	if (!isGrounded) && ((jumpTime >= jumpTimeThreshold) || (!isJumping)){
-	
-		inAir = true;
-		vsp += grav;
-		
-	}
-	
-	if (!isGrounded) {
-	
 		if (coyoteTime > 0) {
 		
 			coyoteTime--;
@@ -110,11 +99,13 @@ function scr_player_movement() {
 			if (!isJumping) {
 			
 				if (keyJump) {
-				
-					vsp = -jumpForce;
+					
+					y--;
+					justJumped = true;
 					inAir = true;
 					isJumping = true;
 					isGrounded = false;
+					isFalling = false;
 					canJump = false;
 				
 				}
@@ -122,7 +113,54 @@ function scr_player_movement() {
 			}
 		
 		}
+		
+		if (!isFalling) {
+			
+			if (abs(vsp) < 0.75) {
+			
+				grav = lerp(grav, gravBase / 4, 0.1);
+			
+			} else {
+			
+				grav = gravBase;
+			
+			}
+			
+		} else {
+		
+			grav = gravBase * 1.5;
+		
+		}
+
+	}
 	
+	if (justJumped) {
+	
+		jumpAccelTime--;
+		
+		if (jumpAccelTime <= 0) {
+			
+			jumpAccelTime = jumpAccelThreshold;
+			justJumped = false;
+		
+		}
+		
+		vsp = lerp(vsp, -jumpForce, jumpAccel);
+	
+	}
+	
+	if (!keyJumpDown) && (isJumping) {
+		
+		if (isJumping) && (!isFalling) && (!isGrounded) {
+	
+			jumpTime = jumpTimeThreshold;
+			inAir = true;
+			jumpAccelTime = jumpAccelThreshold;
+			justJumped = false;
+			vsp /= 1.25;
+	
+		}
+		
 	}
 	
 	hsp = clamp(hsp, -hspMax, hspMax);
@@ -269,7 +307,6 @@ function scr_player_movement() {
 		
 		if (semisolidCollision) 
 		&& (bbox_bottom <= semisolidCollision.bbox_top)
-		//&& (!collision_rectangle(bbox_left, bbox_top, bbox_right, semisolidCollision.y, par_solid, true, false))
 		{
 			
 			if (semisolidCollision.semiSolid) {
@@ -300,27 +337,5 @@ function scr_player_movement() {
 	}
 	
 	y += vsp;
-	
-	/*
-	for(var i = 0; i < 100; ++i;){
-				
-			if (!instance_place(x + i, y, par_collision)){
-					x += i;
-					break;
-			}
-			if (!instance_place(x - i, y, par_collision)){
-					x -= i;
-					break;
-			}
-			if (!instance_place(x, y - i, par_collision)){
-					x -= i;
-					break;
-			}
-			if (!instance_place(x, y + i, par_collision)){
-					x += i;
-					break;
-			}
 
-	}
-	*/
 }

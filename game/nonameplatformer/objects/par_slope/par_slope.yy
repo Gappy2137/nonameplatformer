@@ -12,8 +12,8 @@
     "path": "folders/Base_Group/Objects/_PARENTS.yy",
   },
   "parentObjectId": {
-    "name": "par_collision",
-    "path": "objects/par_collision/par_collision.yy",
+    "name": "par_solid",
+    "path": "objects/par_solid/par_solid.yy",
   },
   "persistent": false,
   "physicsAngularDamping": 0.1,

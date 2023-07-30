@@ -7,3 +7,6 @@ if keyboard_check_pressed(ord("G")) {
 if keyboard_check_pressed(ord("H")) {
 	room_speed = 60;
 }
+
+if (isJumping) && (!isGrounded) counter++;
+if (isGrounded) counter = 0;

@@ -1,4 +1,4 @@
-
+draw_set_color(#FFFFFF);
 var i = 0;
 draw_text(16,16 + (16*i++),"x:" + string(x));
 draw_text(16,16 + (16*i++),"y:" + string(y));
@@ -8,4 +8,7 @@ draw_text(16,16 + (16*i++),"isJumping:" + string(isJumping));
 draw_text(16,16 + (16*i++),"isGrounded:" + string(isGrounded));
 draw_text(16,16 + (16*i++),"canJump:" + string(canJump));
 draw_text(16,16 + (16*i++),"isFalling:" + string(isFalling));
-draw_text(16,16 + (16*i++),"coyoteTime:" + string(coyoteTime));
+draw_text(16,16 + (16*i++),"jumpAccelTime:" + string(jumpAccelTime));
+draw_text(16,16 + (16*i++),"jumpBuffer:" + string(jumpBuffer));
+draw_text(16,16 + (16*i++),"grav:" + string(grav));
+draw_text(16,16 + (16*i++),"jumpForce:" + string(jumpForce));
