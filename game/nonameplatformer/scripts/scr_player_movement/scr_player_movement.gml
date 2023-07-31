@@ -4,6 +4,8 @@ function scr_player_movement() {
 	var keyLeft	 =			keyboard_check(ord("A"));
 	var keyRight =			keyboard_check(ord("D"));
 	var keyUp =				keyboard_check(ord("W"));
+	
+	var keyDownPressed =	keyboard_check_pressed(ord("S"));
 
 	var keyJump =			keyboard_check_pressed(vk_space);
 	var keyJumpReleased =	keyboard_check_released(vk_space);
@@ -38,8 +40,7 @@ function scr_player_movement() {
 	}
 	
 	if ( (( (keyLeft) && (hsp > 0.1) )
-	|| ( (keyRight) && (hsp < 0.1) ))
-	|| (((!keyRight) && (!keyLeft) && (hsp != 0))) )
+	|| ( (keyRight) && (hsp < 0.1) )) )
 	&& (!((keyRight) && (keyLeft))) {
 
 		isSkidding = true;
@@ -59,11 +60,24 @@ function scr_player_movement() {
 	
 	}
 	
+	if (keyDownPressed) {
+	
+		jumpOffTime = 0;
+	
+	} else {
+		
+		if (jumpOffTime >= jumpOffMax)
+			jumpOffTime = jumpOffMax;
+		else
+			jumpOffTime++;
+		
+	}
+	
 	var semisolidCollision =  collision_rectangle(bbox_left, bbox_bottom, bbox_right, bbox_bottom + 1, par_semisolid, true, false);
 	
 	if ( (instance_place(x, y + 1, par_solid))
 	|| (collision_rectangle(bbox_left, bbox_bottom, bbox_right, bbox_bottom + 1, par_slope, true, false)) )
-	|| ( (vsp >= 0) && (semisolidCollision) && (bbox_bottom <= semisolidCollision.bbox_top) ) {
+	|| ( (vsp >= 0) && (semisolidCollision) && (bbox_bottom <= semisolidCollision.bbox_top) && (jumpOffTime == jumpOffMax) ) {
 		
 		isGrounded = true;
 		inAir = false;
@@ -325,8 +339,10 @@ function scr_player_movement() {
 			
 		var bbox_half = (bbox_left + (bbox_right - bbox_left) / 2);		// position in world
 		var wallPassThreshold = bbox_right - bbox_half;					// length
-		var topThreshold = abs(vsp/2) + 1;
-		var topThresholdBlock = abs(vsp/2) + 4;
+		var topThreshold = round(abs(vsp/2)) + 2;
+		var topThresholdBlock = round(abs(vsp/2)) + 4;
+		a=topThreshold;
+		b=topThresholdBlock;
 
 		if (hsp <= 1) {
 			
@@ -334,7 +350,7 @@ function scr_player_movement() {
 			
 			if (!blockCol) {
 				
-				var emptyCol = (collision_rectangle(bbox_left + wallPassThreshold, bbox_top - topThreshold, bbox_right - 1, bbox_bottom, par_solid, true, false));
+				var emptyCol = (collision_rectangle(bbox_left + wallPassThreshold, bbox_top - topThreshold, bbox_right + 1, bbox_bottom, par_solid, true, false));
 				
 				if (emptyCol)
 				&& (object_get_parent(emptyCol.object_index) != par_semisolid)
@@ -353,7 +369,7 @@ function scr_player_movement() {
 			
 			if (!blockCol) {
 				
-				var emptyCol = (collision_rectangle(bbox_left + 1, bbox_top - topThreshold, bbox_right - wallPassThreshold, bbox_bottom, par_solid, true, false));
+				var emptyCol = (collision_rectangle(bbox_left - 1, bbox_top - topThreshold, bbox_right - wallPassThreshold, bbox_bottom, par_solid, true, false));
 				
 				if (emptyCol) 
 				&& (object_get_parent(emptyCol.object_index) != par_semisolid)
@@ -368,7 +384,7 @@ function scr_player_movement() {
 		
 	}
 	
-	if (vsp > 0) {
+	if (vsp > 0) && (jumpOffTime == jumpOffMax) {
 		
 		if collision_rectangle(bbox_left, bbox_bottom, bbox_right, bbox_bottom + (vsp), par_semisolid, true, false) if (vsp > 1) vsp = 1;
 		

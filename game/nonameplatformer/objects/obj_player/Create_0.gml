@@ -52,6 +52,14 @@ jumpAccelThreshold = 10;
 jumpAccelTime = jumpAccelThreshold;
 jumpAccelTimeMax = -10;
 
+jumpOffMax = 5;
+jumpOffTime = jumpOffMax;
+
+_prev = 0;
+xPrev[0] = x;
+yPrev[0] = y;
+rewind = false;
+
 var _my_method = function(){
 	instance_create_layer(x,y,"Instances",obj_trail);
 }

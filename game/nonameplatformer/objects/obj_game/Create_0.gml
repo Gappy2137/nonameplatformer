@@ -8,6 +8,22 @@
 #macro MAIN_VIEWPORT 0
 #macro MAIN_CAMERA view_camera[MAIN_VIEWPORT]
 
+#macro LAYER_GAME "Game"
+#macro LAYER_INST "Instances"
+//#macro LAYER_UI "UI"
+
+#macro DEPTH_CURSOR 1_000_001
+#macro DEPTH_UI		1_000_000
+
+// Enum
+
+enum cursorSprite {
+
+	normal =	0,
+	hook =		1
+
+}
+
 // Glowne zmienne
 
 x = 0;
@@ -29,6 +45,8 @@ global.game = {
 	aspectRatio: GAME_WIDTH / GAME_HEIGHT,
 	
 	windowSize: 1,
+	
+	cursorType: cursorSprite.hook,
 	
 	game_set_size : function(newSize) {
 		
@@ -66,6 +84,11 @@ for (var i = 1; i <= room_last; i++) {
 	}
 	
 }
+
+window_set_cursor(cr_none);
+
+instance_create_layer(0, 0, LAYER_GAME, obj_camera);
+instance_create_layer(0, 0, LAYER_GAME, obj_cursor);
 
 // Przenies z pokoju init do kolejnego
 room_goto(rm_devroom);

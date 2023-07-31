@@ -1,12 +1,12 @@
 draw_set_color(#FFFFFF);
+
 var i = 0;
 draw_text(0,0 + (16*i++),"x:             " + string(x));
 draw_text(0,0 + (16*i++),"y:             " + string(y));
 draw_text(0,0 + (16*i++),"hsp:           " + string(hsp));
 draw_text(0,0 + (16*i++),"vsp:           " + string(vsp));
-draw_text(0,0 + (16*i++),"isJumping:     " + string(isJumping));
-draw_text(0,0 + (16*i++),"isGrounded:    " + string(isGrounded));
-draw_text(0,0 + (16*i++),"canJump:       " + string(canJump));
-draw_text(0,0 + (16*i++),"facing:        " + string(facing));
-draw_text(0,0 + (16*i++),"skidTime:      " + string(skidTime));
-draw_text(0,0 + (16*i++),"isSkidding:    " + string(isSkidding));
+draw_text(0,0 + (16*i++),"bbox_left:     " + string(bbox_left));
+draw_text(0,0 + (16*i++),"bbox_right:    " + string(bbox_right));
+draw_text(0,0 + (16*i++),"bbox_top:      " + string(bbox_top));
+draw_text(0,0 + (16*i++),"bbox_bottom:   " + string(bbox_bottom));
+draw_text(0,0 + (16*i++),"_prev:    " + string(_prev));
