@@ -11,7 +11,6 @@ hsp = 0;
 vsp = 0;
 jumpForceBase = 2.55;
 jumpForce = jumpForceBase;
-jumpForceMultiplier = 1;
 
 dir = 0;
 facing = 1;
@@ -25,7 +24,7 @@ deccel = 0.2;
 
 hspMax = 8;
 vspMin = -9;
-vspMax = 4.5;
+vspMax = 6;
 
 canJump = true;
 isJumping = false;
@@ -34,6 +33,9 @@ isGrounded = false;
 inAir = true;
 isSkidding = false;
 isTurning = false;
+
+skidTimeMax = 10;
+skidTime = 0;
 
 jumpTimeThreshold = 10;
 jumpTime = 0;

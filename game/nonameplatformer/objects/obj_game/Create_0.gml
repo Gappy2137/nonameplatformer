@@ -37,6 +37,7 @@ global.game = {
 		windowHeight = GAME_HEIGHT * windowSize;
 		
 		surface_resize(application_surface, windowWidth, windowHeight);
+		display_set_gui_size(GAME_WIDTH, GAME_HEIGHT);
 		window_set_size(windowWidth, windowHeight);
 		window_center();
 		

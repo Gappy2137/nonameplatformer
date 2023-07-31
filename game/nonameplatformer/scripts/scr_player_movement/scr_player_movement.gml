@@ -14,13 +14,49 @@ function scr_player_movement() {
 
 	if (horKeypress != 0) {
 		
+		
+		if (isSkidding) {
+			spd = spdBase / 1.25;
+			accel = 0.2;
+		} else {
+			spd = spdBase;
+			accel = 0.4;
+		}
+		
+		
 		hsp = lerp(hsp, spd * horKeypress, accel);
 		facing = horKeypress;
+		
 
 	} else {
 		
-		hsp = lerp(hsp, 0, deccel);
+		if (abs(hsp) > spd / 2) 
+			hsp = lerp(hsp, 0, deccel / 2);
+		else
+			hsp = lerp(hsp, 0, deccel * 2);
 
+	}
+	
+	if ( (( (keyLeft) && (hsp > 0.1) )
+	|| ( (keyRight) && (hsp < 0.1) ))
+	|| (((!keyRight) && (!keyLeft) && (hsp != 0))) )
+	&& (!((keyRight) && (keyLeft))) {
+
+		isSkidding = true;
+	
+	}
+	
+	if (isSkidding) {
+	
+		skidTime++;
+		
+		if (skidTime >= skidTimeMax) {
+		
+			skidTime = 0;
+			isSkidding = false;
+		
+		}
+	
 	}
 	
 	var semisolidCollision =  collision_rectangle(bbox_left, bbox_bottom, bbox_right, bbox_bottom + 1, par_semisolid, true, false);
@@ -35,15 +71,16 @@ function scr_player_movement() {
 		canJump = true;
 		jumpTime = 0;
 		isJumping = false;
-
+		
 	} else {
-	
+		
 		isGrounded = false;
 		canJump = false;
-	
+		
 	}
 	
-	if (isGrounded) coyoteTime = coyoteMax;
+	if (isGrounded) 
+		coyoteTime = coyoteMax;
 	
 	// Blisko scian nie uzywamy ulamkowych czesci pozycji zeby nie bylo problemow z kolizjami
 	
@@ -55,13 +92,10 @@ function scr_player_movement() {
 	isFalling = vsp > 0 ? true : false;
 	
 	if (!isJumping)
-		jumpForce = jumpForceBase * ((abs(hsp * hsp) / 50) + 1);
+		jumpForce = jumpForceBase * ((abs(hsp * hsp) / 25) + 1);
 
-	if (keyJump) {
-		
+	if (keyJump)
 		jumpBuffer = jumpBufferMax;
-		
-	}
 	
 	if (jumpBuffer > 0) {
 		
@@ -84,6 +118,9 @@ function scr_player_movement() {
 	if (isJumping) jumpTime++;
 	
 	if (!isGrounded) {
+		
+		skidTime = 0;
+		isSkidding = false;
 		
 		if ((jumpTime >= jumpTimeThreshold) || (!isJumping)) {
 			
@@ -116,19 +153,27 @@ function scr_player_movement() {
 		
 		if (!isFalling) {
 			
-			if (abs(vsp) < 0.75) {
+			if (!isGrounded) {
+				
+				if (abs(vsp) < 0.75) {
 			
-				grav = lerp(grav, gravBase / 4, 0.1);
+					grav = lerp(grav, gravBase / 4, 0.1);
 			
+				} else {
+			
+					grav = gravBase;
+			
+				}
+				
 			} else {
 			
-				grav = gravBase;
+				grav = 0;
 			
 			}
 			
 		} else {
 		
-			grav = gravBase * 1.5;
+			grav = gravBase * 1.75;
 		
 		}
 
@@ -157,7 +202,7 @@ function scr_player_movement() {
 			inAir = true;
 			jumpAccelTime = jumpAccelThreshold;
 			justJumped = false;
-			vsp /= 1.25;
+			vsp *= 0.75;
 	
 		}
 		
@@ -165,6 +210,33 @@ function scr_player_movement() {
 	
 	hsp = clamp(hsp, -hspMax, hspMax);
 	vsp = clamp(vsp, vspMin, vspMax);
+	
+	if (isFalling) {
+	
+		if (hsp != 0) {
+			
+			var threshold = 4;
+		
+			var ledgeCol = collision_rectangle(bbox_left + hsp, bbox_bottom - threshold, bbox_right + hsp, bbox_bottom, par_solid, false, false);
+			
+			if (ledgeCol)
+			&& (object_get_parent(ledgeCol.object_index) != par_slope) { 
+			
+				var _height = (bbox_bottom - bbox_top);
+				var emptyCol = collision_rectangle(bbox_left + hsp, bbox_top - threshold, bbox_right + hsp, bbox_bottom - threshold, par_solid, false, false);
+			
+				if (!emptyCol) {
+					
+					x += sign(hsp);
+					y = ledgeCol.bbox_top - sprite_yoffset;
+					
+				}
+			
+			}
+		
+		}
+	
+	}
 	
 	var horCollision = instance_place(x + hsp, y, par_solid);
 	
@@ -298,7 +370,7 @@ function scr_player_movement() {
 	
 	if (vsp > 0) {
 		
-		if collision_rectangle(bbox_left, bbox_bottom, bbox_right, bbox_bottom + vspMax, par_semisolid, true, false) if (vsp > 1) vsp = 1;
+		if collision_rectangle(bbox_left, bbox_bottom, bbox_right, bbox_bottom + (vsp), par_semisolid, true, false) if (vsp > 1) vsp = 1;
 		
 		if (collision_rectangle(bbox_left, bbox_bottom - 2.5, bbox_right, bbox_bottom, par_semisolid, true, false)) {
 			y--;
