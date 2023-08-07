@@ -1,17 +1,17 @@
 {
   "resourceType": "GMObject",
   "resourceVersion": "1.0",
-  "name": "obj_slope_8_dr",
+  "name": "par_semislope",
   "eventList": [],
   "managed": true,
   "overriddenProperties": [],
   "parent": {
-    "name": "_DEV",
-    "path": "folders/Base_Group/Objects/_DEV.yy",
+    "name": "_PARENTS",
+    "path": "folders/Base_Group/Objects/_PARENTS.yy",
   },
   "parentObjectId": {
-    "name": "par_slope",
-    "path": "objects/par_slope/par_slope.yy",
+    "name": "par_semisolid",
+    "path": "objects/par_semisolid/par_semisolid.yy",
   },
   "persistent": false,
   "physicsAngularDamping": 0.1,
@@ -28,10 +28,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_slope_8_dr",
-    "path": "sprites/spr_slope_8_dr/spr_slope_8_dr.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": false,
 }

@@ -10,7 +10,7 @@ if keyboard_check_pressed(ord("H")) {
 
 if (isJumping) && (!isGrounded) counter++;
 if (isGrounded) counter = 0;
-
+/*
 if (_prev < 0) _prev = 0;
 if (_prev >= 1000) _prev = 1000;
 
@@ -31,3 +31,4 @@ if (rewind) {
 	}
 
 }
+*/

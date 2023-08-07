@@ -8,3 +8,6 @@ if keyboard_check_pressed(ord("Y")) {
 
 global.game.mouseX = device_mouse_x_to_gui(0);
 global.game.mouseY = device_mouse_y_to_gui(0);
+
+global.game.mouseXR = mouse_x;
+global.game.mouseYR = mouse_y;

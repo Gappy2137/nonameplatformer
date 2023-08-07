@@ -1,4 +1,4 @@
-
+/*
 if (!rewind) {
 	xPrev[_prev] = x;
 	yPrev[_prev] = y;
@@ -7,3 +7,4 @@ if (!rewind) {
 }else{
 _prev--;	
 }
+*/

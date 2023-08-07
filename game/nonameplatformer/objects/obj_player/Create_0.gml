@@ -60,6 +60,8 @@ xPrev[0] = x;
 yPrev[0] = y;
 rewind = false;
 
+instance_create_layer(x,y,LAYER_INST,obj_hook);
+
 var _my_method = function(){
 	instance_create_layer(x,y,"Instances",obj_trail);
 }

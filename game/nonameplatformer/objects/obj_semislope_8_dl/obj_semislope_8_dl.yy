@@ -1,7 +1,7 @@
 {
   "resourceType": "GMObject",
   "resourceVersion": "1.0",
-  "name": "obj_slope_8_dr",
+  "name": "obj_semislope_8_dl",
   "eventList": [],
   "managed": true,
   "overriddenProperties": [],
@@ -10,8 +10,8 @@
     "path": "folders/Base_Group/Objects/_DEV.yy",
   },
   "parentObjectId": {
-    "name": "par_slope",
-    "path": "objects/par_slope/par_slope.yy",
+    "name": "par_semislope",
+    "path": "objects/par_semislope/par_semislope.yy",
   },
   "persistent": false,
   "physicsAngularDamping": 0.1,
@@ -29,8 +29,8 @@
   "properties": [],
   "solid": false,
   "spriteId": {
-    "name": "spr_slope_8_dr",
-    "path": "sprites/spr_slope_8_dr/spr_slope_8_dr.yy",
+    "name": "spr_semislope_8_dl",
+    "path": "sprites/spr_semislope_8_dl/spr_semislope_8_dl.yy",
   },
   "spriteMaskId": null,
   "visible": false,

@@ -1,5 +1,7 @@
 /// @description Setup
 
+//show_debug_overlay(true);
+
 // Makra
 
 #macro GAME_WIDTH 480
@@ -24,6 +26,15 @@ enum cursorSprite {
 
 }
 
+enum hookState {
+
+	onPlayer = 0,
+	launched = 1,
+	released = 2,
+	embedded = 3
+
+}
+
 // Glowne zmienne
 
 x = 0;
@@ -35,6 +46,9 @@ global.game = {
 	
 	mouseX: device_mouse_x_to_gui(0),
 	mouseY: device_mouse_y_to_gui(0),
+	
+	mouseXR: mouse_x,
+	mouseYR: mouse_y,
 
 	windowWidth: GAME_WIDTH,
 	windowHeight: GAME_HEIGHT,

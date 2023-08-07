@@ -29,8 +29,8 @@
   "properties": [],
   "solid": false,
   "spriteId": {
-    "name": "spr_slope_8_dr",
-    "path": "sprites/spr_slope_8_dr/spr_slope_8_dr.yy",
+    "name": "spr_slope_8_dl",
+    "path": "sprites/spr_slope_8_dl/spr_slope_8_dl.yy",
   },
   "spriteMaskId": null,
   "visible": false,
