@@ -62,22 +62,23 @@ function scr_player_movement() {
 	
 	if (keyDownPressed) {
 	
-		jumpOffTime = 0;
-	
-	} else {
-		
-		if (jumpOffTime >= jumpOffMax)
+		if (jumpOffTime == 0)
 			jumpOffTime = jumpOffMax;
-		else
-			jumpOffTime++;
-		
+	
 	}
+		
+	if (jumpOffTime <= 0)
+		jumpOffTime = 0;
+	else
+		jumpOffTime--;
+		
+	
 	
 	var semisolidCollision =  collision_rectangle(bbox_left, bbox_bottom, bbox_right, bbox_bottom + 1, par_semisolid, true, false);
 	
 	if ( (instance_place(x, y + 1, par_solid))
 	|| (collision_rectangle(bbox_left, bbox_bottom, bbox_right, bbox_bottom + 1, par_slope, true, false)) )
-	|| ( (vsp >= 0) && (semisolidCollision) && (bbox_bottom <= semisolidCollision.bbox_top) && (jumpOffTime == jumpOffMax) ) {
+	|| ( (vsp >= 0) && (semisolidCollision) && (bbox_bottom <= semisolidCollision.bbox_top) && (jumpOffTime == 0) ) {
 		
 		isGrounded = true;
 		inAir = false;
@@ -224,6 +225,8 @@ function scr_player_movement() {
 	
 	hsp = clamp(hsp, -hspMax, hspMax);
 	vsp = clamp(vsp, vspMin, vspMax);
+	
+	// Ledge forgiveness
 	
 	if (isFalling) {
 	
@@ -384,7 +387,7 @@ function scr_player_movement() {
 		
 	}
 	
-	if (vsp > 0) && (jumpOffTime == jumpOffMax) {
+	if (vsp > 0) && (jumpOffTime == 0) {
 		
 		if collision_rectangle(bbox_left, bbox_bottom, bbox_right, bbox_bottom + (vsp), par_semisolid, true, false) if (vsp > 1) vsp = 1;
 		

@@ -52,8 +52,8 @@ jumpAccelThreshold = 10;
 jumpAccelTime = jumpAccelThreshold;
 jumpAccelTimeMax = -10;
 
-jumpOffMax = 5;
-jumpOffTime = jumpOffMax;
+jumpOffMax = 7;
+jumpOffTime = 0;
 
 _prev = 0;
 xPrev[0] = x;

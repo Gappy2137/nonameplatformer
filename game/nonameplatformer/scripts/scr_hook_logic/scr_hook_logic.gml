@@ -22,11 +22,11 @@ function scr_hook_logic() {
 				
 				state = hookState.launched;
 				
-				var ray = raycast(x, y, x + lengthdir_x(maxRange + obj_player.hsp, angleToMouse), y + lengthdir_y(maxRange + obj_player.vsp, angleToMouse), par_collision);
+				var ray = raycast(x, y, x + lengthdir_x(maxRange + obj_player.hsp, angleToMouse), y + lengthdir_y(maxRange + obj_player.vsp, angleToMouse), par_solid, [par_semisolid]);
 				
 				if (ray[0] != noone) {
 					
-					if (object_get_parent(ray[0].object_index) == par_solid) {
+					if (object_is_ancestor(ray[0].object_index, par_solid)) {
 					
 						if (ray[0].canBeAttachedTo)
 						&& (ray[0].canCollide)
@@ -95,13 +95,14 @@ function scr_hook_logic() {
 				drawX += hsp;
 				drawY += vsp;
 				
-				if (drawX > x + (maxRange / 3))
-				|| (drawY > y + (maxRange / 3)) {
-					
+				var _rangeX = (maxRange / 3) * sign(hsp);
+				var _rangeY = (maxRange / 3) * sign(vsp);
+				
+				var distance = point_distance(drawX, drawY, x + _rangeX, y + _rangeY);
+				var maxDistance = point_distance(x, y, x + _rangeX, y + _rangeY);
+				
+				if (distance > maxDistance)
 					state = hookState.released;
-					
-				}
-			
 			}
 	
 

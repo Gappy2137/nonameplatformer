@@ -1,4 +1,4 @@
-function raycast(x1, y1, x2, y2, obj) {
+function raycast(x1, y1, x2, y2, obj, omit) {
 	
 	var xx = 0, yy = 0;
 	
@@ -6,7 +6,31 @@ function raycast(x1, y1, x2, y2, obj) {
 	var _rayList = ds_list_create();
 	
 	var ray = collision_line_list(x1, y1, x2, y2, obj, true, true, rayList, true);
+/*
+	var i = 0, j = 0, del = [];
 	
+	repeat(array_length(omit)) {
+		
+		repeat(ds_list_size(rayList)) {
+			
+			if (object_get_parent(rayList[| i]) == omit[@ j])
+				array_push(del, i);
+			i++;
+			
+		}
+		
+		j++;
+	}
+	
+	i = 0;
+	
+	repeat(array_length(del)) {
+		
+		ds_list_delete(rayList, del[@ i]);
+		
+		i++;
+	}
+	*/
 	var empty = [noone, -1, -1];
 	
 	var _obj = 0;
@@ -45,12 +69,6 @@ function raycast(x1, y1, x2, y2, obj) {
 	
 			}
 		
-		} else {
-		
-			ds_list_destroy(rayList);
-			ds_list_destroy(_rayList);
-			return empty;
-			
 		}
 	
 	} else {

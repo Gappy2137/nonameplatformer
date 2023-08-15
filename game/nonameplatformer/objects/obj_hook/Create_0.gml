@@ -21,9 +21,9 @@ catchTime = 0;
 catchTimeMax = 20;
 
 launchTime = 0;
-launchTimeMax = 50;
+launchTimeMax = 30;
 
-maxRange = 256 + 16;
+maxRange = 196;
 
 angleToMouse = 0;
 
