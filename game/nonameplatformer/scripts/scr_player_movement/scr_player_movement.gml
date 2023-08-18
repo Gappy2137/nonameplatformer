@@ -29,6 +29,9 @@ function scr_player_movement() {
 		hsp = lerp(hsp, spd * horKeypress, accel);
 		facing = horKeypress;
 		
+		if (abs(frac(hsp)) > .99) 
+			hsp = round(hsp);
+		
 
 	} else {
 		
@@ -99,9 +102,9 @@ function scr_player_movement() {
 	
 	// Blisko scian nie uzywamy ulamkowych czesci pozycji zeby nie bylo problemow z kolizjami
 	
-	if (collision_rectangle(bbox_left - 1, bbox_bottom - 2, bbox_right + 1, bbox_bottom - 1, par_solid, false, false)) x = round(x);
+	//if (collision_rectangle(bbox_left - 1, bbox_bottom - 2, bbox_right + 1, bbox_bottom - 1, par_solid, false, false)) x = round(x);
 	
-	if (collision_rectangle(bbox_left, bbox_bottom, bbox_right, bbox_bottom + 4, par_solid, false, false)) y = round(y);
+	if (collision_rectangle(bbox_left, bbox_bottom, bbox_right, bbox_bottom + 1, par_solid, false, false)) y = round(y);
 	if (collision_rectangle(bbox_left, bbox_bottom, bbox_right, bbox_bottom + 1, par_semisolid, true, false)) y = round(y);
 	
 	isFalling = vsp > 0 ? true : false;
@@ -228,16 +231,19 @@ function scr_player_movement() {
 	
 	// Ledge forgiveness
 	
+	if (horKeypress != 0)
+	counter = abs(((spd * horKeypress) - hsp) * accel);
+	
 	if (isFalling) {
 	
-		if (hsp != 0) {
+		if ( abs(hsp) > accel * 2 ) {
 			
 			var threshold = 4;
 		
 			var ledgeCol = collision_rectangle(bbox_left + hsp, bbox_bottom - threshold, bbox_right + hsp, bbox_bottom, par_solid, false, false);
 			
 			if (ledgeCol)
-			&& (object_get_parent(ledgeCol.object_index) != par_slope) { 
+			&& (!object_is_ancestor(ledgeCol.object_index, par_slope)) { 
 			
 				var _height = (bbox_bottom - bbox_top);
 				var emptyCol = collision_rectangle(bbox_left + hsp, bbox_top - threshold, bbox_right + hsp, bbox_bottom - threshold, par_solid, false, false);
@@ -253,21 +259,6 @@ function scr_player_movement() {
 		
 		}
 	
-	}
-	
-	var horCollision = instance_place(x + hsp, y, par_solid);
-	
-	if (horCollision) 
-	&& (object_get_parent(horCollision.object_index) != par_slope)
-	&& (object_get_parent(horCollision.object_index) != par_slope_inv)
-	&& (object_get_parent(horCollision.object_index) != par_semisolid){
-
-		while (!instance_place(x + sign(hsp), y, par_solid)) {
-			x += sign(hsp);
-		}
-			
-		hsp = 0;
-			
 	}
 	
 	var slopeCollisionHor = instance_place(x + hsp, y, par_slope);
@@ -289,8 +280,7 @@ function scr_player_movement() {
 		
 	}
 	
-	if (slopeCollisionHor)
-	&& (object_get_parent(slopeCollisionHor.object_index) != par_slope_inv) {
+	if (slopeCollisionHor) {
 	
 		var yplus = 0;
 		
@@ -308,14 +298,27 @@ function scr_player_movement() {
 		} else {
 		
 			y -= yplus;
-			slopeup++;
 			
 		}
 	
 	}
 	
-	if (slopeCollisionHorInv)
-	&& (object_get_parent(slopeCollisionHorInv.object_index) != par_slope) {
+	var horCollision = instance_place(x + hsp, y, par_solid);
+	
+	if (horCollision) 
+	&& (!object_is_ancestor(horCollision.object_index, par_slope))
+	&& (!object_is_ancestor(horCollision.object_index, par_slope_inv)) {
+
+		while (!instance_place(x + sign(hsp), y, par_solid)) {
+			x += sign(hsp);
+		}
+			
+		
+		hsp = 0;
+			
+	}
+	
+	if (slopeCollisionHorInv) {
 	
 		var yplus = 0;
 		
@@ -344,8 +347,6 @@ function scr_player_movement() {
 		var wallPassThreshold = bbox_right - bbox_half;					// length
 		var topThreshold = round(abs(vsp/2)) + 2;
 		var topThresholdBlock = round(abs(vsp/2)) + 4;
-		a=topThreshold;
-		b=topThresholdBlock;
 
 		if (hsp <= 1) {
 			
@@ -356,9 +357,8 @@ function scr_player_movement() {
 				var emptyCol = (collision_rectangle(bbox_left + wallPassThreshold, bbox_top - topThreshold, bbox_right + 1, bbox_bottom, par_solid, true, false));
 				
 				if (emptyCol)
-				&& (object_get_parent(emptyCol.object_index) != par_semisolid)
-				&& (object_get_parent(emptyCol.object_index) != par_slope)
-				&& (object_get_parent(emptyCol.object_index) != par_slope_inv)
+				&& (!object_is_ancestor(emptyCol.object_index, par_slope))
+				&& (!object_is_ancestor(emptyCol.object_index, par_slope_inv))
 				
 					x -= bbox_right - emptyCol.bbox_left;
 	
@@ -374,10 +374,9 @@ function scr_player_movement() {
 				
 				var emptyCol = (collision_rectangle(bbox_left - 1, bbox_top - topThreshold, bbox_right - wallPassThreshold, bbox_bottom, par_solid, true, false));
 				
-				if (emptyCol) 
-				&& (object_get_parent(emptyCol.object_index) != par_semisolid)
-				&& (object_get_parent(emptyCol.object_index) != par_slope)
-				&& (object_get_parent(emptyCol.object_index) != par_slope_inv)
+				if (emptyCol)
+				&& (!object_is_ancestor(emptyCol.object_index, par_slope))
+				&& (!object_is_ancestor(emptyCol.object_index, par_slope_inv))
 				
 					x += emptyCol.bbox_right - bbox_left;
 	
@@ -415,15 +414,11 @@ function scr_player_movement() {
 	
 	if (verCollision) {
 		
-		if ((object_get_parent(verCollision.object_index) != par_semisolid)) {
-			
-			while (!instance_place(x, y + sign(vsp), par_solid)) {
-				y += sign(vsp);
-			}
-			
-			vsp = 0;
-			
+		while (!instance_place(x, y + sign(vsp), par_solid)) {
+			y += sign(vsp);
 		}
+			
+		vsp = 0;
 			
 	}
 	

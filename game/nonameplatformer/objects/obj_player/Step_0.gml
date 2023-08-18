@@ -8,8 +8,8 @@ if keyboard_check_pressed(ord("H")) {
 	room_speed = 60;
 }
 
-if (isJumping) && (!isGrounded) counter++;
-if (isGrounded) counter = 0;
+//if (isJumping) && (!isGrounded) counter++;
+//if (isGrounded) counter = 0;
 /*
 if (_prev < 0) _prev = 0;
 if (_prev >= 1000) _prev = 1000;
