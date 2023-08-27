@@ -1,12 +1,52 @@
 
-draw_sprite_ext(spr_hook, 2, drawX, drawY, 1, 1, hookAngle, #FFFFFF, 1);
+if (state != hookState.onPlayer) {
 
-draw_set_color(#FF0000);
-/*
-a = raycast(x,y,x+lengthdir_x(maxRange, angleToMouse), y+lengthdir_y(maxRange, angleToMouse), par_collision, [par_semisolid]);
+	var size = 8;
 
-if a[0] != noone
-&& (a[0].canBeAttachedTo)
-&& (a[0].canCollide)
-&& (!a[0].semiSolid)
-draw_line(x,y,a[1], a[2]);
+	var fromX = chainFromX;
+	var fromY = chainFromY;
+	var toX = drawX;
+	var toY = drawY;
+	
+	var chainAngle = point_direction(fromX, fromY, toX, toY);
+	
+	var dist = point_distance(fromX, fromY, toX, toY);
+	
+	var parts = ceil(dist / size) + 1;
+	
+	if (state != hookState.embedded)
+	&& (state != hookState.released)
+		chainAngle = hookAngle;
+	
+	var i = 0;
+	
+	var offset = 4;
+
+	var originX = -(dcos(chainAngle) * offset) - (dcos(chainAngle - 90) * offset);
+	var originY = -(-dsin(chainAngle) * offset) - (-dsin(chainAngle - 90) * offset);
+	
+	repeat(parts) {
+		
+		var partWidth = (i == parts - 1 ? size * frac(dist / size) : size)
+		
+		draw_sprite_general(spr_hook_chain, 1, 0, 0, partWidth, size, chainFromX + originX - (-i * size * dcos(chainAngle)), chainFromY + originY + (-i * size * dsin(chainAngle)), 1, 1, chainAngle, #FFFFFF, #FFFFFF, #FFFFFF, #FFFFFF, 1);
+		
+		i++;
+		
+	}
+
+}
+
+var realDrawX = drawX, realDrawY = drawY;
+
+if (state != hookState.embedded) && (state != hookState.released){
+	var _dist = point_distance(chainFromX, chainFromY, drawX, drawY);
+
+	realDrawX = chainFromX - (-dcos(hookAngle) * _dist);
+	realDrawY = chainFromY - (dsin(hookAngle) * _dist);
+}
+
+if (state != hookState.onPlayer)
+	draw_sprite(spr_hook_chain, 2, realDrawX, realDrawY);
+
+draw_sprite_ext(spr_hook, 0, realDrawX, realDrawY, 1, 1, hookAngle, #FFFFFF, 1);

@@ -129,6 +129,7 @@ function scr_hook_logic() {
 			
 			}
 			
+			hookAngle = point_direction(drawX, drawY, returnTo.x, returnTo.y) + 180;
 			drawX = lerp(drawX, returnTo.x, .25);
 			drawY = lerp(drawY, returnTo.y, .25);
 			

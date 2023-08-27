@@ -78,10 +78,12 @@ function scr_player_movement() {
 	
 	
 	var semisolidCollision =  collision_rectangle(bbox_left, bbox_bottom, bbox_right, bbox_bottom + 1, par_semisolid, true, false);
+	var semiSlopeCollision =  collision_rectangle(bbox_left, bbox_bottom, bbox_right, bbox_bottom + 1, par_semislope, true, false);
 	
 	if ( (instance_place(x, y + 1, par_solid))
 	|| (collision_rectangle(bbox_left, bbox_bottom, bbox_right, bbox_bottom + 1, par_slope, true, false)) )
-	|| ( (vsp >= 0) && (semisolidCollision) && (bbox_bottom <= semisolidCollision.bbox_top) && (jumpOffTime == 0) ) {
+	|| ( (vsp >= 0) && (semisolidCollision) && (bbox_bottom <= semisolidCollision.bbox_top) && (jumpOffTime == 0) )
+	|| ( (vsp >= 0) && (semiSlopeCollision) && (bbox_bottom <= semiSlopeCollision.bbox_top) && (jumpOffTime == 0) ){
 		
 		isGrounded = true;
 		inAir = false;
@@ -263,6 +265,7 @@ function scr_player_movement() {
 	
 	var slopeCollisionHor = instance_place(x + hsp, y, par_slope);
 	var slopeCollisionHorInv = instance_place(x + hsp, y, par_slope_inv);
+	var semiSlopeCollisionHor = instance_place(x + hsp, y, par_semislope);
 	
 	if (instance_place(x, y + 1, par_slope))
 	&& (!instance_place(x + hsp, y + 1, par_slope)) {
@@ -285,6 +288,29 @@ function scr_player_movement() {
 		var yplus = 0;
 		
 		while ( (instance_place(x + hsp, y - yplus, par_slope)) && (yplus <= abs(2*hsp)) )
+			yplus += 1;
+	    
+		if instance_place(x + hsp, y - yplus, par_solid) {
+			
+			while (!instance_place(x + sign(hsp), y, par_solid)) {
+				x += sign(hsp);
+			}
+			
+			hsp = 0;
+			
+		} else {
+		
+			y -= yplus;
+			
+		}
+	
+	}
+	
+	if (semiSlopeCollisionHor) {
+	
+		var yplus = 0;
+		
+		while ( (instance_place(x + hsp, y - yplus, par_semislope)) && (yplus <= abs(2*hsp)) )
 			yplus += 1;
 	    
 		if instance_place(x + hsp, y - yplus, par_solid) {
@@ -388,25 +414,19 @@ function scr_player_movement() {
 	
 	if (vsp > 0) && (jumpOffTime == 0) {
 		
-		if collision_rectangle(bbox_left, bbox_bottom, bbox_right, bbox_bottom + (vsp), par_semisolid, true, false) if (vsp > 1) vsp = 1;
+		if collision_rectangle(bbox_left, bbox_bottom, bbox_right, bbox_bottom + (vsp), par_semisolid, true, false)
+		|| collision_rectangle(bbox_left, bbox_bottom, bbox_right, bbox_bottom + (vsp), par_semislope, true, false)
+			if (vsp > 1) vsp = 1;
 		
 		if (collision_rectangle(bbox_left, bbox_bottom - 2.5, bbox_right, bbox_bottom, par_semisolid, true, false)) {
 			y--;
 			vsp = 0;
 		}
 		
-		if (semisolidCollision) 
-		&& (bbox_bottom <= semisolidCollision.bbox_top)
-		{
-			
-			if (semisolidCollision.semiSolid) {
-			
-				vsp = 0;
-				
-			}
-	
-		}
-	
+		if ( (semisolidCollision) && (bbox_bottom <= semisolidCollision.bbox_top) )
+		|| ( (semiSlopeCollision) && (bbox_bottom <= semiSlopeCollision.bbox_top) )
+			vsp = 0;
+
 	}
 
 	

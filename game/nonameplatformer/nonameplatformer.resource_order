@@ -57,6 +57,7 @@
     {"name":"par_slope_inv","order":3,"path":"objects/par_slope_inv/par_slope_inv.yy",},
     {"name":"par_entity","order":1,"path":"objects/par_entity/par_entity.yy",},
     {"name":"spr_slope_8_dr","order":2,"path":"sprites/spr_slope_8_dr/spr_slope_8_dr.yy",},
+    {"name":"spr_hook_chain","order":1,"path":"sprites/spr_hook_chain/spr_hook_chain.yy",},
     {"name":"spr_slope_8_ul","order":4,"path":"sprites/spr_slope_8_ul/spr_slope_8_ul.yy",},
   ],
 }

@@ -87,6 +87,7 @@
     {"id":{"name":"par_slope_inv","path":"objects/par_slope_inv/par_slope_inv.yy",},},
     {"id":{"name":"par_entity","path":"objects/par_entity/par_entity.yy",},},
     {"id":{"name":"spr_slope_8_dr","path":"sprites/spr_slope_8_dr/spr_slope_8_dr.yy",},},
+    {"id":{"name":"spr_hook_chain","path":"sprites/spr_hook_chain/spr_hook_chain.yy",},},
     {"id":{"name":"scr_player_movement","path":"scripts/scr_player_movement/scr_player_movement.yy",},},
     {"id":{"name":"spr_slope_8_ul","path":"sprites/spr_slope_8_ul/spr_slope_8_ul.yy",},},
     {"id":{"name":"tileset_test","path":"tilesets/tileset_test/tileset_test.yy",},},

@@ -29,5 +29,7 @@ angleToMouse = 0;
 
 drawX = x;
 drawY = y;
+chainFromX = x;
+chainFromY = y;
 timeToEmbed = 0;
 embedTimer = 0;

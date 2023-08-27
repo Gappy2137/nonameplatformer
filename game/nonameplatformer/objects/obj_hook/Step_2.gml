@@ -5,9 +5,13 @@ if (instance_exists(obj_player)) {
 	
 		drawX = obj_player.x;
 		drawY = obj_player.y;
-		x = obj_player.x;
-		y = obj_player.y;
+		x = drawX;
+		y = drawY;
 	
 	}
+
+	chainFromX = obj_player.x;
+	chainFromY = obj_player.y;
+	
 
 }

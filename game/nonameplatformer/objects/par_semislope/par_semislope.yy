@@ -2,7 +2,9 @@
   "resourceType": "GMObject",
   "resourceVersion": "1.0",
   "name": "par_semislope",
-  "eventList": [],
+  "eventList": [
+    {"resourceType":"GMEvent","resourceVersion":"1.0","name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,},
+  ],
   "managed": true,
   "overriddenProperties": [],
   "parent": {
@@ -10,8 +12,8 @@
     "path": "folders/Base_Group/Objects/_PARENTS.yy",
   },
   "parentObjectId": {
-    "name": "par_semisolid",
-    "path": "objects/par_semisolid/par_semisolid.yy",
+    "name": "par_collision",
+    "path": "objects/par_collision/par_collision.yy",
   },
   "persistent": false,
   "physicsAngularDamping": 0.1,
