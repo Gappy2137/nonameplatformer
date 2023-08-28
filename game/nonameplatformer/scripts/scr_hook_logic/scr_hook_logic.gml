@@ -13,10 +13,11 @@ function scr_hook_logic() {
 			vsp = 0;
 			catchTime = 0;
 			launchTime = 0;
+			hookPullEnd = false;
 			
 			angleToMouse = point_direction(x, y, global.game.mouseXR, global.game.mouseYR);
 			
-			if (keyLaunch) {
+			if ( (keyLaunch) && (canUse) ) {
 	
 				launchAngle = angleToMouse;
 				
@@ -163,7 +164,7 @@ function scr_hook_logic() {
 			catchTime = 0;
 			launchTime = 0;
 		
-			if (keyRelease) 
+			if (keyRelease)
 				state = hookState.released;
 			
 			hsp = 0;

@@ -5,6 +5,10 @@ counter = 0;
 slopeup = 0;
 slopedown = 0;
 
+state = playerState.idle;
+hookedState = playerHookedState.none;
+ignoreGravity = false;
+
 spdBase = 2;
 spd = spdBase;
 hsp = 0;
@@ -54,6 +58,9 @@ jumpAccelTimeMax = -10;
 
 jumpOffMax = 7;
 jumpOffTime = 0;
+
+hspOnHook = 0;
+vspOnHook = 0;
 
 _prev = 0;
 xPrev[0] = x;

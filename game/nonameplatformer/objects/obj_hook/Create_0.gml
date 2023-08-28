@@ -24,6 +24,9 @@ launchTime = 0;
 launchTimeMax = 30;
 
 maxRange = 196;
+slowDownRange = round(maxRange / 3);
+freeRange = round(maxRange / 8);
+hookPullEnd = false;
 
 angleToMouse = 0;
 
@@ -33,3 +36,5 @@ chainFromX = x;
 chainFromY = y;
 timeToEmbed = 0;
 embedTimer = 0;
+
+canUse = true;

@@ -1,4 +1,6 @@
 function scr_player_movement() {
+	
+	if (!instance_exists(obj_hook)) exit;
 
 	var keyDown	 =			keyboard_check(ord("S"));
 	var keyLeft	 =			keyboard_check(ord("A"));
@@ -13,9 +15,15 @@ function scr_player_movement() {
 
 	var horKeypress = keyRight - keyLeft;
 	//var verKeypress = keyUp - keyDown;
+	
+	if ( (hsp == 0) && (vsp == 0) )
+		state = playerState.idle;
+	else if ( (hsp != 0) || (vsp != 0) )
+		state = playerState.walking;
 
 	if (horKeypress != 0) {
 		
+		state = playerState.walking;
 		
 		if (isSkidding) {
 			spd = spdBase / 1.25;
@@ -31,7 +39,6 @@ function scr_player_movement() {
 		
 		if (abs(frac(hsp)) > .99) 
 			hsp = round(hsp);
-		
 
 	} else {
 		
@@ -145,7 +152,8 @@ function scr_player_movement() {
 		if ((jumpTime >= jumpTimeThreshold) || (!isJumping)) {
 			
 			inAir = true;
-			vsp += grav;
+			if (!ignoreGravity)
+				vsp += grav;
 			
 		}
 		
@@ -192,7 +200,7 @@ function scr_player_movement() {
 			}
 			
 		} else {
-		
+			
 			grav = gravBase * 1.75;
 		
 		}
@@ -230,6 +238,8 @@ function scr_player_movement() {
 	
 	hsp = clamp(hsp, -hspMax, hspMax);
 	vsp = clamp(vsp, vspMin, vspMax);
+	
+	scr_player_hook();
 	
 	// Ledge forgiveness
 	

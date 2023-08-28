@@ -35,6 +35,22 @@ enum hookState {
 
 }
 
+enum playerState {
+
+	idle =		0,
+	walking =	1,
+	swimming =	2
+	
+}
+
+enum playerHookedState {
+
+	pull = 0,
+	fall = 1,
+	none = 2
+
+}
+
 // Glowne zmienne
 
 x = 0;
