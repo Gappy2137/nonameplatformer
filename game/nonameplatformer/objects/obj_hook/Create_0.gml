@@ -21,11 +21,11 @@ catchTime = 0;
 catchTimeMax = 20;
 
 launchTime = 0;
-launchTimeMax = 30;
+launchTimeMax = 100;
 
-maxRange = 196;
+maxRange = 220;
 slowDownRange = round(maxRange / 3);
-freeRange = round(maxRange / 8);
+freeRange = round(maxRange / 7);
 hookPullEnd = false;
 
 angleToMouse = 0;

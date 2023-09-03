@@ -1,10 +1,13 @@
 
 draw_set_color(#FF0000);
-draw_set_alpha(0.25);
+draw_set_alpha(0.2);
 draw_circle(x, y, freeRange, false);
 draw_set_color(#FFFF00);
-draw_set_alpha(0.25);
+draw_set_alpha(0.15);
 draw_circle(x, y, slowDownRange, false);
+draw_set_color(#00FF00);
+draw_set_alpha(0.1);
+draw_circle(x, y, maxRange, false);
 draw_set_color(#FFFFFF);
 draw_set_alpha(1);
 

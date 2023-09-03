@@ -14,7 +14,7 @@ function scr_player_movement() {
 	var keyJumpDown =		keyboard_check(vk_space);
 
 	var horKeypress = keyRight - keyLeft;
-	//var verKeypress = keyUp - keyDown;
+	var verKeypress = keyDown - keyUp;
 	
 	if ( (hsp == 0) && (vsp == 0) )
 		state = playerState.idle;
@@ -23,18 +23,20 @@ function scr_player_movement() {
 
 	if (horKeypress != 0) {
 		
-		state = playerState.walking;
+		if (!hookAtMax) {
+			
+			if (isSkidding) {
+				spd = spdBase / 1.25;
+				accel = 0.2;
+			} else {
+				spd = spdBase;
+				accel = 0.4;
+			}
+
+			hsp = lerp(hsp, spd * horKeypress, accel);
 		
-		if (isSkidding) {
-			spd = spdBase / 1.25;
-			accel = 0.2;
-		} else {
-			spd = spdBase;
-			accel = 0.4;
 		}
 		
-		
-		hsp = lerp(hsp, spd * horKeypress, accel);
 		facing = horKeypress;
 		
 		if (abs(frac(hsp)) > .99) 
@@ -118,8 +120,13 @@ function scr_player_movement() {
 	
 	isFalling = vsp > 0 ? true : false;
 	
-	if (!isJumping)
-		jumpForce = jumpForceBase * ((abs(hsp * hsp) / 25) + 1);
+	if (hookedState == playerHookedState.pull)
+		jumpForce = jumpForceBase * ((abs(hsp * hsp) * .01) + 1);
+	else
+		if (!isJumping)
+			jumpForce = jumpForceBase * ((abs(hsp * hsp) * .04) + 1);
+		
+	jumpForce = clamp(jumpForce, 0, 4);
 
 	if (keyJump)
 		jumpBuffer = jumpBufferMax;
@@ -239,7 +246,121 @@ function scr_player_movement() {
 	hsp = clamp(hsp, -hspMax, hspMax);
 	vsp = clamp(vsp, vspMin, vspMax);
 	
-	scr_player_hook();
+	#region Hook
+	
+	if (obj_hook.state == hookState.embedded) {
+	
+		var hx = obj_hook.x;
+		var hy = obj_hook.y;
+	
+		var angle = point_direction(x, y, hx, hy);
+		var dist = point_distance(x, y, hx, hy);
+		
+		var hookedSpd = spd * 3;
+		
+		if (dist < obj_hook.freeRange) {
+		
+			obj_hook.hookPullEnd = true;
+			hookedState = playerHookedState.fall;
+		
+		} else {
+			
+			if (!obj_hook.hookPullEnd)
+				hookedState = playerHookedState.pull;
+			
+		}
+
+		if (hookedState == playerHookedState.pull) {
+		
+			hsp = lengthdir_x(hookedSpd, angle);
+			vsp = lengthdir_y(hookedSpd, angle);
+		
+		} else
+		if (hookedState == playerHookedState.fall) {
+		
+		
+		
+			if (dist > obj_hook.slowDownRange) {
+			
+				hookAtMax = true;
+				if (!hookSetAngle)
+					hookSetAngle = 1;
+				//ignoreGravity = true;
+			
+			} else {
+			
+				hookAtMax = false;
+				hookSetAngle = 0;
+			
+			}
+			
+		
+		} else
+			hookAtMax = false;
+		
+		if (hookAtMax) {
+			
+			if (hookSetAngle == 1) {
+				
+				onHookAngle = angle + 180;
+				onHookVel = (-.2 * dcos(onHookAngle)) * -hsp;
+				
+				hookSetAngle = 2;
+			}
+		
+			//ignoreGravity = true;
+			
+			var _vel = -.2 * dcos(onHookAngle);
+			_vel += horKeypress * .02;
+			onHookVel += _vel;
+			onHookAngle += onHookVel;
+			onHookVel *= .99;
+			onHookVel = clamp(onHookVel, -2, 2);
+			
+			var rx = hx + lengthdir_x(dist, onHookAngle);
+			var ry = hy + lengthdir_y(dist, onHookAngle);
+			
+			hsp = rx - x;
+			vsp = ry - y;
+		
+		}
+	
+		if (keyJump) {
+			
+			obj_hook.state = hookState.released;
+			hookedState = playerHookedState.none;
+			
+			if (!instance_place(x, y - abs(vsp), par_solid)) {
+				
+				//y--;
+				//justJumped = true;
+				vsp *= .75;
+				inAir = true;
+				isJumping = true;
+				isGrounded = false;
+				isFalling = false;
+				canJump = false;
+				
+			} else {
+			
+				vsp *= .5;
+				y++;
+			
+			}
+			
+		}
+
+	} else {
+	
+		ignoreGravity = false;
+		hookedState = playerHookedState.none;
+		hookAtMax = false;
+		onHookVel = 0;
+		hookSetAngle = 0;
+	
+	}
+	
+	#endregion
 	
 	// Ledge forgiveness
 	

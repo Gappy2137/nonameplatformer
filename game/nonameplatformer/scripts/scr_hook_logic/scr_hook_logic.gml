@@ -96,13 +96,13 @@ function scr_hook_logic() {
 				drawX += hsp;
 				drawY += vsp;
 				
-				var _rangeX = (maxRange / 3) * sign(hsp);
-				var _rangeY = (maxRange / 3) * sign(vsp);
+				//var _rangeX = (maxRange / 2) * sign(hsp);
+				//var _rangeY = (maxRange / 2) * sign(vsp);
 				
-				var distance = point_distance(drawX, drawY, x + _rangeX, y + _rangeY);
-				var maxDistance = point_distance(x, y, x + _rangeX, y + _rangeY);
+				var distance = point_distance(x, y, drawX, drawY);
+				//var maxDistance = point_distance(x, y, x + maxRange, y + maxRange);
 				
-				if (distance > maxDistance)
+				if (distance > maxRange - spdBase)
 					state = hookState.released;
 			}
 	

@@ -8,6 +8,8 @@ draw_text(GAME_WIDTH,0 + (16*i++),"drawX:" + string(drawX));
 draw_text(GAME_WIDTH,0 + (16*i++),"drawY:" + string(drawY));
 draw_text(GAME_WIDTH,0 + (16*i++),"chainFromX:" + string(chainFromX));
 draw_text(GAME_WIDTH,0 + (16*i++),"chainFromY:" + string(chainFromY));
+draw_text(GAME_WIDTH,0 + (16*i++),"launchAngle:" + string(launchAngle));
+draw_text(GAME_WIDTH,0 + (16*i++),"hookAngle:" + string(hookAngle));
 /*
 draw_text(GAME_WIDTH,0 + (16*i++),"hsp:" + string(hsp));
 draw_text(GAME_WIDTH,0 + (16*i++),"vsp:" + string(vsp));
