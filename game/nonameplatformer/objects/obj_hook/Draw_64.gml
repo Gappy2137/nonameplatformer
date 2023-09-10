@@ -1,3 +1,4 @@
+/*
 draw_set_color(#FFFFFF);
 
 var i = 0;

@@ -1,4 +1,8 @@
-
+if (state == hookState.embedded)
+	if (ropeDrawTimer <= 0) ropeDrawTimer = 0; else ropeDrawTimer--;
+else
+	ropeDrawTimer = 5;
+/*
 draw_set_color(#FF0000);
 draw_set_alpha(0.2);
 draw_circle(x, y, freeRange, false);
@@ -10,7 +14,12 @@ draw_set_alpha(0.1);
 draw_circle(x, y, maxRange, false);
 draw_set_color(#FFFFFF);
 draw_set_alpha(1);
-
+*/
+if (ropeDrawTimer != 0){
+draw_set_color(#FFFFFF);
+draw_line_width(chainFromX, chainFromY, drawX, drawY, 2);
+}
+/*
 if (state != hookState.onPlayer) {
 
 	var size = 8;

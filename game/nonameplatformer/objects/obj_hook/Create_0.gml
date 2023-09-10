@@ -38,3 +38,7 @@ timeToEmbed = 0;
 embedTimer = 0;
 
 canUse = true;
+
+ropeImpulse = 0;
+ropeID = noone;
+ropeDrawTimer = 5;

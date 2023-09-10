@@ -33,5 +33,5 @@
     "path": "sprites/spr_semisolid_8/spr_semisolid_8.yy",
   },
   "spriteMaskId": null,
-  "visible": false,
+  "visible": true,
 }

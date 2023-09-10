@@ -14,6 +14,8 @@ function scr_hook_logic() {
 			catchTime = 0;
 			launchTime = 0;
 			hookPullEnd = false;
+			ropeImpulse = 0;
+			ropeID = noone;
 			
 			angleToMouse = point_direction(x, y, global.game.mouseXR, global.game.mouseYR);
 			
@@ -111,6 +113,15 @@ function scr_hook_logic() {
 		break;
 		case hookState.released:
 		
+			if (ropeID != noone) {
+				
+				instance_destroy(ropeID);
+				ropeID = noone;
+				
+			}
+		
+			ropeImpulse = 0;
+		
 			launchTime = 0;
 			catchTime++;
 			
@@ -151,6 +162,27 @@ function scr_hook_logic() {
 			*/
 		break;
 		case hookState.embedded:
+		
+			if (!ropeImpulse)
+				ropeImpulse = 1;
+			
+			if (ropeImpulse == 1) {
+			
+				var aX = anchorX;
+				var aY = anchorY;
+			
+				ropeID = instance_create_layer(chainFromX, chainFromY, LAYER_INST, obj_testrope_hold);
+				
+				with (ropeID) {
+				
+					anchorX = aX;
+					anchorY = aY;
+					
+				}
+				
+				ropeImpulse = 2;
+			
+			}
 		
 			if (embeddedTo != noone) {
 				

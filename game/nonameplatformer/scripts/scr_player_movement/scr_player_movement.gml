@@ -272,8 +272,8 @@ function scr_player_movement() {
 
 		if (hookedState == playerHookedState.pull) {
 		
-			hsp = lengthdir_x(hookedSpd, angle);
-			vsp = lengthdir_y(hookedSpd, angle);
+			//hsp = lengthdir_x(hookedSpd, angle);
+			//vsp = lengthdir_y(hookedSpd, angle);
 		
 		} else
 		if (hookedState == playerHookedState.fall) {
@@ -320,8 +320,8 @@ function scr_player_movement() {
 			var rx = hx + lengthdir_x(dist, onHookAngle);
 			var ry = hy + lengthdir_y(dist, onHookAngle);
 			
-			hsp = rx - x;
-			vsp = ry - y;
+			//hsp = rx - x;
+			//vsp = ry - y;
 		
 		}
 	
@@ -333,8 +333,8 @@ function scr_player_movement() {
 			if (!instance_place(x, y - abs(vsp), par_solid)) {
 				
 				//y--;
-				//justJumped = true;
-				vsp *= .75;
+				justJumped = true;
+				//vsp *= .75;
 				inAir = true;
 				isJumping = true;
 				isGrounded = false;

@@ -6,6 +6,8 @@ camMaxY = room_height - (camHeight);
 if (following == noone) {
 	
 	following = id;
+	camX = following.x;
+	camY = following.y;
 	
 }
 
