@@ -11,4 +11,4 @@ draw_text(GAME_WIDTH,0 + (16*i++),"state:    " + string(state));
 draw_text(GAME_WIDTH,0 + (16*i++),"hooked:   " + string(hookedState));
 draw_text(GAME_WIDTH,0 + (16*i++),"inAir:    " + string(inAir));
 draw_text(GAME_WIDTH,0 + (16*i++),"isJumping:" + string(isJumping));
-draw_text(GAME_WIDTH,0 + (16*i++),"hookAtMax:" + string(hookAtMax));
+draw_text(GAME_WIDTH,0 + (16*i++),"hookAtMax:" + string(ignoreGravity));

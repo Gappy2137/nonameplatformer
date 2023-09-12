@@ -63,6 +63,10 @@ jumpAccelTimeMax = -10;
 jumpOffMax = 7;
 jumpOffTime = 0;
 
+offHookTrigger = false;
+offHookTimerMax = 10;
+offHookTimer = 0;
+
 _prev = 0;
 xPrev[0] = x;
 yPrev[0] = y;

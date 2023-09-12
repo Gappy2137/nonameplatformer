@@ -128,6 +128,8 @@ function scr_hook_logic() {
 			embeddedTo = noone;
 			anchorX = -1;
 			anchorY = -1;
+			
+			obj_player.offHookTrigger = true;
 		
 			var returnTo = obj_player;
 			//var returnToX = returnTo.x;

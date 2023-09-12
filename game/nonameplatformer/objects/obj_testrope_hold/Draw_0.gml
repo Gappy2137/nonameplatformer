@@ -1,4 +1,4 @@
-//physics_draw_debug();
+physics_draw_debug();
 //draw_self();
 draw_set_color(#FFFFFF);
 
@@ -7,7 +7,7 @@ draw_line_width(
 	phy_position_y,
 	ropeArray[0].phy_position_x,
 	ropeArray[0].phy_position_y,
-	2
+	1
 );
 
 var i = 0;
@@ -20,7 +20,7 @@ repeat(array_length(ropeArray) - 1) {
 			ropeArray[i].phy_position_y,
 			ropeArray[i + 1].phy_position_x,
 			ropeArray[i + 1].phy_position_y,
-			2
+			1
 		);
 
 	i++;

@@ -2,10 +2,10 @@
 scr_player_movement();
 
 if keyboard_check_pressed(ord("G")) {
-	room_speed = 5;
+	game_set_speed(5, gamespeed_fps);
 }
 if keyboard_check_pressed(ord("H")) {
-	room_speed = 60;
+	game_set_speed(60, gamespeed_fps);
 }
 
 //if (isJumping) && (!isGrounded) counter++;

@@ -26,7 +26,7 @@ function scr_player_movement() {
 		if (!hookAtMax) {
 			
 			if (isSkidding) {
-				spd = spdBase / 1.25;
+				spd = spdBase * .8;
 				accel = 0.2;
 			} else {
 				spd = spdBase;
@@ -44,10 +44,18 @@ function scr_player_movement() {
 
 	} else {
 		
-		if (abs(hsp) > spd / 2) 
-			hsp = lerp(hsp, 0, deccel / 2);
-		else
-			hsp = lerp(hsp, 0, deccel * 2);
+		if (isGrounded) {
+			
+			if (abs(hsp) > spd / 2) 
+				hsp = lerp(hsp, 0, deccel * .5);
+			else
+				hsp = lerp(hsp, 0, deccel * 2);
+			
+		} else {
+			
+			hsp = lerp(hsp, 0, deccel * .5);
+			
+		}
 
 	}
 	
@@ -248,6 +256,25 @@ function scr_player_movement() {
 	
 	#region Hook
 	
+	if (offHookTrigger) {
+	
+		if (offHookTimer >= offHookTimerMax) {
+		
+			offHookTimer = 0;
+			offHookTrigger = false;
+			
+			ignoreGravity = false;
+		
+		} else {
+		
+			offHookTimer++;
+			ignoreGravity = true;
+			vsp = -1.25;
+		
+		}
+	
+	}
+	
 	if (obj_hook.state == hookState.embedded) {
 	
 		var hx = obj_hook.x;
@@ -326,7 +353,7 @@ function scr_player_movement() {
 		}
 	
 		if (keyJump) {
-			
+			/*
 			obj_hook.state = hookState.released;
 			hookedState = playerHookedState.none;
 			
@@ -347,12 +374,12 @@ function scr_player_movement() {
 				y++;
 			
 			}
-			
+			*/
 		}
 
 	} else {
 	
-		ignoreGravity = false;
+		//ignoreGravity = false;
 		hookedState = playerHookedState.none;
 		hookAtMax = false;
 		onHookVel = 0;
