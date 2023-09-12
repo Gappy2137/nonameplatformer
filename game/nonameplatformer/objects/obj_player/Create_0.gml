@@ -17,7 +17,8 @@ spdBase = 2;
 spd = spdBase;
 hsp = 0;
 vsp = 0;
-jumpForceBase = 2.55;
+jumpForceBase = 2.25;
+//2.55
 jumpForce = jumpForceBase;
 
 dir = 0;

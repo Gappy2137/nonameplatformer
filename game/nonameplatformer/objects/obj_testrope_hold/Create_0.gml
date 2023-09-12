@@ -2,11 +2,10 @@ anchorX = 0;
 anchorY = 0;
 depth = obj_player.depth - 1;
 
-ropePieces = 8;
-ropePieceMaxLength = .2;
+ropePieces = 4;
+ropePieceMaxLength = .3;
 ropeArray = array_create(ropePieces, noone);
 jointArray = array_create(ropePieces, 0);
-
 
 var ID = 0;
 
@@ -25,9 +24,10 @@ if (obj_roomcontrol.enablePhy) {
 	//physics_joint_set_value(attach, phy_joint_max_length, ropePieceMaxLength);
 	
 	physics_fixture_delete(fixture);
+	
 	//ropeArray[0][ID]._parent = other.id;
-
-	ropeArray[0] = instance_create_layer(phy_position_x, phy_position_y, LAYER_INST, obj_testrope);
+	
+	ropeArray[0] = instance_create_layer(obj_hook.x, obj_hook.y, LAYER_INST, obj_testrope);
 	var attachFirst = physics_joint_rope_create(id, ropeArray[0], phy_position_x, phy_position_y, ropeArray[0].x, ropeArray[0].y, ropePieceMaxLength, false);
 	physics_joint_set_value(attachFirst, phy_joint_max_length, ropePieceMaxLength);
 	jointArray[ropePieces - 1] = attachFirst;

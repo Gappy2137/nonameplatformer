@@ -173,7 +173,7 @@ function scr_hook_logic() {
 				var aX = anchorX;
 				var aY = anchorY;
 			
-				ropeID = instance_create_layer(chainFromX, chainFromY, LAYER_INST, obj_testrope_hold);
+				ropeID = instance_create_layer(aX, aY, LAYER_INST, obj_testrope_hold);
 				
 				with (ropeID) {
 				

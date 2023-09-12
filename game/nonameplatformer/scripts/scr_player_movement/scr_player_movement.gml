@@ -33,7 +33,8 @@ function scr_player_movement() {
 				accel = 0.4;
 			}
 
-			hsp = lerp(hsp, spd * horKeypress, accel);
+			if (!offHookTrigger)
+				hsp = lerp(hsp, spd * horKeypress, accel);
 		
 		}
 		
@@ -44,16 +45,30 @@ function scr_player_movement() {
 
 	} else {
 		
-		if (isGrounded) {
+		var deccelFinal = (-0.002 * (hsp * hsp)) + 0.25;
+		
+		if (offHookTrigger) {
 			
-			if (abs(hsp) > spd / 2) 
-				hsp = lerp(hsp, 0, deccel * .5);
-			else
-				hsp = lerp(hsp, 0, deccel * 2);
+			hsp = lerp(hsp, 0, deccelFinal * .25);
 			
 		} else {
 			
-			hsp = lerp(hsp, 0, deccel * .5);
+			if (isGrounded) {
+			
+				/*
+				if (abs(hsp) > spd * .5) 
+					hsp = lerp(hsp, 0, deccelFinal * .5);
+				else
+					hsp = lerp(hsp, 0, deccelFinal * 2);
+				*/
+			
+				hsp = lerp(hsp, 0, deccelFinal);
+			
+			} else {
+			
+				hsp = lerp(hsp, 0, deccelFinal * .25);
+			
+			}
 			
 		}
 
@@ -134,7 +149,7 @@ function scr_player_movement() {
 		if (!isJumping)
 			jumpForce = jumpForceBase * ((abs(hsp * hsp) * .04) + 1);
 		
-	jumpForce = clamp(jumpForce, 0, 4);
+	jumpForce = clamp(jumpForce, 0, 5);
 
 	if (keyJump)
 		jumpBuffer = jumpBufferMax;
@@ -268,8 +283,9 @@ function scr_player_movement() {
 		} else {
 		
 			offHookTimer++;
-			ignoreGravity = true;
-			vsp = -1.25;
+			grav *= 0.75;
+			//ignoreGravity = true;
+			//vsp = -1.25;
 		
 		}
 	

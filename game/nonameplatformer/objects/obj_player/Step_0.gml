@@ -3,9 +3,11 @@ scr_player_movement();
 
 if keyboard_check_pressed(ord("G")) {
 	game_set_speed(5, gamespeed_fps);
+	physics_world_update_speed(game_get_speed(gamespeed_fps));
 }
 if keyboard_check_pressed(ord("H")) {
 	game_set_speed(60, gamespeed_fps);
+	physics_world_update_speed(game_get_speed(gamespeed_fps));
 }
 
 //if (isJumping) && (!isGrounded) counter++;
