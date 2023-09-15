@@ -20,11 +20,38 @@ function scr_player_movement() {
 		state = playerState.idle;
 	else if ( (hsp != 0) || (vsp != 0) )
 		state = playerState.walking;
+		
+	if (offHookTrigger) {
+		
+		accel = accelAir;
+		deccel = deccelHook;
+		
+	} else {
+		
+		if (isGrounded) {
+	
+			accel = accelGround;
+			
+			if (abs(hsp) > spdBase)
+				deccel = deccelGround * .5;
+			else
+				deccel = deccelGround;
+	
+		} else {
+		
+			accel = accelAir;
+			deccel = deccelAir;
+		
+		}
+		
+	}
+
 
 	if (horKeypress != 0) {
 		
 		if (!hookAtMax) {
 			
+			/*
 			if (isSkidding) {
 				spd = spdBase * .8;
 				accel = 0.2;
@@ -32,8 +59,9 @@ function scr_player_movement() {
 				spd = spdBase;
 				accel = 0.4;
 			}
-
-			if (!offHookTrigger)
+			*/
+			
+			if ( (!offHookTrigger) || ((abs(hsp) > spdBase) && !offHookTrigger) )
 				hsp = lerp(hsp, spd * horKeypress, accel);
 		
 		}
@@ -44,33 +72,11 @@ function scr_player_movement() {
 			hsp = round(hsp);
 
 	} else {
-		
-		var deccelFinal = (-0.002 * (hsp * hsp)) + 0.25;
-		
-		if (offHookTrigger) {
-			
-			hsp = lerp(hsp, 0, deccelFinal * .25);
-			
-		} else {
-			
-			if (isGrounded) {
-			
-				/*
-				if (abs(hsp) > spd * .5) 
-					hsp = lerp(hsp, 0, deccelFinal * .5);
-				else
-					hsp = lerp(hsp, 0, deccelFinal * 2);
-				*/
-			
-				hsp = lerp(hsp, 0, deccelFinal);
-			
-			} else {
-			
-				hsp = lerp(hsp, 0, deccelFinal * .25);
-			
-			}
-			
-		}
+
+		if (abs(hsp) > spdBase)
+			hsp = lerp(hsp, spdBase - .1, deccel);
+		else
+			hsp = lerp(hsp, 0, deccel); 
 
 	}
 	
@@ -283,7 +289,8 @@ function scr_player_movement() {
 		} else {
 		
 			offHookTimer++;
-			grav *= 0.75;
+			//grav *= 0.75;
+			deccelHook = (-0.0005 * (hsp * hsp)) + .05;
 			//ignoreGravity = true;
 			//vsp = -1.25;
 		

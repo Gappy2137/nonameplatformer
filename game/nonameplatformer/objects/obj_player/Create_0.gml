@@ -28,8 +28,14 @@ gravBase = 0.15;
 grav = gravBase;
 gravDir = 270;
 
-accel = 0.4;
-deccel = 0.2;
+accelGround = 0.4;
+accelAir = 0.2;
+deccelGround = 0.25;
+deccelAir = 0.05;
+deccelHook = 0.05;
+
+accel = accelGround;
+deccel = deccelGround;
 
 hspMax = 8;
 vspMin = -9;
@@ -65,7 +71,7 @@ jumpOffMax = 7;
 jumpOffTime = 0;
 
 offHookTrigger = false;
-offHookTimerMax = 10;
+offHookTimerMax = 20;
 offHookTimer = 0;
 
 _prev = 0;
