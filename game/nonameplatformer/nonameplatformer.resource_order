@@ -61,6 +61,7 @@
     {"name":"spr_slope_8_dl","order":1,"path":"sprites/spr_slope_8_dl/spr_slope_8_dl.yy",},
     {"name":"par_slope_inv","order":3,"path":"objects/par_slope_inv/par_slope_inv.yy",},
     {"name":"par_entity","order":1,"path":"objects/par_entity/par_entity.yy",},
+    {"name":"doJump","order":4,"path":"scripts/doJump/doJump.yy",},
     {"name":"spr_slope_8_dr","order":2,"path":"sprites/spr_slope_8_dr/spr_slope_8_dr.yy",},
     {"name":"round_to_2","order":2,"path":"scripts/round_to_2/round_to_2.yy",},
     {"name":"spr_hook_chain","order":1,"path":"sprites/spr_hook_chain/spr_hook_chain.yy",},

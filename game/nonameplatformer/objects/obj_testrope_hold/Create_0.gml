@@ -2,7 +2,7 @@ anchorX = 0;
 anchorY = 0;
 depth = obj_player.depth - 1;
 
-ropePieces = 4;
+ropePieces = 5;
 ropePieceMaxLength = .3;
 ropeArray = array_create(ropePieces, noone);
 jointArray = array_create(ropePieces, 0);

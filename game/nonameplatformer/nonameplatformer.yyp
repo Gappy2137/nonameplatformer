@@ -49,7 +49,7 @@
   "isEcma": false,
   "LibraryEmitters": [],
   "MetaData": {
-    "IDEVersion": "2023.8.0.98",
+    "IDEVersion": "2023.8.2.106",
   },
   "resources": [
     {"id":{"name":"obj_semisolid_8","path":"objects/obj_semisolid_8/obj_semisolid_8.yy",},},
@@ -91,6 +91,7 @@
     {"id":{"name":"spr_solid_8","path":"sprites/spr_solid_8/spr_solid_8.yy",},},
     {"id":{"name":"par_slope_inv","path":"objects/par_slope_inv/par_slope_inv.yy",},},
     {"id":{"name":"par_entity","path":"objects/par_entity/par_entity.yy",},},
+    {"id":{"name":"doJump","path":"scripts/doJump/doJump.yy",},},
     {"id":{"name":"spr_slope_8_dr","path":"sprites/spr_slope_8_dr/spr_slope_8_dr.yy",},},
     {"id":{"name":"round_to_2","path":"scripts/round_to_2/round_to_2.yy",},},
     {"id":{"name":"spr_hook_chain","path":"sprites/spr_hook_chain/spr_hook_chain.yy",},},

@@ -29,9 +29,9 @@ grav = gravBase;
 gravDir = 270;
 
 accelGround = 0.4;
-accelAir = 0.2;
+accelAir = 0.3;
 deccelGround = 0.25;
-deccelAir = 0.05;
+deccelAir = 0.1;
 deccelHook = 0.05;
 
 accel = accelGround;
@@ -62,6 +62,7 @@ coyoteTime = 0;
 coyoteMax = 6;
 
 justJumped = false;
+jumpTrigger = false;
 jumpAccel = 0.4;
 jumpAccelThreshold = 10;
 jumpAccelTime = jumpAccelThreshold;
@@ -73,6 +74,11 @@ jumpOffTime = 0;
 offHookTrigger = false;
 offHookTimerMax = 20;
 offHookTimer = 0;
+hspAtRelease = 0;
+
+canDoubleJump = true;
+jumpsMax = 2;
+jumpsLeft = jumpsMax;
 
 _prev = 0;
 xPrev[0] = x;

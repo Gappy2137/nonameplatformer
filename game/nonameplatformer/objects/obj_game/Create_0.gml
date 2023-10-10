@@ -1,6 +1,6 @@
 /// @description Setup
 
-//show_debug_overlay(true);
+show_debug_overlay(true);
 
 // Makra
 
@@ -39,7 +39,7 @@ enum playerState {
 
 	idle =		0,
 	walking =	1,
-	swimming =	2
+	offhook =	2
 	
 }
 

@@ -125,11 +125,14 @@ function scr_hook_logic() {
 			launchTime = 0;
 			catchTime++;
 			
+			if (embeddedTo != noone) {
+				obj_player.offHookTrigger = true;
+				obj_player.hspAtRelease = hsp;
+			}
+			
 			embeddedTo = noone;
 			anchorX = -1;
 			anchorY = -1;
-			
-			obj_player.offHookTrigger = true;
 		
 			var returnTo = obj_player;
 			//var returnToX = returnTo.x;
@@ -164,6 +167,8 @@ function scr_hook_logic() {
 			*/
 		break;
 		case hookState.embedded:
+		
+			if (obj_player.inAir) obj_player.isJumping = true;
 		
 			if (!ropeImpulse)
 				ropeImpulse = 1;

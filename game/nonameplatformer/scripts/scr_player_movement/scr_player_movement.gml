@@ -15,55 +15,60 @@ function scr_player_movement() {
 
 	var horKeypress = keyRight - keyLeft;
 	var verKeypress = keyDown - keyUp;
-	
-	if ( (hsp == 0) && (vsp == 0) )
-		state = playerState.idle;
-	else if ( (hsp != 0) || (vsp != 0) )
-		state = playerState.walking;
 		
 	if (offHookTrigger) {
 		
-		accel = accelAir;
-		deccel = deccelHook;
+		state = playerState.offhook;
 		
 	} else {
 		
-		if (isGrounded) {
+		if ( (hsp == 0) && (vsp == 0) )
+			state = playerState.idle;
+		else if ( (hsp != 0) || (vsp != 0) )
+			state = playerState.walking;
+
+	}
 	
-			accel = accelGround;
+	switch(state) {
+	
+		case playerState.idle:
+		case playerState.walking:
+		
+			if (isGrounded) {
+	
+				accel = accelGround;
 			
-			if (abs(hsp) > spdBase)
-				deccel = deccelGround * .5;
-			else
-				deccel = deccelGround;
+				if (abs(hsp) > spdBase)
+					deccel = deccelGround * .5;
+				else
+					deccel = deccelGround;
 	
-		} else {
+			} else {
+		
+				accel = accelAir;
+				deccel = deccelAir;
+		
+			}
+		
+		break;
+		
+		case playerState.offhook:
 		
 			accel = accelAir;
-			deccel = deccelAir;
+			deccel = deccelHook;
 		
-		}
-		
+		break;
+	
 	}
 
 
 	if (horKeypress != 0) {
 		
-		if (!hookAtMax) {
-			
-			/*
-			if (isSkidding) {
-				spd = spdBase * .8;
-				accel = 0.2;
-			} else {
-				spd = spdBase;
-				accel = 0.4;
-			}
-			*/
-			
-			if ( (!offHookTrigger) || ((abs(hsp) > spdBase) && !offHookTrigger) )
-				hsp = lerp(hsp, spd * horKeypress, accel);
-		
+		if ( (state != playerState.offhook) 
+		|| ( (abs(hsp) > spdBase) && (state != playerState.offhook) ) )
+			hsp = lerp(hsp, spd * horKeypress, accel);
+		else {
+			hsp = lerp(hsp, clamp(hspAtRelease, spd, hspMax) * horKeypress, accel * ( (abs(hsp) > spdBase) ? .1 : .25 ) );
 		}
 		
 		facing = horKeypress;
@@ -72,11 +77,15 @@ function scr_player_movement() {
 			hsp = round(hsp);
 
 	} else {
-
-		if (abs(hsp) > spdBase)
-			hsp = lerp(hsp, spdBase - .1, deccel);
-		else
-			hsp = lerp(hsp, 0, deccel); 
+		
+		if (state != playerState.offhook) {
+			
+			if (abs(hsp) > spdBase)
+				hsp = lerp(hsp, spdBase - .1, deccel * 0.75);
+			else
+				hsp = lerp(hsp, 0, deccel); 
+			
+		}
 
 	}
 	
@@ -129,11 +138,11 @@ function scr_player_movement() {
 		canJump = true;
 		jumpTime = 0;
 		isJumping = false;
+		offHookTrigger = false;
 		
 	} else {
 		
 		isGrounded = false;
-		canJump = false;
 		
 	}
 	
@@ -157,6 +166,8 @@ function scr_player_movement() {
 		
 	jumpForce = clamp(jumpForce, 0, 5);
 
+	if (jumpsLeft == 0) canJump = false;
+
 	if (keyJump)
 		jumpBuffer = jumpBufferMax;
 	
@@ -164,21 +175,14 @@ function scr_player_movement() {
 		
 		jumpBuffer--;
 	
-		if (canJump) {
-			
-			y--;
-			justJumped = true;
-			inAir = true;
-			isJumping = true;
-			isGrounded = false;
-			isFalling = false;
-			canJump = false;
-			
-		}
+		if (canJump) && (!jumpTrigger)
+			doJump();
 	
 	}
 	
-	if (isJumping) jumpTime++;
+	if (isFalling) || (isGrounded) jumpTrigger = false;
+	
+	if (isJumping) jumpTime++; else jumpsLeft = jumpsMax;
 	
 	if (!isGrounded) {
 		
@@ -199,25 +203,20 @@ function scr_player_movement() {
 			
 			if (!isJumping) {
 			
-				if (keyJump) {
-					
-					y--;
-					justJumped = true;
-					inAir = true;
-					isJumping = true;
-					isGrounded = false;
-					isFalling = false;
-					canJump = false;
-				
-				}
+				if (keyJump) && (!jumpTrigger)
+					doJump();
 				
 			}
 		
 		}
 		
-		if (!isFalling) {
+		if (state == playerState.offhook) {
 			
-			if (!isGrounded) {
+			grav = gravBase * ((isFalling) ? 1 : .65);
+			
+		} else {
+			
+			if (!isFalling) {
 				
 				if (abs(vsp) < 0.75) {
 			
@@ -230,18 +229,14 @@ function scr_player_movement() {
 				}
 				
 			} else {
-			
-				grav = 0;
-			
+				
+				grav = gravBase * 1.75;
+				
 			}
 			
-		} else {
-			
-			grav = gravBase * 1.75;
-		
 		}
 
-	}
+	}// else grav = 0;
 	
 	if (justJumped) {
 	
@@ -257,6 +252,8 @@ function scr_player_movement() {
 		vsp = lerp(vsp, -jumpForce, jumpAccel);
 	
 	}
+	
+	if (jumpsLeft <= 0) jumpsLeft = 0;
 	
 	if (!keyJumpDown) && (isJumping) {
 		
@@ -277,6 +274,7 @@ function scr_player_movement() {
 	
 	#region Hook
 	
+	/*
 	if (offHookTrigger) {
 	
 		if (offHookTimer >= offHookTimerMax) {
@@ -288,7 +286,7 @@ function scr_player_movement() {
 		
 		} else {
 		
-			offHookTimer++;
+			//offHookTimer++;
 			//grav *= 0.75;
 			deccelHook = (-0.0005 * (hsp * hsp)) + .05;
 			//ignoreGravity = true;
@@ -297,118 +295,7 @@ function scr_player_movement() {
 		}
 	
 	}
-	
-	if (obj_hook.state == hookState.embedded) {
-	
-		var hx = obj_hook.x;
-		var hy = obj_hook.y;
-	
-		var angle = point_direction(x, y, hx, hy);
-		var dist = point_distance(x, y, hx, hy);
-		
-		var hookedSpd = spd * 3;
-		
-		if (dist < obj_hook.freeRange) {
-		
-			obj_hook.hookPullEnd = true;
-			hookedState = playerHookedState.fall;
-		
-		} else {
-			
-			if (!obj_hook.hookPullEnd)
-				hookedState = playerHookedState.pull;
-			
-		}
-
-		if (hookedState == playerHookedState.pull) {
-		
-			//hsp = lengthdir_x(hookedSpd, angle);
-			//vsp = lengthdir_y(hookedSpd, angle);
-		
-		} else
-		if (hookedState == playerHookedState.fall) {
-		
-		
-		
-			if (dist > obj_hook.slowDownRange) {
-			
-				hookAtMax = true;
-				if (!hookSetAngle)
-					hookSetAngle = 1;
-				//ignoreGravity = true;
-			
-			} else {
-			
-				hookAtMax = false;
-				hookSetAngle = 0;
-			
-			}
-			
-		
-		} else
-			hookAtMax = false;
-		
-		if (hookAtMax) {
-			
-			if (hookSetAngle == 1) {
-				
-				onHookAngle = angle + 180;
-				onHookVel = (-.2 * dcos(onHookAngle)) * -hsp;
-				
-				hookSetAngle = 2;
-			}
-		
-			//ignoreGravity = true;
-			
-			var _vel = -.2 * dcos(onHookAngle);
-			_vel += horKeypress * .02;
-			onHookVel += _vel;
-			onHookAngle += onHookVel;
-			onHookVel *= .99;
-			onHookVel = clamp(onHookVel, -2, 2);
-			
-			var rx = hx + lengthdir_x(dist, onHookAngle);
-			var ry = hy + lengthdir_y(dist, onHookAngle);
-			
-			//hsp = rx - x;
-			//vsp = ry - y;
-		
-		}
-	
-		if (keyJump) {
-			/*
-			obj_hook.state = hookState.released;
-			hookedState = playerHookedState.none;
-			
-			if (!instance_place(x, y - abs(vsp), par_solid)) {
-				
-				//y--;
-				justJumped = true;
-				//vsp *= .75;
-				inAir = true;
-				isJumping = true;
-				isGrounded = false;
-				isFalling = false;
-				canJump = false;
-				
-			} else {
-			
-				vsp *= .5;
-				y++;
-			
-			}
-			*/
-		}
-
-	} else {
-	
-		//ignoreGravity = false;
-		hookedState = playerHookedState.none;
-		hookAtMax = false;
-		onHookVel = 0;
-		hookSetAngle = 0;
-	
-	}
+	*/
 	
 	#endregion
 	
