@@ -4,7 +4,7 @@ phy_position_y = anchorY;
 if (keyboard_check(ord("W"))) ropePieceMaxLength-=.005;
 if (keyboard_check(ord("S"))) ropePieceMaxLength+=.005;
 
-ropePieceMaxLength = clamp(ropePieceMaxLength, 0.1, .6);
+ropePieceMaxLength = clamp(ropePieceMaxLength, 0.2, .6);
 
 var i = 0;
 

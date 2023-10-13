@@ -37,7 +37,7 @@ deccelHook = 0.05;
 accel = accelGround;
 deccel = deccelGround;
 
-hspMax = 8;
+hspMax = 6;
 vspMin = -9;
 vspMax = 6;
 
@@ -77,8 +77,13 @@ offHookTimer = 0;
 hspAtRelease = 0;
 
 canDoubleJump = true;
-jumpsMax = 2;
+jumpsMax = 1;
 jumpsLeft = jumpsMax;
+jumps = 0;
+
+isSliding = false;
+slideMax = 20;
+slideTime = 0;
 
 _prev = 0;
 xPrev[0] = x;

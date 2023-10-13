@@ -15,24 +15,36 @@ function scr_player_movement() {
 
 	var horKeypress = keyRight - keyLeft;
 	var verKeypress = keyDown - keyUp;
+	
+	isFalling = vsp > 0 ? true : false;
 		
-	if (offHookTrigger) {
 		
-		state = playerState.offhook;
-		
+	if (obj_hook.state == hookState.embedded) {
+	
+		state = playerState.onhook;
+	
 	} else {
 		
-		if ( (hsp == 0) && (vsp == 0) )
-			state = playerState.idle;
-		else if ( (hsp != 0) || (vsp != 0) )
-			state = playerState.walking;
+		if (offHookTrigger) {
+		
+			state = playerState.offhook;
+		
+		} else {
+		
+			if ( (hsp == 0) && (vsp == 0) )
+				state = playerState.idle;
+			else if ( (hsp != 0) || (vsp != 0) )
+				state = playerState.walking;
 
+		}
+		
 	}
 	
 	switch(state) {
 	
 		case playerState.idle:
 		case playerState.walking:
+		case playerState.onhook:
 		
 			if (isGrounded) {
 	
@@ -64,11 +76,17 @@ function scr_player_movement() {
 
 	if (horKeypress != 0) {
 		
-		if ( (state != playerState.offhook) 
-		|| ( (abs(hsp) > spdBase) && (state != playerState.offhook) ) )
-			hsp = lerp(hsp, spd * horKeypress, accel);
+		if ( (state == playerState.offhook) 
+		|| ( (isSliding) && (state != playerState.offhook) ) )
+			
+			hsp = lerp(hsp, clamp(hspAtRelease, spd, hspMax) * horKeypress, .1);
+			
 		else {
-			hsp = lerp(hsp, clamp(hspAtRelease, spd, hspMax) * horKeypress, accel * ( (abs(hsp) > spdBase) ? .1 : .25 ) );
+			
+			hsp = lerp(hsp, spd * horKeypress, accel);
+			//if (slideTime > 0)
+				
+				//hsp = lerp(hsp, clamp(hspAtRelease, spd, hspMax) * horKeypress, accel * ( (abs(hsp) > spdBase) ? .1 : .25 ) );
 		}
 		
 		facing = horKeypress;
@@ -81,7 +99,7 @@ function scr_player_movement() {
 		if (state != playerState.offhook) {
 			
 			if (abs(hsp) > spdBase)
-				hsp = lerp(hsp, spdBase - .1, deccel * 0.75);
+				hsp = lerp(abs(hsp), spdBase - .1, deccel * 0.75) * sign(hsp);
 			else
 				hsp = lerp(hsp, 0, deccel); 
 			
@@ -110,6 +128,30 @@ function scr_player_movement() {
 	
 	}
 	
+	if (abs(hsp) > spdBase) 
+	&& (isGrounded)
+	&& (state == playerState.walking) {
+	
+		isSliding = true;
+	
+	}
+	
+	if (isSliding) {
+	
+		slideTime++;
+		
+		if (slideTime >= slideMax) {
+		
+			isSliding = false;
+			slideTime = 0;
+		
+		}
+	
+	}
+	
+	//--------------------------------------------------------------------------------
+	// Jumping off semisolids 
+	
 	if (keyDownPressed) {
 	
 		if (jumpOffTime == 0)
@@ -122,7 +164,11 @@ function scr_player_movement() {
 	else
 		jumpOffTime--;
 		
+	//--------------------------------------------------------------------------------
 	
+	
+	//--------------------------------------------------------------------------------
+	// Grounded state
 	
 	var semisolidCollision =  collision_rectangle(bbox_left, bbox_bottom, bbox_right, bbox_bottom + 1, par_semisolid, true, false);
 	var semiSlopeCollision =  collision_rectangle(bbox_left, bbox_bottom, bbox_right, bbox_bottom + 1, par_semislope, true, false);
@@ -130,24 +176,26 @@ function scr_player_movement() {
 	if ( (instance_place(x, y + 1, par_solid))
 	|| (collision_rectangle(bbox_left, bbox_bottom, bbox_right, bbox_bottom + 1, par_slope, true, false)) )
 	|| ( (vsp >= 0) && (semisolidCollision) && (bbox_bottom <= semisolidCollision.bbox_top) && (jumpOffTime == 0) )
-	|| ( (vsp >= 0) && (semiSlopeCollision) && (bbox_bottom <= semiSlopeCollision.bbox_top) && (jumpOffTime == 0) ){
-		
+	|| ( (vsp >= 0) && (semiSlopeCollision) && (bbox_bottom <= semiSlopeCollision.bbox_top) && (jumpOffTime == 0) )
 		isGrounded = true;
+	 else
+		isGrounded = false;
+	
+	if (isGrounded) {
+	
 		inAir = false;
 		jumpThreshold = 0;
 		canJump = true;
 		jumpTime = 0;
 		isJumping = false;
 		offHookTrigger = false;
-		
-	} else {
-		
-		isGrounded = false;
+		coyoteTime = coyoteMax;
+		jumps = 0;
+		jumpTrigger = false;
 		
 	}
 	
-	if (isGrounded) 
-		coyoteTime = coyoteMax;
+	//--------------------------------------------------------------------------------
 	
 	// Blisko scian nie uzywamy ulamkowych czesci pozycji zeby nie bylo problemow z kolizjami
 	
@@ -156,31 +204,79 @@ function scr_player_movement() {
 	if (collision_rectangle(bbox_left, bbox_bottom, bbox_right, bbox_bottom + 1, par_solid, false, false)) y = round(y);
 	if (collision_rectangle(bbox_left, bbox_bottom, bbox_right, bbox_bottom + 1, par_semisolid, true, false)) y = round(y);
 	
-	isFalling = vsp > 0 ? true : false;
-	
-	if (hookedState == playerHookedState.pull)
-		jumpForce = jumpForceBase * ((abs(hsp * hsp) * .01) + 1);
-	else
-		if (!isJumping)
-			jumpForce = jumpForceBase * ((abs(hsp * hsp) * .04) + 1);
+	if (!isJumping)
+		jumpForce = (jumpForceBase * ((abs(hsp * hsp) * .04) + 1));
 		
-	jumpForce = clamp(jumpForce, 0, 5);
+	jumpForce = clamp(jumpForce, 0, (state == playerState.onhook ? 2.8 : 4));
 
-	if (jumpsLeft == 0) canJump = false;
+	if ( (isFalling) && (!isJumping) && (coyoteTime == 0) ) || (obj_hook.state == hookState.embedded) jumps = 1;
 
-	if (keyJump)
-		jumpBuffer = jumpBufferMax;
+	if (jumps >= jumpsMax) canJump = false;
+
+	if (keyJump) {
+		
+		if (state == playerState.onhook) {
+			
+			obj_hook.state = hookState.released;
+			
+			if (isGrounded) {
+				
+				doJump();
+				//jumps++;
+			
+			}
+			
+			/*
+			if (vsp > -.5) {
+			
+				doJump();
+				//jumps++;
+			
+			}
+			*/
+			
+		} else {
+			
+			if (jumps == jumpsMax) {
+			
+				// Jezeli wykorzystalismy wszystkie skoki
+				
+				jumpBuffer = jumpBufferMax;
+			
+			} else {
+			
+				if (jumps < jumpsMax) && (!jumpTrigger) {
+				
+					doJump();
+					jumps++;
+
+					//jumpTrigger = true;
+			
+				}
+			
+			}
+			
+		}
+		
+	}
 	
 	if (jumpBuffer > 0) {
 		
 		jumpBuffer--;
 	
-		if (canJump) && (!jumpTrigger)
+		if (jumps < jumpsMax) && (!jumpTrigger) {
+			
+			if (state == playerState.offhook) && (abs(hsp) < spdBase)
+				offHookTrigger = false;
+
 			doJump();
-	
+			jumps++;
+
+			//jumpTrigger = true;
+			
+		}
+		
 	}
-	
-	if (isFalling) || (isGrounded) jumpTrigger = false;
 	
 	if (isJumping) jumpTime++; else jumpsLeft = jumpsMax;
 	
@@ -203,8 +299,13 @@ function scr_player_movement() {
 			
 			if (!isJumping) {
 			
-				if (keyJump) && (!jumpTrigger)
+				if (keyJump) && (!jumpTrigger) {
+				
 					doJump();
+			
+					jumpTrigger = true;
+					
+				}
 				
 			}
 		
@@ -263,7 +364,7 @@ function scr_player_movement() {
 			inAir = true;
 			jumpAccelTime = jumpAccelThreshold;
 			justJumped = false;
-			vsp *= 0.75;
+			vsp *= 0.8;
 	
 		}
 		

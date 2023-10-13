@@ -10,8 +10,6 @@ function doJump() {
 			isJumping = true;
 			isGrounded = false;
 			isFalling = false;
-			jumpsLeft--;
-			jumpTrigger = true;
 		
 		break;
 		
