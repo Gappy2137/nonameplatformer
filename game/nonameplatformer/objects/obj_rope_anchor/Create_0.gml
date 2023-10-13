@@ -11,7 +11,7 @@ var ID = 0;
 
 if (obj_roomcontrol.enablePhy) {
 	
-	//ropeArray[0][ID] = instance_create_layer(anchorX, anchorY, LAYER_INST, obj_testrope);
+	//ropeArray[0][ID] = instance_create_layer(anchorX, anchorY, LAYER_INST, obj_rope_part);
 	//ropeArray[0][_X] = anchorX;
 	//ropeArray[0][_Y] = anchorY;
 	
@@ -27,7 +27,7 @@ if (obj_roomcontrol.enablePhy) {
 	
 	//ropeArray[0][ID]._parent = other.id;
 	
-	ropeArray[0] = instance_create_layer(obj_hook.x, obj_hook.y, LAYER_INST, obj_testrope);
+	ropeArray[0] = instance_create_layer(obj_hook.x, obj_hook.y, LAYER_INST, obj_rope_part);
 	var attachFirst = physics_joint_rope_create(id, ropeArray[0], phy_position_x, phy_position_y, ropeArray[0].x, ropeArray[0].y, ropePieceMaxLength, false);
 	physics_joint_set_value(attachFirst, phy_joint_max_length, ropePieceMaxLength);
 	jointArray[ropePieces - 1] = attachFirst;
@@ -43,7 +43,7 @@ if (obj_roomcontrol.enablePhy) {
 		var mx = -lengthdir_x(i * (ropePieceMaxLength * 32), angle);
 		var my = -lengthdir_y(i * (ropePieceMaxLength * 32), angle);
 		
-		ropeArray[i] = instance_create_layer(obj_hook.x + mx, obj_hook.y + my, LAYER_INST, obj_testrope, {
+		ropeArray[i] = instance_create_layer(obj_hook.x + mx, obj_hook.y + my, LAYER_INST, obj_rope_part, {
 		
 			lastPiece: _p,
 			x: obj_hook.x + mx,

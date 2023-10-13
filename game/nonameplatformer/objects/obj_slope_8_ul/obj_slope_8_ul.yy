@@ -2,7 +2,9 @@
   "resourceType": "GMObject",
   "resourceVersion": "1.0",
   "name": "obj_slope_8_ul",
-  "eventList": [],
+  "eventList": [
+    {"resourceType":"GMEvent","resourceVersion":"1.0","name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,},
+  ],
   "managed": true,
   "overriddenProperties": [],
   "parent": {
@@ -23,8 +25,12 @@
   "physicsObject": false,
   "physicsRestitution": 0.1,
   "physicsSensor": false,
-  "physicsShape": 1,
-  "physicsShapePoints": [],
+  "physicsShape": 2,
+  "physicsShapePoints": [
+    {"x":8.0,"y":0.0,},
+    {"x":4.0,"y":5.0,},
+    {"x":0.0,"y":0.0,},
+  ],
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,

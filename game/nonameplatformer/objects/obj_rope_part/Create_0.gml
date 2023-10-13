@@ -1,4 +1,4 @@
-attachedTo = obj_testrope_hold;
+attachedTo = obj_rope_anchor;
 depth = obj_player.depth - 1;
 setupTimer = 5;
 joint = 0;
