@@ -12,18 +12,20 @@ if (lastPiece) {
 		//var angle = point_direction(x, y, obj_hook.x, obj_hook.y); 
 		
 		if (keyboard_check(ord("A")))
-			phy_speed_x -= .1;
+			phy_speed_x -= (obj_player.isGrounded ? .15 : .08);
 		if (keyboard_check(ord("D")))
-			phy_speed_x += .1;
+			phy_speed_x += (obj_player.isGrounded ? .15 : .08);
 		
 		//phy_speed_x = lengthdir_x(hookedSpd, angle);
 		//phy_speed_y = lengthdir_y(hookedSpd, angle);
 	
+
 		obj_player.x = round_to_2(phy_position_x + 1);
 		obj_player.y = round_to_2(phy_position_y - 3);
 			
 		obj_player.hsp = phy_speed_x;
 		obj_player.vsp = phy_speed_y;
+
 	
 		/*
 		if (!obj_player.isGrounded) {

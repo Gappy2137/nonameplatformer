@@ -1,18 +1,15 @@
 {
   "resourceType": "GMObject",
   "resourceVersion": "1.0",
-  "name": "obj_semisolid_8",
+  "name": "obj_doublejump_8",
   "eventList": [],
   "managed": true,
   "overriddenProperties": [],
   "parent": {
-    "name": "_DEV",
-    "path": "folders/Base_Group/Objects/_DEV.yy",
+    "name": "Env",
+    "path": "folders/Base_Group/Objects/_DEV/Env.yy",
   },
-  "parentObjectId": {
-    "name": "par_semisolid",
-    "path": "objects/par_semisolid/par_semisolid.yy",
-  },
+  "parentObjectId": null,
   "persistent": false,
   "physicsAngularDamping": 0.1,
   "physicsDensity": 0.5,
@@ -29,8 +26,8 @@
   "properties": [],
   "solid": false,
   "spriteId": {
-    "name": "spr_semisolid_8",
-    "path": "sprites/spr_semisolid_8/spr_semisolid_8.yy",
+    "name": "spr_doublejump_8",
+    "path": "sprites/spr_doublejump_8/spr_doublejump_8.yy",
   },
   "spriteMaskId": null,
   "visible": false,

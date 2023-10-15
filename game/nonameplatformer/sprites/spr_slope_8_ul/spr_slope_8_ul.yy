@@ -25,8 +25,8 @@
   "nineSlice": null,
   "origin": 0,
   "parent": {
-    "name": "_DEV",
-    "path": "folders/Base_Group/Sprites/_DEV.yy",
+    "name": "Solids",
+    "path": "folders/Base_Group/Sprites/_DEV/Solids.yy",
   },
   "preMultiplyAlpha": false,
   "sequence": {

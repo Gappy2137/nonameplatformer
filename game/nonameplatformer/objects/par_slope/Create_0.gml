@@ -1,3 +1,3 @@
 canCollide = true;
 semiSolid = false;
-canBeAttachedTo = true;
+canBeAttachedTo = false;

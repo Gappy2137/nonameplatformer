@@ -373,6 +373,58 @@ function scr_player_movement() {
 	hsp = clamp(hsp, -hspMax, hspMax);
 	vsp = clamp(vsp, vspMin, vspMax);
 	
+	//--------------------------------------------------------------------------------
+	// Walljump
+	
+	if (canWalljump) && (!isGrounded) {
+	
+		var toLeft = collision_rectangle(bbox_left - 1, bbox_top, bbox_left + 1, bbox_bottom, obj_walljump_8, false, false);
+		var toRight = collision_rectangle(bbox_right - 1, bbox_top, bbox_right + 1, bbox_bottom, obj_walljump_8, false, false);
+		
+		var wallSlideTreshold = .025;
+		var wallSlideSpd = .85;
+		
+		// Left wall
+		
+		if (horKeypress == -1) && (toLeft) {
+			
+			// Sliding down the wall
+			
+			if (isFalling) {
+			
+				wallSlideTimer = (wallSlideTimer >= 1 ? 1 : wallSlideTimer + wallSlideTreshold);
+				
+				vsp *= wallSlideSpd * (wallSlideTimer + 1 - wallSlideSpd);
+			
+			}
+			
+		} else
+		
+		// Right wall
+		
+		if (horKeypress == 1) && (toRight) {
+			
+			// Sliding down the wall
+			
+			if (isFalling) {
+			
+				wallSlideTimer = (wallSlideTimer >= 1 ? 1 : wallSlideTimer + wallSlideTreshold);
+				
+				vsp *= wallSlideSpd * (wallSlideTimer + 1 - wallSlideSpd);
+			
+			}
+			
+		} else {
+		
+			wallSlideTimer = wallSlideBase;
+		
+		}
+	
+	} else wallSlideTimer = wallSlideBase;
+	
+	
+	//--------------------------------------------------------------------------------
+	
 	#region Hook
 	
 	/*
@@ -400,6 +452,7 @@ function scr_player_movement() {
 	
 	#endregion
 	
+	//--------------------------------------------------------------------------------
 	// Ledge forgiveness
 	
 	if (horKeypress != 0)
@@ -432,185 +485,197 @@ function scr_player_movement() {
 	
 	}
 	
-	var slopeCollisionHor = instance_place(x + hsp, y, par_slope);
-	var slopeCollisionHorInv = instance_place(x + hsp, y, par_slope_inv);
-	var semiSlopeCollisionHor = instance_place(x + hsp, y, par_semislope);
+	//--------------------------------------------------------------------------------
 	
-	if (instance_place(x, y + 1, par_slope))
-	&& (!instance_place(x + hsp, y + 1, par_slope)) {
+	//--------------------------------------------------------------------------------
+	// Kolizje
+	
+	if (state != playerState.onhook) {
+	
+		var slopeCollisionHor = instance_place(x + hsp, y, par_slope);
+		var slopeCollisionHorInv = instance_place(x + hsp, y, par_slope_inv);
+		var semiSlopeCollisionHor = instance_place(x + hsp, y, par_semislope);
+	
+		if (instance_place(x, y + 1, par_slope))
+		&& (!instance_place(x + hsp, y + 1, par_slope)) {
 		
-		var yplus = 0;
+			var yplus = 0;
 		
-		while ( (!instance_place(x + round(hsp), y + yplus + 1, par_slope)) && (yplus <= abs(2*round(hsp))) )
-			yplus++;
+			while ( (!instance_place(x + round(hsp), y + yplus + 1, par_slope)) && (yplus <= abs(2*round(hsp))) )
+				yplus++;
 	    
-		if !instance_place(x + hsp, y + yplus, par_solid) {
+			if !instance_place(x + hsp, y + yplus, par_solid) {
 			
-			y += yplus;
+				y += yplus;
 
+			}
+		
 		}
-		
-	}
 	
-	if (slopeCollisionHor) {
+		if (slopeCollisionHor) {
 	
-		var yplus = 0;
+			var yplus = 0;
 		
-		while ( (instance_place(x + hsp, y - yplus, par_slope)) && (yplus <= abs(2*hsp)) )
-			yplus += 1;
+			while ( (instance_place(x + hsp, y - yplus, par_slope)) && (yplus <= abs(2*hsp)) )
+				yplus += 1;
 	    
-		if instance_place(x + hsp, y - yplus, par_solid) {
+			if instance_place(x + hsp, y - yplus, par_solid) {
 			
+				while (!instance_place(x + sign(hsp), y, par_solid)) {
+					x += sign(hsp);
+				}
+			
+				hsp = 0;
+			
+			} else {
+		
+				y -= yplus;
+				if (abs(hsp) > spdBase) 
+					vsp -= 1.4; 
+			
+			}
+	
+		}
+	
+		if (semiSlopeCollisionHor) {
+	
+			var yplus = 0;
+		
+			while ( (instance_place(x + hsp, y - yplus, par_semislope)) && (yplus <= abs(2*hsp)) )
+				yplus += 1;
+	    
+			if instance_place(x + hsp, y - yplus, par_solid) {
+			
+				while (!instance_place(x + sign(hsp), y, par_solid)) {
+					x += sign(hsp);
+				}
+			
+				hsp = 0;
+			
+			} else {
+		
+				y -= yplus;
+			
+			}
+	
+		}
+	
+		var horCollision = instance_place(x + hsp, y, par_solid);
+	
+		if (horCollision) 
+		&& (!object_is_ancestor(horCollision.object_index, par_slope))
+		&& (!object_is_ancestor(horCollision.object_index, par_slope_inv)) {
+
 			while (!instance_place(x + sign(hsp), y, par_solid)) {
 				x += sign(hsp);
 			}
 			
-			hsp = 0;
-			
-		} else {
 		
-			y -= yplus;
+			hsp = 0;
 			
 		}
 	
-	}
+		if (slopeCollisionHorInv) {
 	
-	if (semiSlopeCollisionHor) {
-	
-		var yplus = 0;
+			var yplus = 0;
 		
-		while ( (instance_place(x + hsp, y - yplus, par_semislope)) && (yplus <= abs(2*hsp)) )
-			yplus += 1;
+			while ( (instance_place(x + hsp, y + yplus, par_slope_inv)) && (yplus <= abs(2*hsp)) )
+				yplus += 1;
 	    
-		if instance_place(x + hsp, y - yplus, par_solid) {
+			if instance_place(x + hsp, y + yplus, par_solid) {
 			
-			while (!instance_place(x + sign(hsp), y, par_solid)) {
-				x += sign(hsp);
-			}
+				while (!instance_place(x + sign(hsp), y, par_solid)) {
+					x += sign(hsp);
+				}
 			
-			hsp = 0;
+				hsp = 0;
 			
-		} else {
+			} else
 		
-			y -= yplus;
-			
+				y += yplus;
+	
 		}
 	
-	}
+		x += hsp;
 	
-	var horCollision = instance_place(x + hsp, y, par_solid);
-	
-	if (horCollision) 
-	&& (!object_is_ancestor(horCollision.object_index, par_slope))
-	&& (!object_is_ancestor(horCollision.object_index, par_slope_inv)) {
+		if (isJumping) && (!isFalling) && (vsp < -0.05) {
+			
+			var bbox_half = (bbox_left + (bbox_right - bbox_left) / 2);		// position in world
+			var wallPassThreshold = bbox_right - bbox_half;					// length
+			var topThreshold = round(abs(vsp/2)) + 2;
+			var topThresholdBlock = round(abs(vsp/2)) + 4;
 
-		while (!instance_place(x + sign(hsp), y, par_solid)) {
-			x += sign(hsp);
-		}
+			if (hsp <= 1) {
 			
-		
-		hsp = 0;
+				var blockCol = collision_rectangle(bbox_left - wallPassThreshold, bbox_top - topThreshold, bbox_right - wallPassThreshold, bbox_bottom, par_solid, true, false);
 			
-	}
+				if (!blockCol) {
+				
+					var emptyCol = (collision_rectangle(bbox_left + wallPassThreshold, bbox_top - topThreshold, bbox_right + 1, bbox_bottom, par_solid, true, false));
+				
+					if (emptyCol)
+					&& (!object_is_ancestor(emptyCol.object_index, par_slope))
+					&& (!object_is_ancestor(emptyCol.object_index, par_slope_inv))
+				
+						x -= bbox_right - emptyCol.bbox_left;
 	
-	if (slopeCollisionHorInv) {
-	
-		var yplus = 0;
-		
-		while ( (instance_place(x + hsp, y + yplus, par_slope_inv)) && (yplus <= abs(2*hsp)) )
-			yplus += 1;
-	    
-		if instance_place(x + hsp, y + yplus, par_solid) {
+				}
 			
-			while (!instance_place(x + sign(hsp), y, par_solid)) {
-				x += sign(hsp);
 			}
-			
-			hsp = 0;
-			
-		} else
 		
-			y += yplus;
-	
-	}
-	
-	x += hsp;
-	
-	if (isJumping) && (!isFalling) && (vsp < -0.05) {
+			if (hsp >= -1) {
 			
-		var bbox_half = (bbox_left + (bbox_right - bbox_left) / 2);		// position in world
-		var wallPassThreshold = bbox_right - bbox_half;					// length
-		var topThreshold = round(abs(vsp/2)) + 2;
-		var topThresholdBlock = round(abs(vsp/2)) + 4;
+				var blockCol = collision_rectangle(bbox_left + wallPassThreshold, bbox_top - topThreshold, bbox_right + wallPassThreshold, bbox_bottom, par_solid, true, false);
+			
+				if (!blockCol) {
+				
+					var emptyCol = (collision_rectangle(bbox_left - 1, bbox_top - topThreshold, bbox_right - wallPassThreshold, bbox_bottom, par_solid, true, false));
+				
+					if (emptyCol)
+					&& (!object_is_ancestor(emptyCol.object_index, par_slope))
+					&& (!object_is_ancestor(emptyCol.object_index, par_slope_inv))
+				
+						x += emptyCol.bbox_right - bbox_left;
+	
+				}
+			
+			}
+		
+		}
+	
+		if (vsp > 0) && (jumpOffTime == 0) {
+		
+			if collision_rectangle(bbox_left, bbox_bottom, bbox_right, bbox_bottom + (vsp), par_semisolid, true, false)
+			|| collision_rectangle(bbox_left, bbox_bottom, bbox_right, bbox_bottom + (vsp), par_semislope, true, false)
+				if (vsp > 1) vsp = 1;
+		
+			if (collision_rectangle(bbox_left, bbox_bottom - 2.5, bbox_right, bbox_bottom, par_semisolid, true, false)) {
+				y--;
+				vsp = 0;
+			}
+		
+			if ( (semisolidCollision) && (bbox_bottom <= semisolidCollision.bbox_top) )
+			|| ( (semiSlopeCollision) && (bbox_bottom <= semiSlopeCollision.bbox_top) )
+				vsp = 0;
 
-		if (hsp <= 1) {
-			
-			var blockCol = collision_rectangle(bbox_left - wallPassThreshold, bbox_top - topThreshold, bbox_right - wallPassThreshold, bbox_bottom, par_solid, true, false);
-			
-			if (!blockCol) {
-				
-				var emptyCol = (collision_rectangle(bbox_left + wallPassThreshold, bbox_top - topThreshold, bbox_right + 1, bbox_bottom, par_solid, true, false));
-				
-				if (emptyCol)
-				&& (!object_is_ancestor(emptyCol.object_index, par_slope))
-				&& (!object_is_ancestor(emptyCol.object_index, par_slope_inv))
-				
-					x -= bbox_right - emptyCol.bbox_left;
+		}
+
 	
+		var verCollision = instance_place(x, y + vsp, par_solid);
+	
+		if (verCollision) {
+		
+			while (!instance_place(x, y + sign(vsp), par_solid)) {
+				y += sign(vsp);
 			}
 			
-		}
-		
-		if (hsp >= -1) {
-			
-			var blockCol = collision_rectangle(bbox_left + wallPassThreshold, bbox_top - topThreshold, bbox_right + wallPassThreshold, bbox_bottom, par_solid, true, false);
-			
-			if (!blockCol) {
-				
-				var emptyCol = (collision_rectangle(bbox_left - 1, bbox_top - topThreshold, bbox_right - wallPassThreshold, bbox_bottom, par_solid, true, false));
-				
-				if (emptyCol)
-				&& (!object_is_ancestor(emptyCol.object_index, par_slope))
-				&& (!object_is_ancestor(emptyCol.object_index, par_slope_inv))
-				
-					x += emptyCol.bbox_right - bbox_left;
-	
-			}
-			
-		}
-		
-	}
-	
-	if (vsp > 0) && (jumpOffTime == 0) {
-		
-		if collision_rectangle(bbox_left, bbox_bottom, bbox_right, bbox_bottom + (vsp), par_semisolid, true, false)
-		|| collision_rectangle(bbox_left, bbox_bottom, bbox_right, bbox_bottom + (vsp), par_semislope, true, false)
-			if (vsp > 1) vsp = 1;
-		
-		if (collision_rectangle(bbox_left, bbox_bottom - 2.5, bbox_right, bbox_bottom, par_semisolid, true, false)) {
-			y--;
 			vsp = 0;
-		}
-		
-		if ( (semisolidCollision) && (bbox_bottom <= semisolidCollision.bbox_top) )
-		|| ( (semiSlopeCollision) && (bbox_bottom <= semiSlopeCollision.bbox_top) )
-			vsp = 0;
-
-	}
-
-	
-	var verCollision = instance_place(x, y + vsp, par_solid);
-	
-	if (verCollision) {
-		
-		while (!instance_place(x, y + sign(vsp), par_solid)) {
-			y += sign(vsp);
-		}
 			
-		vsp = 0;
-			
-	}
+		}
 	
-	y += vsp;
+		y += vsp;
+
+		//--------------------------------------------------------------------------------
+	}
 
 }

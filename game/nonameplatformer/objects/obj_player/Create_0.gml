@@ -85,6 +85,11 @@ isSliding = false;
 slideMax = 20;
 slideTime = 0;
 
+canWalljump = true;
+wallSlideBase = .4;
+wallSlideTimer = wallSlideBase;
+
+
 _prev = 0;
 xPrev[0] = x;
 yPrev[0] = y;
