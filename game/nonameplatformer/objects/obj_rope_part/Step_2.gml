@@ -54,6 +54,8 @@ if (lastPiece) {
 		
 		phy_position_x = obj_player.x;
 		phy_position_y = obj_player.y + 3;
+		phy_speed_x = obj_player.hsp;
+		phy_speed_y = obj_player.vsp;
 
 	}
 

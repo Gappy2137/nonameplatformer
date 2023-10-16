@@ -1,6 +1,6 @@
 attachedTo = obj_rope_anchor;
 depth = obj_player.depth - 1;
-setupTimer = 5;
+setupTimer = 2;
 joint = 0;
 
 if (obj_roomcontrol.enablePhy) {

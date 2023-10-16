@@ -40,7 +40,8 @@ enum playerState {
 	idle =		0,
 	walking =	1,
 	offhook =	2,
-	onhook =	3
+	onhook =	3,
+	wallslide = 4
 	
 }
 

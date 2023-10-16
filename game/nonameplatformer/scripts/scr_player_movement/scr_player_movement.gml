@@ -83,7 +83,8 @@ function scr_player_movement() {
 			
 		else {
 			
-			hsp = lerp(hsp, spd * horKeypress, accel);
+			if (!wallJumpTrigger)
+				hsp = lerp(hsp, spd * horKeypress, accel);
 			//if (slideTime > 0)
 				
 				//hsp = lerp(hsp, clamp(hspAtRelease, spd, hspMax) * horKeypress, accel * ( (abs(hsp) > spdBase) ? .1 : .25 ) );
@@ -376,6 +377,8 @@ function scr_player_movement() {
 	//--------------------------------------------------------------------------------
 	// Walljump
 	
+	var vspWallSlide = 0;
+	
 	if (canWalljump) && (!isGrounded) {
 	
 		var toLeft = collision_rectangle(bbox_left - 1, bbox_top, bbox_left + 1, bbox_bottom, obj_walljump_8, false, false);
@@ -383,44 +386,70 @@ function scr_player_movement() {
 		
 		var wallSlideTreshold = .025;
 		var wallSlideSpd = .85;
+		var vspPrev = (isWallSliding ? 0 : vsp);
+		counter = vspPrev;
 		
-		// Left wall
+		if (toLeft) {
 		
-		if (horKeypress == -1) && (toLeft) {
-			
-			// Sliding down the wall
-			
-			if (isFalling) {
-			
-				wallSlideTimer = (wallSlideTimer >= 1 ? 1 : wallSlideTimer + wallSlideTreshold);
-				
-				vsp *= wallSlideSpd * (wallSlideTimer + 1 - wallSlideSpd);
-			
-			}
-			
-		} else
+			isWallSliding = (horKeypress == -1 ? true : false);
 		
-		// Right wall
-		
-		if (horKeypress == 1) && (toRight) {
+		} else if (toRight) {
 			
-			// Sliding down the wall
-			
-			if (isFalling) {
-			
-				wallSlideTimer = (wallSlideTimer >= 1 ? 1 : wallSlideTimer + wallSlideTreshold);
-				
-				vsp *= wallSlideSpd * (wallSlideTimer + 1 - wallSlideSpd);
-			
-			}
+			isWallSliding = (horKeypress == 1 ? true : false);
 			
 		} else {
 		
 			wallSlideTimer = wallSlideBase;
+			isWallSliding = false;
+			wallJump = (wallJumpTimer <= 0 ? 0 : wallJump);
 		
 		}
+		
+		if (isWallSliding) {
+			
+			if (isFalling) {
+				
+				wallSlideTimer = (wallSlideTimer >= 1 ? 1 : wallSlideTimer + wallSlideTreshold);
+				
+				vsp *= wallSlideSpd * (wallSlideTimer + 1 - wallSlideSpd);
+				
+				if (keyJump) {
+					
+					isWallSliding = false;
+					wallJumpTrigger = true;
+					hsp = -horKeypress;
+					doJump();
+					wallJump = horKeypress;
+					
+				}
+			
+			}
+			
+		}
 	
-	} else wallSlideTimer = wallSlideBase;
+	} else {
+	
+		wallSlideTimer = wallSlideBase;
+		isWallSliding = false;
+		wallJump = (wallJumpTimer <= 0 ? 0 : wallJump);
+	
+	}
+	
+	if (wallJumpTrigger) {
+		
+		if (wallJumpTimer <= 0) {
+		
+			wallJumpTimer = wallJumpMax;
+			wallJumpTrigger = false;
+		
+		} else {
+			
+			wallJumpTimer--;
+			
+		}
+		
+	}
+
 	
 	
 	//--------------------------------------------------------------------------------
@@ -454,10 +483,7 @@ function scr_player_movement() {
 	
 	//--------------------------------------------------------------------------------
 	// Ledge forgiveness
-	
-	if (horKeypress != 0)
-	counter = abs(((spd * horKeypress) - hsp) * accel);
-	
+
 	if (isFalling) {
 	
 		if ( abs(hsp) > accel * 2 ) {
@@ -677,5 +703,8 @@ function scr_player_movement() {
 
 		//--------------------------------------------------------------------------------
 	}
+
+	// Stupid slope fix
+	if (!isGrounded) && (jumpsMax == 1) jumps = 1;
 
 }

@@ -68,7 +68,7 @@ jumpAccelThreshold = 10;
 jumpAccelTime = jumpAccelThreshold;
 jumpAccelTimeMax = -10;
 
-jumpOffMax = 7;
+jumpOffMax = 9;
 jumpOffTime = 0;
 
 offHookTrigger = false;
@@ -88,7 +88,11 @@ slideTime = 0;
 canWalljump = true;
 wallSlideBase = .4;
 wallSlideTimer = wallSlideBase;
-
+isWallSliding = false;
+wallJumpTrigger = false;
+wallJumpMax = 15;
+wallJumpTimer = wallJumpMax;
+wallJump = 0;
 
 _prev = 0;
 xPrev[0] = x;
