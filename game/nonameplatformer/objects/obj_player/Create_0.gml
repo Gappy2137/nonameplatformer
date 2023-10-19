@@ -90,7 +90,7 @@ wallSlideBase = .4;
 wallSlideTimer = wallSlideBase;
 isWallSliding = false;
 wallJumpTrigger = false;
-wallJumpMax = 15;
+wallJumpMax = 18;
 wallJumpTimer = wallJumpMax;
 wallJump = 0;
 

@@ -371,13 +371,8 @@ function scr_player_movement() {
 		
 	}
 	
-	hsp = clamp(hsp, -hspMax, hspMax);
-	vsp = clamp(vsp, vspMin, vspMax);
-	
 	//--------------------------------------------------------------------------------
 	// Walljump
-	
-	var vspWallSlide = 0;
 	
 	if (canWalljump) && (!isGrounded) {
 	
@@ -387,21 +382,25 @@ function scr_player_movement() {
 		var wallSlideTreshold = .025;
 		var wallSlideSpd = .85;
 		var vspPrev = (isWallSliding ? 0 : vsp);
-		counter = vspPrev;
+		var hspPrev = (isWallSliding ? 0 : hsp);
+		counter = hspPrev;
 		
 		if (toLeft) {
 		
 			isWallSliding = (horKeypress == -1 ? true : false);
+			offHookTrigger = false;
 		
 		} else if (toRight) {
 			
 			isWallSliding = (horKeypress == 1 ? true : false);
+			offHookTrigger = false;
 			
 		} else {
 		
 			wallSlideTimer = wallSlideBase;
 			isWallSliding = false;
 			wallJump = (wallJumpTimer <= 0 ? 0 : wallJump);
+			hspPrev = hsp;
 		
 		}
 		
@@ -417,7 +416,7 @@ function scr_player_movement() {
 					
 					isWallSliding = false;
 					wallJumpTrigger = true;
-					hsp = -horKeypress;
+					hsp = -horKeypress * spdBase;
 					doJump();
 					wallJump = horKeypress;
 					
@@ -512,6 +511,9 @@ function scr_player_movement() {
 	}
 	
 	//--------------------------------------------------------------------------------
+	
+	hsp = clamp(hsp, -hspMax, hspMax);
+	vsp = clamp(vsp, vspMin, vspMax);
 	
 	//--------------------------------------------------------------------------------
 	// Kolizje

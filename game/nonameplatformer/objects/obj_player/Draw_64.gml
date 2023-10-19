@@ -15,7 +15,7 @@ draw_text(GAME_WIDTH,0 + (16*i++),"wallSlideTimer:" + string(wallSlideTimer));
 draw_text(GAME_WIDTH,0 + (16*i++),"isWallSliding:" + string(isWallSliding));
 draw_text(GAME_WIDTH,0 + (16*i++),"wallJumpTimer:" + string(wallJumpTimer));
 draw_text(GAME_WIDTH,0 + (16*i++),"wallJump:" + string(wallJump));
-
+draw_text(GAME_WIDTH,0 + (16*i++),"state:" + string(state));
 
 
 /*
