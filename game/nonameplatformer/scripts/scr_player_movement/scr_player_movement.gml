@@ -105,6 +105,9 @@ function scr_player_movement() {
 				hsp = lerp(hsp, 0, deccel); 
 			
 		}
+		
+		if (abs(hsp) < .05)
+			hsp = 0;
 
 	}
 	
@@ -184,6 +187,7 @@ function scr_player_movement() {
 	
 	if (isGrounded) {
 	
+		vsp = 0;
 		inAir = false;
 		jumpThreshold = 0;
 		canJump = true;
@@ -381,10 +385,8 @@ function scr_player_movement() {
 		
 		var wallSlideTreshold = .025;
 		var wallSlideSpd = .85;
-		var vspPrev = (isWallSliding ? 0 : vsp);
-		var hspPrev = (isWallSliding ? 0 : hsp);
-		counter = hspPrev;
-		
+		//var vspPrev = (isWallSliding ? 0 : vsp);
+
 		if (toLeft) {
 		
 			isWallSliding = (horKeypress == -1 ? true : false);
@@ -400,11 +402,12 @@ function scr_player_movement() {
 			wallSlideTimer = wallSlideBase;
 			isWallSliding = false;
 			wallJump = (wallJumpTimer <= 0 ? 0 : wallJump);
-			hspPrev = hsp;
 		
 		}
 		
 		if (isWallSliding) {
+			
+			state = playerState.wallslide;
 			
 			if (isFalling) {
 				
@@ -416,7 +419,7 @@ function scr_player_movement() {
 					
 					isWallSliding = false;
 					wallJumpTrigger = true;
-					hsp = -horKeypress * spdBase;
+					hsp = -horKeypress * spdBase * 1.2;
 					doJump();
 					wallJump = horKeypress;
 					

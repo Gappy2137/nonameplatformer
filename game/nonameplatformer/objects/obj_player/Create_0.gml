@@ -94,6 +94,17 @@ wallJumpMax = 18;
 wallJumpTimer = wallJumpMax;
 wallJump = 0;
 
+animFrame = 0;
+animFrameNum = 0;
+animSpeed = 0;
+
+idleSprite = spr_player_snow_idle;
+runSprite = spr_player_snow_run;
+jumpSprite = spr_player_snow_jump;
+wallslideSprite = spr_player_snow_wallslide;
+
+spriteInd = idleSprite;
+
 _prev = 0;
 xPrev[0] = x;
 yPrev[0] = y;

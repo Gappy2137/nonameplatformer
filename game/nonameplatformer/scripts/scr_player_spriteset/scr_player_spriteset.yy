@@ -1,7 +1,7 @@
 {
   "resourceType": "GMScript",
   "resourceVersion": "1.0",
-  "name": "doJump",
+  "name": "scr_player_spriteset",
   "isCompatibility": false,
   "isDnD": false,
   "parent": {

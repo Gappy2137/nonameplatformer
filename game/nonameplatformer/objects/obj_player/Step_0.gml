@@ -1,5 +1,6 @@
 
 scr_player_movement();
+scr_player_anim();
 
 if keyboard_check_pressed(ord("G")) {
 	game_set_speed(5, gamespeed_fps);
