@@ -111,10 +111,11 @@ yPrev[0] = y;
 rewind = false;
 
 instance_create_layer(x,y,LAYER_INST,obj_hook);
-
+/*
 var _my_method = function(){
 	instance_create_layer(x,y,"Instances",obj_trail);
 }
 
 var trail = time_source_create(time_source_game, 1, time_source_units_frames, _my_method, [], -1);
 time_source_start(trail);
+*/

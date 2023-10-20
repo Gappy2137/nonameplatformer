@@ -6,9 +6,11 @@ draw_set_color(#FFFFFF);
 
 var i = 0;
 draw_set_halign(fa_center);
-
+/*
+draw_text(x,y + 16 + (16*i++),"spriteInd:" + string(sprite_get_name(spriteInd)));
 draw_text(x,y + 16 + (16*i++),"animFrame:" + string(animFrame));
-draw_text(x,y + 16 + (16*i++),"vsp:" + string(vsp));
+draw_text(x,y + 16 + (16*i++),"facing:" + string(facing));
+draw_text(x,y + 16 + (16*i++),"state:" + string(state));
 /*
 draw_set_color(#FFFF00);
 draw_rectangle(bbox_left, bbox_top, bbox_right - 1, bbox_bottom - 1, true);

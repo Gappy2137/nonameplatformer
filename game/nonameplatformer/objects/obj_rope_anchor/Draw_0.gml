@@ -1,4 +1,4 @@
-physics_draw_debug();
+//physics_draw_debug();
 //draw_self();
 draw_set_color(#FFFFFF);
 

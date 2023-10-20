@@ -28,9 +28,9 @@ if (obj_roomcontrol.enablePhy) {
 	//ropeArray[0][ID]._parent = other.id;
 	
 	ropeArray[0] = instance_create_layer(obj_hook.x, obj_hook.y, LAYER_INST, obj_rope_part);
-	var attachFirst = physics_joint_rope_create(id, ropeArray[0], phy_position_x, phy_position_y, ropeArray[0].x, ropeArray[0].y, ropePieceMaxLength, false);
-	physics_joint_set_value(attachFirst, phy_joint_max_length, ropePieceMaxLength);
-	jointArray[ropePieces - 1] = attachFirst;
+	jointArray[ropePieces - 1] = physics_joint_rope_create(id, ropeArray[0], phy_position_x, phy_position_y, ropeArray[0].x, ropeArray[0].y, ropePieceMaxLength, false);
+	physics_joint_set_value(jointArray[ropePieces - 1], phy_joint_max_length, ropePieceMaxLength);
+	//jointArray[ropePieces - 1] = attachFirst;
 
 	var angle = point_direction(obj_player.x, obj_player.y, obj_hook.x, obj_hook.y); 
 
@@ -59,13 +59,13 @@ if (obj_roomcontrol.enablePhy) {
 	
 	repeat(ropePieces - 1) {
 	
-		var attach = physics_joint_rope_create(ropeArray[i], ropeArray[i + 1], ropeArray[i].x, ropeArray[i].y, ropeArray[i + 1].x, ropeArray[i + 1].y, ropePieceMaxLength, false);
+		jointArray[i] = physics_joint_rope_create(ropeArray[i], ropeArray[i + 1], ropeArray[i].x, ropeArray[i].y, ropeArray[i + 1].x, ropeArray[i + 1].y, ropePieceMaxLength, false);
 		
-		physics_joint_set_value(attach, phy_joint_max_length, ropePieceMaxLength);
+		physics_joint_set_value(jointArray[i], phy_joint_max_length, ropePieceMaxLength);
 		
-		jointArray[i] = attach;
+		//jointArray[i] = attach;
 		
-		ropeArray[i].joint = jointArray[i];
+		ropeArray[i].joint = jointArray[i + 1];
 	
 		i--;
 	

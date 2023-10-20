@@ -23,7 +23,7 @@ catchTimeMax = 20;
 launchTime = 0;
 launchTimeMax = 100;
 
-maxRange = 220;
+maxRange = 128;
 slowDownRange = round(maxRange / 3);
 freeRange = round(maxRange / 7);
 hookPullEnd = false;

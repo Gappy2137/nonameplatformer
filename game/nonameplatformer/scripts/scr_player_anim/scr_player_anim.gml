@@ -82,7 +82,7 @@ function scr_player_anim() {
 					
 					}
 					
-					if (wallJumpTrigger)
+					if (wallJumpTrigger) && (hsp != 0)
 						facing = sign(hsp);
 					
 				} else {
@@ -96,13 +96,24 @@ function scr_player_anim() {
 						
 					} else {
 						
-						spriteInd = runSprite;
-						animFrameNum = 6;
-						animSpeed = abs(hsp / 10);
+						if (vsp == 0) {
 						
-						animFrame += animSpeed;
-						if (animFrame >= animFrameNum) {
-							animFrame = frac(animFrame);
+							spriteInd = runSprite;
+							animFrameNum = 6;
+							animSpeed = abs(hsp / 10);
+						
+							animFrame += animSpeed;
+							if (animFrame >= animFrameNum) {
+								animFrame = frac(animFrame);
+							}
+						
+						} else {
+						
+							spriteInd = jumpSprite;
+							animFrameNum = 1;
+							animSpeed = 0;
+							animFrame = 2;
+						
 						}
 						
 					}

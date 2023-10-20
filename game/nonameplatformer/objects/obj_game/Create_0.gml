@@ -41,7 +41,8 @@ enum playerState {
 	walking =	1,
 	offhook =	2,
 	onhook =	3,
-	wallslide = 4
+	wallslide = 4,
+	dead =		5
 	
 }
 
@@ -123,4 +124,4 @@ instance_create_layer(0, 0, LAYER_GAME, obj_camera);
 instance_create_layer(0, 0, LAYER_GAME, obj_cursor);
 
 // Przenies z pokoju init do kolejnego
-room_goto(rm_devroom);
+room_goto(rm_devroom2);

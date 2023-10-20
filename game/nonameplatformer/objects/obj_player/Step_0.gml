@@ -1,5 +1,11 @@
 
+// Process logic
+scr_player_logic();
+
+// Process movement
 scr_player_movement();
+
+// Process animations
 scr_player_anim();
 
 if keyboard_check_pressed(ord("G")) {

@@ -601,7 +601,8 @@ function scr_player_movement() {
 				x += sign(hsp);
 			}
 			
-		
+			if (wallJumpTimer < wallJumpMax) wallJumpTimer = 0;
+			
 			hsp = 0;
 			
 		}
