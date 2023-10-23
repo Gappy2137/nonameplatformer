@@ -20,6 +20,7 @@
     {"name":"Env","order":10,"path":"folders/Base_Group/Sprites/_DEV/Env.yy",},
     {"name":"Semisolid","order":6,"path":"folders/Base_Group/Sprites/_DEV/Semisolid.yy",},
     {"name":"Solids","order":11,"path":"folders/Base_Group/Sprites/_DEV/Solids.yy",},
+    {"name":"Background","order":6,"path":"folders/Base_Group/Sprites/Background.yy",},
     {"name":"Player","order":1,"path":"folders/Base_Group/Sprites/Player.yy",},
     {"name":"Hook","order":2,"path":"folders/Base_Group/Sprites/Player/Hook.yy",},
     {"name":"SpriteTileset","order":2,"path":"folders/Base_Group/Sprites/SpriteTileset.yy",},
@@ -33,7 +34,6 @@
     {"name":"Third_Group","order":3,"path":"folders/Third_Group.yy",},
     {"name":"Notes","order":2,"path":"folders/Third_Group/Notes.yy",},
     {"name":"Paths","order":1,"path":"folders/Third_Group/Paths.yy",},
-    {"name":"Background","order":6,"path":"folders/Base_Group/Sprites/Background.yy",},
   ],
   "ResourceOrderSettings": [
     {"name":"spr_player_snow_jump","order":5,"path":"sprites/spr_player_snow_jump/spr_player_snow_jump.yy",},
@@ -72,6 +72,7 @@
     {"name":"scr_player_hook","order":2,"path":"scripts/scr_player_hook/scr_player_hook.yy",},
     {"name":"obj_slope_8_ur","order":4,"path":"objects/obj_slope_8_ur/obj_slope_8_ur.yy",},
     {"name":"obj_cursor","order":2,"path":"objects/obj_cursor/obj_cursor.yy",},
+    {"name":"curve_land","order":1,"path":"animcurves/curve_land/curve_land.yy",},
     {"name":"spr_player_mask","order":1,"path":"sprites/spr_player_mask/spr_player_mask.yy",},
     {"name":"spr_slope_8_ur","order":3,"path":"sprites/spr_slope_8_ur/spr_slope_8_ur.yy",},
     {"name":"spr_solid_8","order":4,"path":"sprites/spr_solid_8/spr_solid_8.yy",},

@@ -1,3 +1,7 @@
+sprPos[0] = [-sprOffset, -sprOffset];
+sprPos[1] = [+sprOffset, -sprOffset];
+sprPos[2] = [+sprOffset, +sprOffset];
+sprPos[3] = [-sprOffset, +sprOffset];
 
 // Process logic
 scr_player_logic();
@@ -8,7 +12,8 @@ scr_player_movement();
 // Process animations
 scr_player_anim();
 
-
+if (!landingAnim)
+	landed = false;
 
 //if (isJumping) && (!isGrounded) counter++;
 //if (isGrounded) counter = 0;

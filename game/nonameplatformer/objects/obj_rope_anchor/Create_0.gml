@@ -12,6 +12,8 @@ ropePieceMaxLength = .3;
 ropeArray = array_create(ropePieces, noone);
 jointArray = array_create(ropePieces, 0);
 
+setupTimer = 1;
+
 var ID = 0;
 
 if (obj_roomcontrol.enablePhy) {

@@ -31,6 +31,7 @@ function scr_player_movement() {
 		
 		} else {
 		
+			
 			if ( (hsp == 0) && (vsp == 0) )
 				state = playerState.idle;
 			else if ( (hsp != 0) || (vsp != 0) )
@@ -187,6 +188,7 @@ function scr_player_movement() {
 	
 	if (isGrounded) {
 	
+		landed = true;
 		vsp = 0;
 		inAir = false;
 		jumpThreshold = 0;

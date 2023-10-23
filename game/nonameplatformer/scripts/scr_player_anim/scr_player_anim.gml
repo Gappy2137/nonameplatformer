@@ -69,7 +69,7 @@ function scr_player_anim() {
 					if (vsp < 0) {
 
 						animFrame = 0;
-					
+
 					} else if (vsp > 0) {
 					
 						animFrame = 2;
@@ -77,7 +77,7 @@ function scr_player_anim() {
 					}
 					
 					if ( (vsp > -.2) && (vsp < .2) ) {
-					
+						
 						animFrame = 1;
 					
 					}
@@ -133,6 +133,102 @@ function scr_player_anim() {
 		
 		break;
 		
+	
+	}
+
+	if (inAir) {
+	
+		if ( (vsp > -.2) && (vsp < .2) ) {
+		
+			juiceT = 0;
+		
+		}
+	
+		if (vsp < -.2) {
+			
+			juiceTSpeed = 0.075;
+			if (juiceT >= .75) juiceT = .75; else juiceT += juiceTSpeed;
+			
+			var squish = animcurve_channel_evaluate(curveJumpUp, juiceT) * 4;
+			
+			// Left
+			juicePos[0][0] = squish;
+			juicePos[3][0] = squish;
+						
+			// Right
+			juicePos[1][0] = -squish;
+			juicePos[2][0] = -squish;
+						
+			// Up
+			juicePos[0][1] = -squish;
+			juicePos[1][1] = -squish;
+						
+			// Down
+			juicePos[2][1] = squish;
+			juicePos[3][1] = squish;
+		
+		}
+		
+		if (vsp > .2) {
+			
+			juiceTSpeed = 0.05;
+			if (juiceT >= .5) juiceT = .5; else juiceT += juiceTSpeed;
+			
+			var squish = animcurve_channel_evaluate(curveJumpUp, juiceT) * 4;
+			
+			// Left
+			juicePos[0][0] = squish;
+			juicePos[3][0] = squish;
+						
+			// Right
+			juicePos[1][0] = -squish;
+			juicePos[2][0] = -squish;
+						
+			// Up
+			juicePos[0][1] = -squish;
+			juicePos[1][1] = -squish;
+						
+			// Down
+			juicePos[2][1] = squish;
+			juicePos[3][1] = squish;
+			
+		}
+	
+	}
+	
+	if (landed) && (!inAir) {
+		
+		juiceTSpeed = 0.1;
+		
+		if (juiceT >= 1) {
+			
+			juiceT = 1;
+			landed = false;
+			
+		} else {
+			
+			juiceT += juiceTSpeed;
+			landingAnim = true;
+			
+		}
+			
+		var squish = animcurve_channel_evaluate(curveJumpUp, juiceT) * (y / yprevious) * 5;
+			
+		// Left
+		juicePos[0][0] = -squish;
+		juicePos[3][0] = -squish;
+						
+		// Right
+		juicePos[1][0] = squish;
+		juicePos[2][0] = squish;
+						
+		// Up
+		juicePos[0][1] = squish;
+		juicePos[1][1] = squish;
+						
+		// Down
+		//juicePos[2][1] = squish;
+		//juicePos[3][1] = squish;
 	
 	}
 

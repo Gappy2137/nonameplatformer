@@ -1,3 +1,5 @@
+if (setupTimer <= 0) setupTimer = 0; else setupTimer--;
+
 phy_position_x = anchorX;
 phy_position_y = anchorY;
 

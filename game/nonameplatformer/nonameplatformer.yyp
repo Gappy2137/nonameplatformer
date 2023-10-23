@@ -32,6 +32,7 @@
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Env","folderPath":"folders/Base_Group/Sprites/_DEV/Env.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Semisolid","folderPath":"folders/Base_Group/Sprites/_DEV/Semisolid.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Solids","folderPath":"folders/Base_Group/Sprites/_DEV/Solids.yy",},
+    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Background","folderPath":"folders/Base_Group/Sprites/Background.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Player","folderPath":"folders/Base_Group/Sprites/Player.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Hook","folderPath":"folders/Base_Group/Sprites/Player/Hook.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"SpriteTileset","folderPath":"folders/Base_Group/Sprites/SpriteTileset.yy",},
@@ -47,7 +48,6 @@
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Notes","folderPath":"folders/Third_Group/Notes.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Paths","folderPath":"folders/Third_Group/Paths.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Timelines","folderPath":"folders/Third_Group/Timelines.yy",},
-    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Background","folderPath":"folders/Base_Group/Sprites/Background.yy",},
   ],
   "IncludedFiles": [],
   "isEcma": false,
@@ -78,6 +78,7 @@
     {"id":{"name":"obj_slope_8_dr","path":"objects/obj_slope_8_dr/obj_slope_8_dr.yy",},},
     {"id":{"name":"obj_roomcontrol","path":"objects/obj_roomcontrol/obj_roomcontrol.yy",},},
     {"id":{"name":"rm_devroom2","path":"rooms/rm_devroom2/rm_devroom2.yy",},},
+    {"id":{"name":"curve_jumpUp","path":"animcurves/curve_jumpUp/curve_jumpUp.yy",},},
     {"id":{"name":"spr_player_snow_run","path":"sprites/spr_player_snow_run/spr_player_snow_run.yy",},},
     {"id":{"name":"spr_semislope_8_dl","path":"sprites/spr_semislope_8_dl/spr_semislope_8_dl.yy",},},
     {"id":{"name":"obj_trail","path":"objects/obj_trail/obj_trail.yy",},},
@@ -103,6 +104,7 @@
     {"id":{"name":"scr_player_hook","path":"scripts/scr_player_hook/scr_player_hook.yy",},},
     {"id":{"name":"obj_slope_8_ur","path":"objects/obj_slope_8_ur/obj_slope_8_ur.yy",},},
     {"id":{"name":"obj_cursor","path":"objects/obj_cursor/obj_cursor.yy",},},
+    {"id":{"name":"curve_land","path":"animcurves/curve_land/curve_land.yy",},},
     {"id":{"name":"spr_player_mask","path":"sprites/spr_player_mask/spr_player_mask.yy",},},
     {"id":{"name":"spr_slope_8_ur","path":"sprites/spr_slope_8_ur/spr_slope_8_ur.yy",},},
     {"id":{"name":"spr_slope_8_dl","path":"sprites/spr_slope_8_dl/spr_slope_8_dl.yy",},},
@@ -134,5 +136,6 @@
   "templateType": null,
   "TextureGroups": [
     {"resourceType":"GMTextureGroup","resourceVersion":"1.3","name":"Default","autocrop":true,"border":2,"compressFormat":"bz2","directory":"","groupParent":null,"isScaled":true,"loadType":"default","mipsToGenerate":0,"targets":-1,},
+    {"resourceType":"GMTextureGroup","resourceVersion":"1.3","name":"Player","autocrop":false,"border":2,"compressFormat":"bz2","directory":"","groupParent":null,"isScaled":true,"loadType":"default","mipsToGenerate":0,"targets":-1,},
   ],
 }

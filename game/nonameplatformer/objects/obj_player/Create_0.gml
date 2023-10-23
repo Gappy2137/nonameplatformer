@@ -17,7 +17,7 @@ spdBase = 2;
 spd = spdBase;
 hsp = 0;
 vsp = 0;
-jumpForceBase = 2.25;
+jumpForceBase = 2.05;
 //2.55
 jumpForce = jumpForceBase;
 
@@ -104,6 +104,27 @@ jumpSprite = spr_player_snow_jump;
 wallslideSprite = spr_player_snow_wallslide;
 
 spriteInd = idleSprite;
+
+angle = 0;
+sprOffset = 12;
+sprPos[0] = [-sprOffset, -sprOffset];
+sprPos[1] = [+sprOffset, -sprOffset];
+sprPos[2] = [+sprOffset, +sprOffset];
+sprPos[3] = [-sprOffset, +sprOffset];
+
+juicePos[0] = [0, 0];
+juicePos[1] = [0, 0];
+juicePos[2] = [0, 0];
+juicePos[3] = [0, 0];
+
+juiceT = 0;
+juiceTSpeed = .1;
+juiceTMax = 1;
+
+curveJumpUp = animcurve_get_channel(curve_jumpUp, "squish");
+
+landed = false;
+landingAnim = false;
 
 _prev = 0;
 xPrev[0] = x;

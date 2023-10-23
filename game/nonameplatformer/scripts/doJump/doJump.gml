@@ -10,6 +10,7 @@ function doJump() {
 			isJumping = true;
 			isGrounded = false;
 			isFalling = false;
+			juiceT = 0.2;
 		
 		break;
 		
