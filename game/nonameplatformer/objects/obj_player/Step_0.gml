@@ -8,14 +8,7 @@ scr_player_movement();
 // Process animations
 scr_player_anim();
 
-if keyboard_check_pressed(ord("G")) {
-	game_set_speed(5, gamespeed_fps);
-	physics_world_update_speed(100);
-}
-if keyboard_check_pressed(ord("H")) {
-	game_set_speed(60, gamespeed_fps);
-	physics_world_update_speed(60);
-}
+
 
 //if (isJumping) && (!isGrounded) counter++;
 //if (isGrounded) counter = 0;

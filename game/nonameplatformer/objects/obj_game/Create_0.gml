@@ -81,6 +81,8 @@ global.game = {
 	
 	cursorType: cursorSprite.hook,
 	
+	debug: false,
+	
 	game_set_size : function(newSize) {
 		
 		windowSize = newSize;

@@ -4,7 +4,7 @@ draw_sprite_ext(spriteInd, animFrame, x, y, facing, 1, 0, #FFFFFF, 1);
 
 draw_set_color(#FFFFFF);
 
-var i = 0;
+//var i = 0;
 draw_set_halign(fa_center);
 /*
 draw_text(x,y + 16 + (16*i++),"spriteInd:" + string(sprite_get_name(spriteInd)));

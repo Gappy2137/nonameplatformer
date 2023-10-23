@@ -2,6 +2,11 @@ anchorX = 0;
 anchorY = 0;
 depth = obj_player.depth - 1;
 
+bezierX1=anchorX;
+bezierY1=anchorY;
+bezierX2=obj_player.x;
+bezierY2=obj_player.y;
+
 ropePieces = 6;
 ropePieceMaxLength = .3;
 ropeArray = array_create(ropePieces, noone);
