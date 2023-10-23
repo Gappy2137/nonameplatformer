@@ -9,7 +9,7 @@ draw_text(0,0 + (16*i++),"lx:   " + string(ropeArray[ropePieces - 1].phy_positio
 draw_text(0,0 + (16*i++),"ly:   " + string(ropeArray[ropePieces - 1].phy_position_y));
 draw_text(0,0 + (16*i++),"_l:   " + string(ropePieceMaxLength));
 */
-draw_text(0,0 + (16*i++),"bezierX1:    " + string(bezierX1));
-draw_text(0,0 + (16*i++),"bezierX2:    " + string(bezierX2));
-draw_text(0,0 + (16*i++),"bezierY1:    " + string(bezierY1));
-draw_text(0,0 + (16*i++),"bezierY2:    " + string(bezierY2));
+//draw_text(0,0 + (16*i++),"bezierX1:    " + string(bezierX1));
+//draw_text(0,0 + (16*i++),"bezierX2:    " + string(bezierX2));
+//draw_text(0,0 + (16*i++),"bezierY1:    " + string(bezierY1));
+//draw_text(0,0 + (16*i++),"bezierY2:    " + string(bezierY2));
