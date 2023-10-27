@@ -126,6 +126,8 @@ curveJumpUp = animcurve_get_channel(curve_jumpUp, "squish");
 landed = false;
 landingAnim = false;
 
+area = 0;
+
 _prev = 0;
 xPrev[0] = x;
 yPrev[0] = y;

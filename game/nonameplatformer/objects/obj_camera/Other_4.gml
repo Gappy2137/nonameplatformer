@@ -3,7 +3,7 @@ camMinY = 0;
 camMaxX = room_width - (camWidth);
 camMaxY = room_height - (camHeight);
 
-if (following == noone) {
+if (following != noone) {
 	
 	following = id;
 	camX = following.x;

@@ -1,3 +1,22 @@
+if (roomTransition) {
+
+	if (transTime >= transMax) roomTransition = false; else ++transTime;
+	
+	if (nextRoom != undefined) && (!roomTrigger) {
+	
+		room_goto(nextRoom);
+		roomTrigger = true;
+		
+	}
+
+} else {
+	
+	transTime = 0;
+	roomTrigger = false;
+	obj_camera.following = obj_player;
+	
+}
+
 if keyboard_check_pressed(ord("Q")) {
     global.game.debug = !global.game.debug;
     show_debug_overlay(global.game.debug);
@@ -22,10 +41,9 @@ if (!global.game.debug) {
 	}
 }
 
-
-
 global.game.mouseX = device_mouse_x_to_gui(0);
 global.game.mouseY = device_mouse_y_to_gui(0);
 
 global.game.mouseXR = mouse_x;
 global.game.mouseYR = mouse_y;
+

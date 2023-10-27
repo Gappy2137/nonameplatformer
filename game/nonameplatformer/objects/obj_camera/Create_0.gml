@@ -11,7 +11,7 @@ camMinY = 0;
 camMaxX = room_width - (camWidth);
 camMaxY = room_height - (camHeight);
 
-following = noone;
+following = obj_player;
 
 follow_type = 0;
 

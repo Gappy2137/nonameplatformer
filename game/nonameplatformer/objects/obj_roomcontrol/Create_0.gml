@@ -30,3 +30,5 @@ repeat(array_length(layers)) {
 	i++;
 	
 }
+
+areaArray = [];

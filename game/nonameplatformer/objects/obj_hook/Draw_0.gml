@@ -19,6 +19,10 @@ if (ropeDrawTimer != 0){
 draw_set_color(#FFFFFF);
 draw_line_width(chainFromX, chainFromY, drawX, drawY, 1);
 }
+var a = raycast(x,y,x+lengthdir_x(maxRange, angleToMouse), y+lengthdir_y(maxRange, angleToMouse), par_collision);
+if a[0] != noone
+draw_line(x,y,a[1], a[2]);
+
 /*
 if (state != hookState.onPlayer) {
 

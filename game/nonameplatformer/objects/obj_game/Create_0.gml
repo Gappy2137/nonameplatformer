@@ -22,7 +22,8 @@
 enum cursorSprite {
 
 	normal =	0,
-	hook =		1
+	hook =		1,
+	hookReady =	2
 
 }
 
@@ -51,6 +52,15 @@ enum playerHookedState {
 	pull = 0,
 	fall = 1,
 	none = 2
+
+}
+
+enum roomTrans {
+
+	right =	 0,
+	up =	 1,
+	left =	 2,
+	down =	 3,
 
 }
 
@@ -83,6 +93,10 @@ global.game = {
 	
 	debug: false,
 	
+	currentRoom: undefined,
+	
+	nextRoom: undefined,
+	
 	game_set_size : function(newSize) {
 		
 		windowSize = newSize;
@@ -99,6 +113,25 @@ global.game = {
 	}
 
 };
+
+// Room transition
+gameStart = true;alarm[0]=10;
+roomTransition = false;
+transOrientation = roomTrans.right;
+transMax = 50;
+transTime = 0;
+roomToX = 0;
+roomToY = 0;
+nextRoom = undefined;
+roomTrigger = false;
+
+surfCurrRoom = -1;
+surfNextRoom = -1;
+
+// Culling
+
+var cullTimer = time_source_create(time_source_game, 4, time_source_units_frames, cullScreen, [], -1);
+time_source_start(cullTimer);
 
 // Poczatkowe ustawienie wielkosci okna
 
@@ -126,4 +159,4 @@ instance_create_layer(0, 0, LAYER_GAME, obj_camera);
 instance_create_layer(0, 0, LAYER_GAME, obj_cursor);
 
 // Przenies z pokoju init do kolejnego
-room_goto(rm_devroom2);
+room_goto(rm_devroom);

@@ -39,6 +39,8 @@ embedTimer = 0;
 
 canUse = true;
 
+ray = [];
+
 ropeImpulse = 0;
 ropeID = noone;
 ropeDrawTimer = 5;
