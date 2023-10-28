@@ -35,6 +35,8 @@ function scr_player_anim() {
 	//
 	//
 	
+	if (!allowMovement) exit;
+	
 	switch(state) {
 	
 		case playerState.idle:

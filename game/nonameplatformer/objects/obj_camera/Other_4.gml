@@ -1,7 +1,7 @@
 camMinX = 0;
 camMinY = 0;
-camMaxX = room_width - (camWidth);
-camMaxY = room_height - (camHeight);
+camMaxX = room_width;
+camMaxY = room_height;
 
 if (following != noone) {
 	

@@ -16,8 +16,9 @@ function scr_player_movement() {
 	var horKeypress = keyRight - keyLeft;
 	var verKeypress = keyDown - keyUp;
 	
+	if (obj_game.roomTrigger) exit;
+	
 	isFalling = vsp > 0 ? true : false;
-		
 		
 	if (obj_hook.state == hookState.embedded) {
 	
@@ -630,7 +631,8 @@ function scr_player_movement() {
 	
 		}
 	
-		x += hsp;
+		if (allowMovement)
+			x += hsp;
 	
 		if (isJumping) && (!isFalling) && (vsp < -0.05) {
 			
@@ -706,9 +708,10 @@ function scr_player_movement() {
 			vsp = 0;
 			
 		}
+		
+		if (allowMovement)
+			y += vsp;
 	
-		y += vsp;
-
 		//--------------------------------------------------------------------------------
 	}
 

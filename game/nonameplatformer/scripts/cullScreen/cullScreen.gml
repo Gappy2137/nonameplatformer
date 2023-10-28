@@ -1,5 +1,7 @@
 function cullScreen() {
 	
+	obj_game.c++;
+	
 	if (!instance_exists(obj_camera)) exit;
 	
 	var cullDist = 32;

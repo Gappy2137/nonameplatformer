@@ -3,8 +3,8 @@ if (roomTransition) {
 	if (transTime >= transMax) roomTransition = false; else ++transTime;
 	
 	if (nextRoom != undefined) && (!roomTrigger) {
-	
-		room_goto(nextRoom);
+		
+		//room_goto(nextRoom);
 		roomTrigger = true;
 		
 	}
@@ -14,6 +14,10 @@ if (roomTransition) {
 	transTime = 0;
 	roomTrigger = false;
 	obj_camera.following = obj_player;
+	firstSurfReady = false;
+	gotoRoom = false;
+	surface_free(surfCurrRoom);
+	surface_free(surfNextRoom);
 	
 }
 

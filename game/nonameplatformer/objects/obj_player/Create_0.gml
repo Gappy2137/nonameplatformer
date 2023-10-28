@@ -59,7 +59,7 @@ jumpBufferMax = 6;
 jumpBuffer = 0;
 
 coyoteTime = 0;
-coyoteMax = 6;
+coyoteMax = 5;
 
 justJumped = false;
 jumpTrigger = false;
@@ -127,6 +127,8 @@ landed = false;
 landingAnim = false;
 
 area = 0;
+
+allowMovement = true;
 
 _prev = 0;
 xPrev[0] = x;

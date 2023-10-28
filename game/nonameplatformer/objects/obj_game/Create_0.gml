@@ -2,6 +2,10 @@
 
 //show_debug_overlay(true);
 
+application_surface_draw_enable(true);
+
+appSurf = -1;
+
 // Makra
 
 #macro GAME_WIDTH 480
@@ -118,19 +122,26 @@ global.game = {
 gameStart = true;alarm[0]=10;
 roomTransition = false;
 transOrientation = roomTrans.right;
-transMax = 50;
+transMax = 15;
 transTime = 0;
 roomToX = 0;
 roomToY = 0;
 nextRoom = undefined;
 roomTrigger = false;
+firstSurfReady = false;
+gotoRoom = false;
+roomTransPlayerVars = [];
+
+ch=0;
 
 surfCurrRoom = -1;
 surfNextRoom = -1;
 
 // Culling
 
-var cullTimer = time_source_create(time_source_game, 4, time_source_units_frames, cullScreen, [], -1);
+c=0;
+
+cullTimer = time_source_create(time_source_game, 4, time_source_units_frames, cullScreen, [], -1);
 time_source_start(cullTimer);
 
 // Poczatkowe ustawienie wielkosci okna

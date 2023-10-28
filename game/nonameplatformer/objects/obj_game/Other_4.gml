@@ -1,16 +1,35 @@
+if (time_source_exists(cullTimer))
+	time_source_resume(cullTimer);
+
 if (!instance_exists(obj_player)) {
 
-	instance_create_layer(roomToX, roomToY, LAYER_INST, obj_player);
+	//[0] = hsp;
+	//[1] = vsp;
+	//[2] = state;
+	//[3] = facing;
+	//[4] = bbox_left;
+	//[5] = bbox_bottom;
+	//[6] = rmTrans.bbox_left;
+	//[7] = rmTrans.bbox_bottom;
+	
+	var ar = roomTransPlayerVars;
+	
+	var relX = (ar[4] - ar[6]);
+	var relY = (ar[7] - ar[5]);
+	
+	instance_create_layer(roomToX + (transOrientation == roomTrans.up || transOrientation == roomTrans.down ? relX : 0),
+						 (roomToY + 4) - (transOrientation == roomTrans.right || transOrientation == roomTrans.left ? relY : 0),
+						 LAYER_INST, obj_player);
+	
+	with (obj_player) {
+
+		hsp = ar[0];
+		vsp = ar[1];
+		state = ar[2];
+		facing = ar[3];
+	
+	}
 	
 }
 
-if (gameStart) || (transTime < 2)  exit;
-
-if (!surface_exists(surfNextRoom))
-	surfNextRoom = surface_create(global.game.windowWidth, global.game.windowHeight);
-	
-surface_set_target(surfNextRoom);
-
-draw_surface_part(application_surface, obj_camera.camX, obj_camera.camY, GAME_WIDTH, GAME_HEIGHT, obj_camera.camX, obj_camera.camY);
-
-surface_reset_target();
+firstSurfReady = true;

@@ -86,6 +86,7 @@
     {"name":"spr_slope_8_dr","order":1,"path":"sprites/spr_slope_8_dr/spr_slope_8_dr.yy",},
     {"name":"round_to_2","order":2,"path":"scripts/round_to_2/round_to_2.yy",},
     {"name":"spr_walljump_8","order":2,"path":"sprites/spr_walljump_8/spr_walljump_8.yy",},
+    {"name":"rm_devroom3","order":2,"path":"rooms/rm_devroom3/rm_devroom3.yy",},
     {"name":"cullScreen","order":4,"path":"scripts/cullScreen/cullScreen.yy",},
     {"name":"scr_player_anim","order":3,"path":"scripts/scr_player_anim/scr_player_anim.yy",},
     {"name":"spr_hook_chain","order":1,"path":"sprites/spr_hook_chain/spr_hook_chain.yy",},

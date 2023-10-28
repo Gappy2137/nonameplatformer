@@ -27,7 +27,9 @@
     {"resourceType":"GMObjectProperty","resourceVersion":"1.0","name":"orient","filters":[],"listItems":[],"multiselect":false,"rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"value":"roomTrans.right","varType":4,},
     {"resourceType":"GMObjectProperty","resourceVersion":"1.0","name":"toX","filters":[],"listItems":[],"multiselect":false,"rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"value":"0","varType":0,},
     {"resourceType":"GMObjectProperty","resourceVersion":"1.0","name":"toY","filters":[],"listItems":[],"multiselect":false,"rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"value":"0","varType":0,},
-    {"resourceType":"GMObjectProperty","resourceVersion":"1.0","name":"nextRoom","filters":[],"listItems":[],"multiselect":false,"rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"value":"rm_devroom","varType":5,},
+    {"resourceType":"GMObjectProperty","resourceVersion":"1.0","name":"nextRoom","filters":[
+        "GMRoom",
+      ],"listItems":[],"multiselect":false,"rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"value":"rm_devroom","varType":5,},
   ],
   "solid": false,
   "spriteId": {
