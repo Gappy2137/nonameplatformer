@@ -1,3 +1,4 @@
+
 camMinX = 0;
 camMinY = 0;
 camMaxX = room_width;

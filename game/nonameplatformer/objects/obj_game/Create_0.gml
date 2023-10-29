@@ -122,7 +122,7 @@ global.game = {
 gameStart = true;alarm[0]=10;
 roomTransition = false;
 transOrientation = roomTrans.right;
-transMax = 15;
+transMax = 60;
 transTime = 0;
 roomToX = 0;
 roomToY = 0;

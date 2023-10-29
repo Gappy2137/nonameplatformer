@@ -25,6 +25,10 @@ if (roomTrigger) && (!gotoRoom) {
 }
 
 if (firstSurfReady) {
+	
+	
+	
+	event_user(0);
 
 	surface_set_target(surfNextRoom);
 
@@ -52,9 +56,9 @@ if (transTime > 1) {
 		break;
 		case roomTrans.up:
 			oldX = 0;
-			oldY = (1 - transTime / transMax) * _h;
+			oldY = (val * GAME_HEIGHT);
 			newX = 0;
-			newY = (-transTime / transMax) * _h;
+			newY = -GAME_HEIGHT * (1 - val);
 		break;
 		case roomTrans.left:
 			oldX = (val * GAME_WIDTH);
@@ -64,16 +68,15 @@ if (transTime > 1) {
 		break;
 		case roomTrans.down:
 			oldX = 0;
-			oldY = (1 + transTime / transMax) * _h;
+			oldY = -(val * GAME_HEIGHT);
 			newX = 0;
-			newY = (transTime / transMax) * _h;
+			newY = GAME_HEIGHT * (1 - val);
 		break;
 	
 	}
 
-	draw_surface_ext(surfCurrRoom, oldX, oldY, size, size, 0, #FFFFFF, 1);
-	draw_surface_ext(surfNextRoom, newX, newY, size, size, 0, #FFFFFF, 1);
-	draw_text(128, 128, newX);
+	draw_surface_ext(surfCurrRoom, oldX, oldY, size, size, 0, #FFFFFF, .5);
+	draw_surface_ext(surfNextRoom, newX, newY, size, size, 0, #FFFFFF, .5);
 	
 }
 

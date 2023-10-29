@@ -18,6 +18,9 @@ follow_type = 0;
 camMoveBorderX = 32;
 camMoveBorderY = 128;
 
+setupTimer = 0;
+setupMax = 80;
+
 // Ustaw kamere
 
 camera = camera_create_view(0, 0, camWidth, camHeight, camAngle, following, -1, -1, camMoveBorderX, camMoveBorderY);

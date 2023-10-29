@@ -24,7 +24,7 @@ var cam_y_pos = camera_get_view_y(MAIN_CAMERA);
 var cam_x = clamp((following.x - (camWidth/2)), camMinX , camMaxX - camWidth);
 var cam_y = clamp((following.y - (camHeight/2)) - 16, camMinY, camMaxY - camHeight);		
 					
-var cam_speed = 0.2;
+var cam_speed = (setupTimer == setupMax ? 0.2 : 1);
 						
 var _x = lerp(cam_x_pos, cam_x, cam_speed);
 var _y = lerp(cam_y_pos, cam_y, cam_speed);

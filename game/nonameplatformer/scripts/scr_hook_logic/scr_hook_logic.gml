@@ -19,7 +19,7 @@ function scr_hook_logic() {
 			
 			angleToMouse = point_direction(x, y, global.game.mouseXR, global.game.mouseYR);
 			
-			ray = raycast(x, y, x + lengthdir_x(maxRange + obj_player.hsp, angleToMouse), y + lengthdir_y(maxRange + obj_player.vsp, angleToMouse), obj_attachable_8);
+			ray = raycast(x, y, x + lengthdir_x(maxRange + obj_player.hsp, angleToMouse), y + lengthdir_y(maxRange + obj_player.vsp, angleToMouse), par_solid);
 			
 			if (ray[0] != noone) && (ray[0].object_index == obj_attachable_8) {
 				global.game.cursorType = cursorSprite.hookReady;
