@@ -35,7 +35,7 @@ function scr_player_anim() {
 	//
 	//
 	
-	if (!allowMovement) exit;
+	if (obj_game.roomTrigger) exit;
 	
 	switch(state) {
 	
@@ -134,8 +134,9 @@ function scr_player_anim() {
 			animSpeed = 0;
 		
 		break;
+		case playerState.dead:
 		
-	
+		break;
 	}
 
 	if (inAir) {

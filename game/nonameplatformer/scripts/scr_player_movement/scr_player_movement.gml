@@ -20,27 +20,31 @@ function scr_player_movement() {
 	
 	isFalling = vsp > 0 ? true : false;
 		
-	if (obj_hook.state == hookState.embedded) {
+	if (state != playerState.dead) {
+		
+		if (obj_hook.state == hookState.embedded) {
 	
-		state = playerState.onhook;
+			state = playerState.onhook;
 	
-	} else {
-		
-		if (offHookTrigger) {
-		
-			state = playerState.offhook;
-		
 		} else {
 		
+			if (offHookTrigger) {
+		
+				state = playerState.offhook;
+		
+			} else {
 			
-			if ( (hsp == 0) && (vsp == 0) )
-				state = playerState.idle;
-			else if ( (hsp != 0) || (vsp != 0) )
-				state = playerState.walking;
+				if ( (hsp == 0) && (vsp == 0) )
+					state = playerState.idle;
+				else if ( (hsp != 0) || (vsp != 0) )
+					state = playerState.walking;
 
+			}
+		
 		}
 		
 	}
+
 	
 	switch(state) {
 	
@@ -70,6 +74,12 @@ function scr_player_movement() {
 		
 			accel = accelAir;
 			deccel = deccelHook;
+		
+		break;
+		case playerState.dead:
+		
+			horKeypress = 0;
+			verKeypress = 0;
 		
 		break;
 	
@@ -113,6 +123,7 @@ function scr_player_movement() {
 
 	}
 	
+	/*
 	if ( (( (keyLeft) && (hsp > 0.1) )
 	|| ( (keyRight) && (hsp < 0.1) )) )
 	&& (!((keyRight) && (keyLeft))) {
@@ -133,7 +144,7 @@ function scr_player_movement() {
 		}
 	
 	}
-	
+	*/
 	if (abs(hsp) > spdBase) 
 	&& (isGrounded)
 	&& (state == playerState.walking) {
@@ -381,7 +392,7 @@ function scr_player_movement() {
 	//--------------------------------------------------------------------------------
 	// Walljump
 	
-	if (canWalljump) && (!isGrounded) {
+	if (canWalljump) && (!isGrounded) && (allowMovement) {
 	
 		var toLeft = collision_rectangle(bbox_left - 1, bbox_top, bbox_left + 1, bbox_bottom, obj_walljump_8, false, false);
 		var toRight = collision_rectangle(bbox_right - 1, bbox_top, bbox_right + 1, bbox_bottom, obj_walljump_8, false, false);
@@ -454,37 +465,35 @@ function scr_player_movement() {
 		}
 		
 	}
-
+	
+	hsp = clamp(hsp, -hspMax, hspMax);
+	vsp = clamp(vsp, vspMin, vspMax);
 	
 	
-	//--------------------------------------------------------------------------------
+	// Dont check for collisions when dead
+	// Also override some variables we dont need
 	
-	#region Hook
+	if (state == playerState.dead) {
 	
-	/*
-	if (offHookTrigger) {
+		isFalling = false;
+		isGrounded = false;
+		isJumping = false;
+		isSkidding = false;
+		isSliding = false;
+		isTurning = false;
+		isWallSliding = false;
+		inAir = true;
+		jumpBuffer = 0;
+		coyoteTime = 0;
+		jumpTime = 0;
+		wallJumpTrigger = false;
+		grav = 0;
+		accel = 0;
+		deccel = 0;
 	
-		if (offHookTimer >= offHookTimerMax) {
-		
-			offHookTimer = 0;
-			offHookTrigger = false;
-			
-			ignoreGravity = false;
-		
-		} else {
-		
-			//offHookTimer++;
-			//grav *= 0.75;
-			deccelHook = (-0.0005 * (hsp * hsp)) + .05;
-			//ignoreGravity = true;
-			//vsp = -1.25;
-		
-		}
+		exit;
 	
 	}
-	*/
-	
-	#endregion
 	
 	//--------------------------------------------------------------------------------
 	// Ledge forgiveness
@@ -517,9 +526,6 @@ function scr_player_movement() {
 	}
 	
 	//--------------------------------------------------------------------------------
-	
-	hsp = clamp(hsp, -hspMax, hspMax);
-	vsp = clamp(vsp, vspMin, vspMax);
 	
 	//--------------------------------------------------------------------------------
 	// Kolizje
@@ -715,7 +721,7 @@ function scr_player_movement() {
 		//--------------------------------------------------------------------------------
 	}
 
-	// Stupid slope fix
+	// Stupid slope fix ???
 	if (!isGrounded) && (jumpsMax == 1) jumps = 1;
 
 }

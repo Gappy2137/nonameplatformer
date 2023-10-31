@@ -1,7 +1,7 @@
 {
   "resourceType": "GMObject",
   "resourceVersion": "1.0",
-  "name": "obj_doublejump_8",
+  "name": "obj_hazard_8",
   "eventList": [],
   "managed": true,
   "overriddenProperties": [],
@@ -26,9 +26,9 @@
   "properties": [],
   "solid": false,
   "spriteId": {
-    "name": "spr_doublejump_8",
-    "path": "sprites/spr_doublejump_8/spr_doublejump_8.yy",
+    "name": "spr_hazard_8",
+    "path": "sprites/spr_hazard_8/spr_hazard_8.yy",
   },
   "spriteMaskId": null,
-  "visible": true,
+  "visible": false,
 }

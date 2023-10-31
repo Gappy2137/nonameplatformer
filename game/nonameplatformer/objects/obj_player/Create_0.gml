@@ -130,6 +130,9 @@ area = 0;
 
 allowMovement = true;
 
+deadMax = 120;
+deadTimer = 0;
+
 _prev = 0;
 xPrev[0] = x;
 yPrev[0] = y;

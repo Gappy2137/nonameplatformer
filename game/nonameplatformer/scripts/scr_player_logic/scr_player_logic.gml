@@ -1,8 +1,10 @@
 function scr_player_logic() {
+	
+	var hazard = instance_place(x, y, obj_hazard_8);
 
-	if (x < -16) || (x > room_width + 16) || (y < -16) || (y > room_height + 16)
+	if ((x < -16) || (x > room_width + 16) || (y < -16) || (y > room_height + 16)) || (hazard)
 		if (state != playerState.dead)
-			doDie();		
+			doDie();
 	
 	var rmTrans = instance_place(x, y, obj_roomtrans_8);
 	
@@ -31,13 +33,65 @@ function scr_player_logic() {
 	
 	area = (rmArea ? rmArea.num : 0);
 	
-	if (obj_game.roomTransition) {
+	if (obj_game.roomTransition) || (state == playerState.dead) {
 	
 		allowMovement = false;
 	
 	} else {
 	
 		allowMovement = true;
+	
+	}
+	
+	if (state == playerState.dead) {
+		
+		if (deadTimer > deadMax * .5) {
+			
+			var resp = [];
+			var px = 0, py = 0;
+		
+			var i = 0;
+			repeat(instance_number(obj_player_respawn)) {
+				
+				resp[i] = instance_find(obj_player_respawn, i);
+				
+				if (resp[i].area == area) {
+				
+					px = resp[i].x;
+					py = resp[i].y;
+					break;
+				
+				}
+				
+				i++;
+				
+			}
+			
+		
+			hsp = lerp(lengthdir_x(hsp, point_direction(x, y, px, py)), 0, 0.1);
+			x += hsp;
+			vsp = lerp(lengthdir_y(hsp, point_direction(x, y, px, py)), 0, 0.1);
+			y += vsp;
+			
+		} else {
+		
+			hsp = lerp(hsp, 0, 0.1);
+			x += hsp;
+			vsp = lerp(vsp, 0, 0.1);
+			y += vsp;
+		
+		}
+	
+		if (deadTimer >= deadMax) {
+			
+			deadTimer = 0;
+			state = playerState.idle;
+			
+		} else {
+		
+			deadTimer++;
+		
+		}
 	
 	}
 

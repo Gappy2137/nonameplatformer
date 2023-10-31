@@ -103,10 +103,10 @@
       ],},
   ],
   "macroPageTiles": {
-    "SerialiseHeight": 7,
-    "SerialiseWidth": 14,
+    "SerialiseHeight": 20,
+    "SerialiseWidth": 16,
     "TileCompressedData": [
-      -98,
+      -320,
       0,
     ],
     "TileDataFormat": 1,
