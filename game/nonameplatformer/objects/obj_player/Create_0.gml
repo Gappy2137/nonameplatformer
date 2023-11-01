@@ -98,11 +98,26 @@ animFrame = 0;
 animFrameNum = 0;
 animSpeed = 0;
 
+// Full body sprites
+
 idleSprite = spr_player_snow_idle;
 runSprite = spr_player_snow_run;
 jumpSprite = spr_player_snow_jump;
 wallslideSprite = spr_player_snow_wallslide;
 deadSprite = spr_player_snow_lose;
+
+// Head sprites
+
+idleSpriteHead = spr_player_head_snow_idle;
+runSpriteHead = spr_player_head_snow_run;
+jumpSpriteHead = spr_player_head_snow_jump;
+lookupSpriteHead = spr_player_head_snow_lookup;
+
+// Body Sprites
+
+idleSpriteBody = spr_player_body_snow_idle;
+runSpriteBody = spr_player_body_snow_run;
+jumpSpriteBody = spr_player_body_snow_jump;
 
 spriteInd = idleSprite;
 
