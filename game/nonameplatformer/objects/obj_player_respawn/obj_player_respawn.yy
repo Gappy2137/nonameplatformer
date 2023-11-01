@@ -34,5 +34,5 @@
     "path": "sprites/spr_player_respawn/spr_player_respawn.yy",
   },
   "spriteMaskId": null,
-  "visible": true,
+  "visible": false,
 }

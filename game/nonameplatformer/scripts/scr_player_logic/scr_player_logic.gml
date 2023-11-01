@@ -16,14 +16,16 @@ function scr_player_logic() {
 		obj_game.roomToY = rmTrans.toY;
 		obj_game.nextRoom = rmTrans.nextRoom;
 		
-		obj_game.roomTransPlayerVars[0] = hsp;
-		obj_game.roomTransPlayerVars[1] = vsp;
-		obj_game.roomTransPlayerVars[2] = state;
-		obj_game.roomTransPlayerVars[3] = facing;
-		obj_game.roomTransPlayerVars[4] = bbox_left;
-		obj_game.roomTransPlayerVars[5] = bbox_bottom;
-		obj_game.roomTransPlayerVars[6] = rmTrans.bbox_left;
-		obj_game.roomTransPlayerVars[7] = rmTrans.bbox_bottom;
+		var i = 0;
+		
+		obj_game.roomTransPlayerVars[i++] = hsp;
+		obj_game.roomTransPlayerVars[i++] = vsp;
+		obj_game.roomTransPlayerVars[i++] = state;
+		obj_game.roomTransPlayerVars[i++] = facing;
+		obj_game.roomTransPlayerVars[i++] = bbox_left;
+		obj_game.roomTransPlayerVars[i++] = bbox_bottom;
+		obj_game.roomTransPlayerVars[i++] = rmTrans.bbox_left;
+		obj_game.roomTransPlayerVars[i++] = rmTrans.bbox_bottom;
 		
 		
 	
@@ -31,7 +33,7 @@ function scr_player_logic() {
 	
 	var rmArea = instance_place(x, y, obj_cameraborder_8);
 	
-	area = (rmArea ? rmArea.num : 0);
+	area = (rmArea ? rmArea.area : 0);
 	
 	if (obj_game.roomTransition) || (state == playerState.dead) {
 	
@@ -58,7 +60,7 @@ function scr_player_logic() {
 				if (resp[i].area == area) {
 				
 					px = resp[i].x;
-					py = resp[i].y;
+					py = resp[i].y - 16;
 					break;
 				
 				}
@@ -67,11 +69,11 @@ function scr_player_logic() {
 				
 			}
 			
-		
-			hsp = lerp(lengthdir_x(hsp, point_direction(x, y, px, py)), 0, 0.1);
-			x += hsp;
-			vsp = lerp(lengthdir_y(hsp, point_direction(x, y, px, py)), 0, 0.1);
-			y += vsp;
+			x = lerp(x, px, 0.25);
+			y = lerp(y, py, 0.25);
+			
+			if (collision_circle(x, y, 2, resp[i], false, false))
+				deadTimer = deadMax;
 			
 		} else {
 		

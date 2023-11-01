@@ -18,18 +18,15 @@ if (currentArea < 0) {
 	
 }
 
-var cam_x_pos = camera_get_view_x(MAIN_CAMERA);
-var cam_y_pos = camera_get_view_y(MAIN_CAMERA);
+camX = camera_get_view_x(MAIN_CAMERA);
+camY = camera_get_view_y(MAIN_CAMERA);
 
 var cam_x = clamp((following.x - (camWidth/2)), camMinX , camMaxX - camWidth);
 var cam_y = clamp((following.y - (camHeight/2)) - 16, camMinY, camMaxY - camHeight);		
 					
 var cam_speed = (setupTimer == setupMax ? 0.2 : 1);
 						
-var _x = lerp(cam_x_pos, cam_x, cam_speed);
-var _y = lerp(cam_y_pos, cam_y, cam_speed);
+var _x = lerp(camX, cam_x, cam_speed);
+var _y = lerp(camY, cam_y, cam_speed);
 
-camera_set_view_pos(MAIN_CAMERA, _x, _y);	
-
-camX = cam_x_pos;
-camY = cam_y_pos;
+camera_set_view_pos(MAIN_CAMERA, _x + shakeX, _y + shakeY);	

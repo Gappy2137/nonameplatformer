@@ -80,6 +80,9 @@ function scr_player_movement() {
 		
 			horKeypress = 0;
 			verKeypress = 0;
+			keyJump = 0;
+			keyJumpDown = 0;
+			keyJumpReleased = 0;
 		
 		break;
 	

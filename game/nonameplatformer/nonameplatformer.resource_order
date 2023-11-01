@@ -40,6 +40,7 @@
     {"name":"obj_semisolid_8","order":5,"path":"objects/obj_semisolid_8/obj_semisolid_8.yy",},
     {"name":"par_semisolid","order":4,"path":"objects/par_semisolid/par_semisolid.yy",},
     {"name":"obj_semislope_8_dr","order":6,"path":"objects/obj_semislope_8_dr/obj_semislope_8_dr.yy",},
+    {"name":"shakeScreen","order":5,"path":"scripts/shakeScreen/shakeScreen.yy",},
     {"name":"spr_cameraborder_8","order":4,"path":"sprites/spr_cameraborder_8/spr_cameraborder_8.yy",},
     {"name":"obj_camera","order":1,"path":"objects/obj_camera/obj_camera.yy",},
     {"name":"obj_testcube","order":4,"path":"objects/obj_testcube/obj_testcube.yy",},

@@ -102,6 +102,7 @@ idleSprite = spr_player_snow_idle;
 runSprite = spr_player_snow_run;
 jumpSprite = spr_player_snow_jump;
 wallslideSprite = spr_player_snow_wallslide;
+deadSprite = spr_player_snow_lose;
 
 spriteInd = idleSprite;
 

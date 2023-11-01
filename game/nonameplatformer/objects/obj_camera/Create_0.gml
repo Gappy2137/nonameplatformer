@@ -21,6 +21,13 @@ camMoveBorderY = 128;
 setupTimer = 0;
 setupMax = 80;
 
+shakeX = 0;
+shakeY = 0;
+shakeDuration = 0;
+shakeIntensity = 0;
+shakeTimer = 0;
+shakeTrigger = false;
+
 // Ustaw kamere
 
 camera = camera_create_view(0, 0, camWidth, camHeight, camAngle, following, -1, -1, camMoveBorderX, camMoveBorderY);

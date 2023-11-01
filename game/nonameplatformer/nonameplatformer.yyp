@@ -61,6 +61,7 @@
     {"id":{"name":"spr_attachable_8","path":"sprites/spr_attachable_8/spr_attachable_8.yy",},},
     {"id":{"name":"par_semisolid","path":"objects/par_semisolid/par_semisolid.yy",},},
     {"id":{"name":"obj_semislope_8_dr","path":"objects/obj_semislope_8_dr/obj_semislope_8_dr.yy",},},
+    {"id":{"name":"shakeScreen","path":"scripts/shakeScreen/shakeScreen.yy",},},
     {"id":{"name":"spr_cameraborder_8","path":"sprites/spr_cameraborder_8/spr_cameraborder_8.yy",},},
     {"id":{"name":"obj_camera","path":"objects/obj_camera/obj_camera.yy",},},
     {"id":{"name":"obj_testcube","path":"objects/obj_testcube/obj_testcube.yy",},},

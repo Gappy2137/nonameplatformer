@@ -136,6 +136,10 @@ function scr_player_anim() {
 		break;
 		case playerState.dead:
 		
+			spriteInd = deadSprite;
+			animFrameNum = 1;
+			animSpeed = 0;
+		
 		break;
 	}
 

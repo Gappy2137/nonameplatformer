@@ -12,6 +12,9 @@ scr_player_movement();
 // Process animations
 scr_player_anim();
 
+if keyboard_check_pressed(ord("J")) shakeScreen(1, 1);
+if keyboard_check_pressed(ord("K")) shakeScreen(10, 1);
+
 if (!landingAnim)
 	landed = false;
 
