@@ -109,6 +109,7 @@
     {"id":{"name":"spr_player_snow_wallslide","path":"sprites/spr_player_snow_wallslide/spr_player_snow_wallslide.yy",},},
     {"id":{"name":"obj_game","path":"objects/obj_game/obj_game.yy",},},
     {"id":{"name":"scr_player_hook","path":"scripts/scr_player_hook/scr_player_hook.yy",},},
+    {"id":{"name":"rm_devroom5","path":"rooms/rm_devroom5/rm_devroom5.yy",},},
     {"id":{"name":"obj_slope_8_ur","path":"objects/obj_slope_8_ur/obj_slope_8_ur.yy",},},
     {"id":{"name":"obj_cursor","path":"objects/obj_cursor/obj_cursor.yy",},},
     {"id":{"name":"curve_land","path":"animcurves/curve_land/curve_land.yy",},},
@@ -146,6 +147,7 @@
     {"roomId":{"name":"rm_devroom3","path":"rooms/rm_devroom3/rm_devroom3.yy",},},
     {"roomId":{"name":"rm_devroom4","path":"rooms/rm_devroom4/rm_devroom4.yy",},},
     {"roomId":{"name":"template","path":"rooms/template/template.yy",},},
+    {"roomId":{"name":"rm_devroom5","path":"rooms/rm_devroom5/rm_devroom5.yy",},},
   ],
   "templateType": null,
   "TextureGroups": [
