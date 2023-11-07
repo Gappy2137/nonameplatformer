@@ -73,6 +73,7 @@
     {"name":"obj_rope_part","order":5,"path":"objects/obj_rope_part/obj_rope_part.yy",},
     {"name":"obj_player_respawn","order":7,"path":"objects/obj_player_respawn/obj_player_respawn.yy",},
     {"name":"obj_slope_8_ul","order":3,"path":"objects/obj_slope_8_ul/obj_slope_8_ul.yy",},
+    {"name":"rm_devroom7","order":7,"path":"rooms/rm_devroom7/rm_devroom7.yy",},
     {"name":"obj_slope_8_dl","order":2,"path":"objects/obj_slope_8_dl/obj_slope_8_dl.yy",},
     {"name":"par_slope","order":2,"path":"objects/par_slope/par_slope.yy",},
     {"name":"spr_player_snow_wallslide","order":6,"path":"sprites/spr_player_snow_wallslide/spr_player_snow_wallslide.yy",},

@@ -103,6 +103,7 @@
     {"id":{"name":"spr_tileset_test","path":"sprites/spr_tileset_test/spr_tileset_test.yy",},},
     {"id":{"name":"obj_slope_8_ul","path":"objects/obj_slope_8_ul/obj_slope_8_ul.yy",},},
     {"id":{"name":"obj_solid_8","path":"objects/obj_solid_8/obj_solid_8.yy",},},
+    {"id":{"name":"rm_devroom7","path":"rooms/rm_devroom7/rm_devroom7.yy",},},
     {"id":{"name":"obj_slope_8_dl","path":"objects/obj_slope_8_dl/obj_slope_8_dl.yy",},},
     {"id":{"name":"spr_hook","path":"sprites/spr_hook/spr_hook.yy",},},
     {"id":{"name":"par_slope","path":"objects/par_slope/par_slope.yy",},},
@@ -150,6 +151,7 @@
     {"roomId":{"name":"template","path":"rooms/template/template.yy",},},
     {"roomId":{"name":"rm_devroom5","path":"rooms/rm_devroom5/rm_devroom5.yy",},},
     {"roomId":{"name":"rm_devroom6","path":"rooms/rm_devroom6/rm_devroom6.yy",},},
+    {"roomId":{"name":"rm_devroom7","path":"rooms/rm_devroom7/rm_devroom7.yy",},},
   ],
   "templateType": null,
   "TextureGroups": [
