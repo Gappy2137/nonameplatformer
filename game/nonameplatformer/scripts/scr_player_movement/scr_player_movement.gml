@@ -214,6 +214,7 @@ function scr_player_movement() {
 		coyoteTime = coyoteMax;
 		jumps = 0;
 		jumpTrigger = false;
+		jumpsMax = 1;
 		
 	}
 	
@@ -267,7 +268,7 @@ function scr_player_movement() {
 			
 			} else {
 			
-				if (jumps < jumpsMax) && (!jumpTrigger) {
+				if (jumps < jumpsMax) && (!jumpTrigger) && (!isWallSliding) {
 				
 					doJump();
 					jumps++;

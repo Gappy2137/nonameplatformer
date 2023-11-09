@@ -75,8 +75,8 @@ if (transTime > 1) {
 	
 	}
 
-	draw_surface_ext(surfCurrRoom, oldX, oldY, size, size, 0, #FFFFFF, .5);
-	draw_surface_ext(surfNextRoom, newX, newY, size, size, 0, #FFFFFF, .5);
+	draw_surface_ext(surfCurrRoom, oldX, oldY, size, size, 0, #FFFFFF, 1);
+	draw_surface_ext(surfNextRoom, newX, newY, size, size, 0, #FFFFFF, 1);
 	
 }
 

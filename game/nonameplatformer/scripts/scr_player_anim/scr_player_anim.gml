@@ -142,6 +142,9 @@ function scr_player_anim() {
 		
 		break;
 	}
+	
+	
+	// Juice
 
 	if (inAir) {
 	
@@ -238,5 +241,7 @@ function scr_player_anim() {
 		//juicePos[3][1] = squish;
 	
 	}
+
+	if (state == playerState.dead) resetJuice();
 
 }

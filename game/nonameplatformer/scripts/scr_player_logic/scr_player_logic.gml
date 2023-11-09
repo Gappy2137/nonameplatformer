@@ -96,5 +96,20 @@ function scr_player_logic() {
 		}
 	
 	}
+	
+	// Extra jump orb
+	
+	var jumpOrb = instance_place(x, y, obj_jump_orb);
+	
+	if (jumpOrb) {
+		
+		if (jumpOrb.animFrame == 0) {
+			
+			jumpOrb.animFrame = 1;
+			jumpsMax++;
+			
+		}
+	
+	}
 
 }

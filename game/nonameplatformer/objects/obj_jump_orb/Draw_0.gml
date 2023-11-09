@@ -1,0 +1,1 @@
+draw_sprite(spr_jump_orb, animFrame, x, y);
