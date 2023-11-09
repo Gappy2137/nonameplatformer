@@ -58,6 +58,7 @@
     {"name":"spr_roomtrans_8","order":3,"path":"sprites/spr_roomtrans_8/spr_roomtrans_8.yy",},
     {"name":"obj_roomcontrol","order":3,"path":"objects/obj_roomcontrol/obj_roomcontrol.yy",},
     {"name":"rm_devroom2","order":1,"path":"rooms/rm_devroom2/rm_devroom2.yy",},
+    {"name":"rm_devroom9","order":9,"path":"rooms/rm_devroom9/rm_devroom9.yy",},
     {"name":"spr_player_snow_run","order":4,"path":"sprites/spr_player_snow_run/spr_player_snow_run.yy",},
     {"name":"spr_semislope_8_dl","order":1,"path":"sprites/spr_semislope_8_dl/spr_semislope_8_dl.yy",},
     {"name":"obj_hazard_8","order":5,"path":"objects/obj_hazard_8/obj_hazard_8.yy",},

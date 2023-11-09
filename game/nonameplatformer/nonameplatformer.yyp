@@ -84,6 +84,7 @@
     {"id":{"name":"obj_roomcontrol","path":"objects/obj_roomcontrol/obj_roomcontrol.yy",},},
     {"id":{"name":"rm_devroom2","path":"rooms/rm_devroom2/rm_devroom2.yy",},},
     {"id":{"name":"curve_jumpUp","path":"animcurves/curve_jumpUp/curve_jumpUp.yy",},},
+    {"id":{"name":"rm_devroom9","path":"rooms/rm_devroom9/rm_devroom9.yy",},},
     {"id":{"name":"spr_player_snow_run","path":"sprites/spr_player_snow_run/spr_player_snow_run.yy",},},
     {"id":{"name":"spr_semislope_8_dl","path":"sprites/spr_semislope_8_dl/spr_semislope_8_dl.yy",},},
     {"id":{"name":"obj_hazard_8","path":"objects/obj_hazard_8/obj_hazard_8.yy",},},
@@ -154,6 +155,7 @@
     {"roomId":{"name":"rm_devroom6","path":"rooms/rm_devroom6/rm_devroom6.yy",},},
     {"roomId":{"name":"rm_devroom7","path":"rooms/rm_devroom7/rm_devroom7.yy",},},
     {"roomId":{"name":"rm_devroom8","path":"rooms/rm_devroom8/rm_devroom8.yy",},},
+    {"roomId":{"name":"rm_devroom9","path":"rooms/rm_devroom9/rm_devroom9.yy",},},
   ],
   "templateType": null,
   "TextureGroups": [
