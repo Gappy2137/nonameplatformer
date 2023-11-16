@@ -119,6 +119,9 @@ idleSpriteBody = spr_player_body_snow_idle;
 runSpriteBody = spr_player_body_snow_run;
 jumpSpriteBody = spr_player_body_snow_jump;
 
+weaponSprite[weaponEnum.none] = spr_none;
+weaponSprite[weaponEnum.pistol] = spr_player_hook;
+
 spriteInd = idleSprite;
 
 angle = 0;

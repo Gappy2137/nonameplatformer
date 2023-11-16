@@ -68,6 +68,14 @@ enum roomTrans {
 
 }
 
+enum weaponEnum {
+
+	none =		0,
+	hook =		1,
+	pistol =	2
+
+}
+
 // Glowne zmienne
 
 x = 0;
@@ -166,8 +174,11 @@ for (var i = 1; i <= room_last; i++) {
 
 window_set_cursor(cr_none);
 
+
+// Always available (like static or singleton idk)
 instance_create_layer(0, 0, LAYER_GAME, obj_camera);
 instance_create_layer(0, 0, LAYER_GAME, obj_cursor);
+instance_create_layer(0, 0, LAYER_GAME, obj_inventory);
 
 // Przenies z pokoju init do kolejnego
 room_goto(rm_devroom);
