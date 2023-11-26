@@ -42,6 +42,13 @@ function scr_player_anim() {
 		case playerState.idle:
 		
 			spriteInd = idleSprite;
+			bodySpriteInd = bodySprite[playerSprite.idle];
+			if (weaponAngle > 60) && (weaponAngle < 120)
+				headSpriteInd = headSprite[playerSprite.lookup];
+			else
+				headSpriteInd = headSprite[playerSprite.idle];
+
+			weaponSpriteInd = weaponSprite[obj_inventory.equipped];
 			animFrameNum = 4;
 			animSpeed = 0.08;
 			
@@ -56,6 +63,9 @@ function scr_player_anim() {
 			if (isSkidding) {
 				
 				spriteInd = idleSprite;
+				bodySpriteInd = bodySprite[playerSprite.idle];
+				headSpriteInd = headSprite[playerSprite.idle];
+				weaponSpriteInd = weaponSprite[obj_inventory.equipped];
 				animFrameNum = 1;
 				animSpeed = 0;
 				animFrame = 2;
@@ -65,6 +75,9 @@ function scr_player_anim() {
 				if (isJumping) {
 					
 					spriteInd = jumpSprite;
+					bodySpriteInd = bodySprite[playerSprite.jump];
+					headSpriteInd = headSprite[playerSprite.jump];
+					weaponSpriteInd = weaponSprite[obj_inventory.equipped];
 					animFrameNum = 1;
 					animSpeed = 0;
 					
@@ -92,6 +105,9 @@ function scr_player_anim() {
 					if (isFalling) {
 						
 						spriteInd = jumpSprite;
+						bodySpriteInd = bodySprite[playerSprite.jump];
+						headSpriteInd = headSprite[playerSprite.jump];
+						weaponSpriteInd = weaponSprite[obj_inventory.equipped];
 						animFrameNum = 1;
 						animSpeed = 0;
 						animFrame = 2;
@@ -101,6 +117,9 @@ function scr_player_anim() {
 						if (vsp == 0) {
 						
 							spriteInd = runSprite;
+							bodySpriteInd = bodySprite[playerSprite.run];
+							headSpriteInd = headSprite[playerSprite.run];
+							weaponSpriteInd = weaponSprite[obj_inventory.equipped];
 							animFrameNum = 6;
 							animSpeed = abs(hsp / 10);
 						
@@ -112,6 +131,9 @@ function scr_player_anim() {
 						} else {
 						
 							spriteInd = jumpSprite;
+							bodySpriteInd = bodySprite[playerSprite.jump];
+							headSpriteInd = headSprite[playerSprite.jump];
+							weaponSpriteInd = weaponSprite[obj_inventory.equipped];
 							animFrameNum = 1;
 							animSpeed = 0;
 							animFrame = 2;
@@ -130,6 +152,9 @@ function scr_player_anim() {
 		case playerState.wallslide:
 		
 			spriteInd = wallslideSprite;
+			bodySpriteInd = wallslideSprite;
+			headSpriteInd = spr_none;
+			weaponSpriteInd = spr_none;
 			animFrameNum = 1;
 			animSpeed = 0;
 		
@@ -137,12 +162,19 @@ function scr_player_anim() {
 		case playerState.dead:
 		
 			spriteInd = deadSprite;
+			bodySpriteInd = deadSprite;
+			headSpriteInd = spr_none;
+			weaponSpriteInd = spr_none;
 			animFrameNum = 1;
 			animSpeed = 0;
 		
 		break;
 	}
 	
+	// Weapon Anim
+	
+	if (obj_inventory.equipped == weaponEnum.hook)
+		weaponFrame = (obj_hook.state == hookState.onPlayer ? 0 : 1);
 	
 	// Juice
 

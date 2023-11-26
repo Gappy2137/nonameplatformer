@@ -31,6 +31,13 @@ repeat(array_length(layers)) {
 	
 }
 
+// Wind
+
+windStr = 7;
+windDir = -1;
+
+// Camera borders
+
 areaArray = [];
 
 

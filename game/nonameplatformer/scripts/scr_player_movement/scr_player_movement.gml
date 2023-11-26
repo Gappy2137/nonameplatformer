@@ -125,29 +125,8 @@ function scr_player_movement() {
 			hsp = 0;
 
 	}
-	
-	/*
-	if ( (( (keyLeft) && (hsp > 0.1) )
-	|| ( (keyRight) && (hsp < 0.1) )) )
-	&& (!((keyRight) && (keyLeft))) {
 
-		isSkidding = true;
 	
-	}
-	
-	if (isSkidding) {
-	
-		skidTime++;
-		
-		if (skidTime >= skidTimeMax) {
-		
-			skidTime = 0;
-			isSkidding = false;
-		
-		}
-	
-	}
-	*/
 	if (abs(hsp) > spdBase) 
 	&& (isGrounded)
 	&& (state == playerState.walking) {

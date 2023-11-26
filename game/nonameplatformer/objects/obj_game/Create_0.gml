@@ -6,6 +6,8 @@ application_surface_draw_enable(true);
 
 appSurf = -1;
 
+randomize();
+
 // Makra
 
 #macro GAME_WIDTH 480
@@ -73,6 +75,17 @@ enum weaponEnum {
 	none =		0,
 	hook =		1,
 	pistol =	2
+
+}
+
+enum playerSprite {
+
+	idle		= 0,
+	run			= 1,
+	jump		= 2,
+	wallslide	= 3,
+	lookup		= 4,
+	dead		= 5
 
 }
 
@@ -144,6 +157,12 @@ ch=0;
 
 surfCurrRoom = -1;
 surfNextRoom = -1;
+
+
+// Other
+
+curveWind = animcurve_get_channel(curve_wind, "angle");
+randomWindSpeedArray = [.8, .9, 1.0, 1.1, 1.2, 1.3, 0.88, 1.11, 0.92, 1.06];
 
 // Culling
 

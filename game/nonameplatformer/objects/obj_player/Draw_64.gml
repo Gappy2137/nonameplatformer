@@ -4,9 +4,10 @@ draw_set_color(#FFFFFF);
 var i = 0;
 draw_set_halign(fa_right);
 
-//draw_text(GAME_WIDTH,0 + (16*i++),"area:" + string(area));
-//draw_text(GAME_WIDTH,0 + (16*i++),"animFrame:" + string(animFrame));
-
+draw_text(GAME_WIDTH,0 + (16*i++),"weaponAngle:" + string(weaponAngle));
+draw_text(GAME_WIDTH,0 + (16*i++),"state:" + string(state));
+draw_text(GAME_WIDTH,0 + (16*i++),"v:" + string(v));
+draw_text(GAME_WIDTH,0 + (16*i++),"e:" + string(obj_inventory.equipped));
 
 
 //draw_text(GAME_WIDTH,0 + (16*i++),"x:" + string(x));

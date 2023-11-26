@@ -1,7 +1,4 @@
-if (state == hookState.embedded)
-	if (ropeDrawTimer <= 0) ropeDrawTimer = 0; else ropeDrawTimer--;
-else
-	ropeDrawTimer = 3;
+
 /*
 draw_set_color(#FF0000);
 draw_set_alpha(0.2);
@@ -15,13 +12,15 @@ draw_circle(x, y, maxRange, false);
 draw_set_color(#FFFFFF);
 draw_set_alpha(1);
 */
-if (ropeDrawTimer != 0){
-draw_set_color(#FFFFFF);
-draw_line_width(chainFromX, chainFromY, drawX, drawY, 1);
-}
-var a = raycast(x,y,x+lengthdir_x(maxRange, angleToMouse), y+lengthdir_y(maxRange, angleToMouse), par_collision);
-if a[0] != noone
-draw_line(x,y,a[1], a[2]);
+//if (ropeDrawTimer != 0) && (state != hookState.onPlayer) {
+//	
+//draw_set_color(wireColor);
+//draw_line_width(obj_player.weaponEndX + 1, obj_player.weaponEndY - 1, drawX, drawY - 1, 1);
+//
+//}
+//var a = raycast(x,y,x+lengthdir_x(maxRange, angleToMouse), y+lengthdir_y(maxRange, angleToMouse), par_collision);
+//if a[0] != noone
+//draw_line(x,y,a[1], a[2]);
 
 /*
 if (state != hookState.onPlayer) {

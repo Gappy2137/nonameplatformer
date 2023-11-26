@@ -1,5 +1,8 @@
 scr_player_draw();
 
+//draw_set_color(#FF0000);
+//draw_circle(weaponEndX,weaponEndY,1,false);
+
 //draw_sprite_ext(spr_player_idle, 0, x, y, 1, 1, 0, #FFFFFF, 1);
 
 //draw_sprite_ext(spriteInd, animFrame, x, y, facing, 1, 0, #FFFFFF, 1);

@@ -47,6 +47,10 @@ function scr_player_logic() {
 	
 	if (state == playerState.dead) {
 		
+		if (deadTimer < 1) {
+			obj_hook.state = hookState.released;
+		}
+		
 		if (deadTimer > deadMax * .5) {
 			
 			var resp = [];
@@ -106,7 +110,7 @@ function scr_player_logic() {
 		if (jumpOrb.animFrame == 0) {
 			
 			jumpOrb.animFrame = 1;
-			jumpsMax++;
+			jumpsMax = 2;
 			
 		}
 	

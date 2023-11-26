@@ -43,4 +43,6 @@ ray = [];
 
 ropeImpulse = 0;
 ropeID = noone;
-ropeDrawTimer = 5;
+ropeDrawTimer = 3;
+
+wireColor = #2D3136;

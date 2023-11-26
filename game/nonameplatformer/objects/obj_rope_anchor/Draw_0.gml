@@ -34,7 +34,7 @@ repeat(array_length(ropeArray) - 1) {
 var p0 = [phy_position_x, phy_position_y];
 var p1 = [bezierX1,bezierY1];
 var p2 = [bezierX2,bezierY2];
-var p3 = [obj_player.x, obj_player.y];
+var p3 = [obj_player.weaponEndX, obj_player.weaponEndY];
 
 var q0 = bezier_points(0, p0, p1, p2, p3);
 
@@ -49,7 +49,9 @@ var i = 1;
 repeat(seg) {
 	var t = i / seg;
 	var q1 = bezier_points(t, p0, p1, p2, p3);
+	draw_set_color(obj_hook.wireColor);
 	draw_line_width(q0[0],q0[1],q1[0],q1[1], 1);
+	draw_set_color(#FFFFFF);
 	q0=q1;
 	i++;
 }

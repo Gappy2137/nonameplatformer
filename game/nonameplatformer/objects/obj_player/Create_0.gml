@@ -1,4 +1,5 @@
 obj_camera.following = id;
+depth = 0;
 
 counter = 0;
 
@@ -18,7 +19,6 @@ spd = spdBase;
 hsp = 0;
 vsp = 0;
 jumpForceBase = 2.15;
-//2.55
 jumpForce = jumpForceBase;
 
 dir = 0;
@@ -98,6 +98,9 @@ animFrame = 0;
 animFrameNum = 0;
 animSpeed = 0;
 
+headSprite = [];
+bodySprite = [];
+
 // Full body sprites
 
 idleSprite = spr_player_snow_idle;
@@ -108,21 +111,34 @@ deadSprite = spr_player_snow_lose;
 
 // Head sprites
 
-idleSpriteHead = spr_player_head_snow_idle;
-runSpriteHead = spr_player_head_snow_run;
-jumpSpriteHead = spr_player_head_snow_jump;
-lookupSpriteHead = spr_player_head_snow_lookup;
+headSprite[playerSprite.idle] = spr_player_head_snow_idle;
+headSprite[playerSprite.run] = spr_player_head_snow_run;
+headSprite[playerSprite.jump] = spr_player_head_snow_jump;
+headSprite[playerSprite.lookup] = spr_player_head_snow_lookup;
 
 // Body Sprites
 
-idleSpriteBody = spr_player_body_snow_idle;
-runSpriteBody = spr_player_body_snow_run;
-jumpSpriteBody = spr_player_body_snow_jump;
+bodySprite[playerSprite.idle] = spr_player_body_snow_idle;
+bodySprite[playerSprite.run] = spr_player_body_snow_run;
+bodySprite[playerSprite.jump] = spr_player_body_snow_jump;
+
+// Weapon Sprites
 
 weaponSprite[weaponEnum.none] = spr_none;
+weaponSprite[weaponEnum.hook] = spr_player_hook;
 weaponSprite[weaponEnum.pistol] = spr_player_hook;
 
 spriteInd = idleSprite;
+bodySpriteInd = bodySprite[playerSprite.idle];
+headSpriteInd = headSprite[playerSprite.idle];
+weaponSpriteInd = weaponSprite[weaponEnum.none];
+
+weaponFrame = 0;
+weaponAngle = 0;
+weaponOX = -2;
+weaponOY = 7;
+weaponEndX = 0;
+weaponEndY = 0;
 
 angle = 0;
 sprOffset = 12;
@@ -156,6 +172,8 @@ _prev = 0;
 xPrev[0] = x;
 yPrev[0] = y;
 rewind = false;
+
+v = 0;
 
 instance_create_layer(x,y,LAYER_INST,obj_hook);
 /*

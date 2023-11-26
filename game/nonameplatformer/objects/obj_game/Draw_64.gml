@@ -85,5 +85,5 @@ draw_set_color(#FFFFFF);
 var i = 0;
 draw_set_halign(fa_right);
 
-draw_text(GAME_WIDTH,0 + (16*i++),"transTime:" + string(transTime));
-draw_text(GAME_WIDTH,0 + (16*i++),"roomTrigger:" + string(roomTrigger));
+//draw_text(GAME_WIDTH,0 + (16*i++),"transTime:" + string(transTime));
+//draw_text(GAME_WIDTH,0 + (16*i++),"roomTrigger:" + string(roomTrigger));

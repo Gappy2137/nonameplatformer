@@ -1,3 +1,5 @@
+event_inherited();
+
 sprPos[0] = [-sprOffset, -sprOffset];
 sprPos[1] = [+sprOffset, -sprOffset];
 sprPos[2] = [+sprOffset, +sprOffset];
@@ -12,33 +14,8 @@ scr_player_movement();
 // Process animations
 scr_player_anim();
 
-if keyboard_check_pressed(ord("J")) shakeScreen(1, 1);
-if keyboard_check_pressed(ord("K")) shakeScreen(10, 1);
+if keyboard_check(ord("J")) v-=.1;
+if keyboard_check(ord("K")) v+=.1;
 
 if (!landingAnim)
 	landed = false;
-
-//if (isJumping) && (!isGrounded) counter++;
-//if (isGrounded) counter = 0;
-/*
-if (_prev < 0) _prev = 0;
-if (_prev >= 1000) _prev = 1000;
-
-if (mouse_check_button(mb_right)){
-	
-	rewind = true;
-
-}else{
-
-	rewind = false;
-
-}
-
-if (rewind) {
-	if (_prev > 0) && (_prev < array_length(xPrev)) {
-		x = xPrev[_prev];
-		y = yPrev[_prev];
-	}
-
-}
-*/

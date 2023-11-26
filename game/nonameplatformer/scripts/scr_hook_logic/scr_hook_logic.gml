@@ -5,6 +5,22 @@ function scr_hook_logic() {
 	var keyLaunch =			mouse_check_button_pressed(mb_left);
 	var keyRelease =		mouse_check_button_pressed(mb_right);
 	
+	
+	if (obj_player.state == playerState.dead) {
+	
+		canUse = false;
+	
+	} else {
+	
+		canUse = true;
+	
+	}
+	
+	if (state == hookState.embedded)
+		if (ropeDrawTimer <= 0) ropeDrawTimer = 0; else ropeDrawTimer--;
+	else
+		ropeDrawTimer = 4;
+	
 	switch (state) {
 	
 		case hookState.onPlayer:
@@ -55,7 +71,7 @@ function scr_hook_logic() {
 			}
 			
 			hookAngle = angleToMouse;
-		
+			
 		break;
 		case hookState.launched:
 		
