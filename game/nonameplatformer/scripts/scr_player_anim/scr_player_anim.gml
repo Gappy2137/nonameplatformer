@@ -149,6 +149,56 @@ function scr_player_anim() {
 
 		
 		break;
+		case playerState.onhook:
+		
+			if (isGrounded) {
+				
+				spriteInd = runSprite;
+				bodySpriteInd = bodySprite[playerSprite.run];
+				headSpriteInd = headSprite[playerSprite.run];
+				weaponSpriteInd = weaponSprite[obj_inventory.equipped];
+				animFrameNum = 6;
+				animSpeed = abs(hsp / 10);
+						
+				animFrame += animSpeed;
+				if (animFrame >= animFrameNum) {
+					animFrame = frac(animFrame);
+				}
+				
+			} else {
+			
+				spriteInd = runSprite;
+				bodySpriteInd = bodySprite[playerSprite.jump];
+				if (weaponAngle > 60) && (weaponAngle < 120) {
+					
+					headSpriteInd = headSprite[playerSprite.lookup];
+					animFrame = 0;
+					
+				} else {
+					
+					headSpriteInd = headSprite[playerSprite.jump];
+					animFrame = 2;
+					
+				}
+					
+				weaponSpriteInd = weaponSprite[obj_inventory.equipped];
+				animFrameNum = 1;
+				animSpeed = 0;
+			
+			}
+		
+		break;
+		case playerState.offhook:
+		
+			spriteInd = runSprite;
+			bodySpriteInd = bodySprite[playerSprite.jump];
+			headSpriteInd = headSprite[playerSprite.jump];
+			weaponSpriteInd = weaponSprite[obj_inventory.equipped];
+			animFrameNum = 1;
+			animSpeed = 0;
+			animFrame = 2;
+		
+		break;
 		case playerState.wallslide:
 		
 			spriteInd = wallslideSprite;

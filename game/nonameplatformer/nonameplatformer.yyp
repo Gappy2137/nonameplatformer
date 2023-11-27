@@ -88,6 +88,7 @@
     {"id":{"name":"spr_semislope_8_dr","path":"sprites/spr_semislope_8_dr/spr_semislope_8_dr.yy",},},
     {"id":{"name":"spr_player_respawn","path":"sprites/spr_player_respawn/spr_player_respawn.yy",},},
     {"id":{"name":"scr_hook_logic","path":"scripts/scr_hook_logic/scr_hook_logic.yy",},},
+    {"id":{"name":"spr_bg_bluesky_0","path":"sprites/spr_bg_bluesky_0/spr_bg_bluesky_0.yy",},},
     {"id":{"name":"obj_cameraborder_8","path":"objects/obj_cameraborder_8/obj_cameraborder_8.yy",},},
     {"id":{"name":"obj_hook","path":"objects/obj_hook/obj_hook.yy",},},
     {"id":{"name":"obj_slope_8_dr","path":"objects/obj_slope_8_dr/obj_slope_8_dr.yy",},},

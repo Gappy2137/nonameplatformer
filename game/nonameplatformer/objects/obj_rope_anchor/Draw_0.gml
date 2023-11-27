@@ -30,7 +30,7 @@ repeat(array_length(ropeArray) - 1) {
 }
 */
 
-
+/*
 var p0 = [phy_position_x, phy_position_y];
 var p1 = [bezierX1,bezierY1];
 var p2 = [bezierX2,bezierY2];

@@ -62,20 +62,60 @@ function scr_player_draw() {
 		break;
 	}
 
-	// Hook's wire
+	// Hook's wire and anchor
 	
 	if (obj_inventory.equipped == weaponEnum.hook) {
+		
+		// Wire launching or releasing
 
 		if (obj_hook.ropeDrawTimer != 0) && (obj_hook.state != hookState.onPlayer) {
-	
+			
 			draw_set_color(obj_hook.wireColor);
 			draw_line_width(weaponEndX, weaponEndY, obj_hook.drawX, obj_hook.drawY - 1, 1);
 
 		}
+		
+		// Wire embedded
+		
+		if (instance_exists(obj_rope_anchor)) {
+		
+			if (obj_rope_anchor.setupTimer == 0) {
+				
+				var p0 = [obj_rope_anchor.phy_position_x, obj_rope_anchor.phy_position_y];
+				var p1 = [obj_rope_anchor.bezierX1,obj_rope_anchor.bezierY1];
+				var p2 = [obj_rope_anchor.bezierX2,obj_rope_anchor.bezierY2];
+				var p3 = [weaponEndX, weaponEndY];
+
+				var q0 = bezier_points(0, p0, p1, p2, p3);
+
+				var seg = 10;
+				var i = 1;
+
+				repeat(seg) {
+					var t = i / seg;
+					var q1 = bezier_points(t, p0, p1, p2, p3);
+					draw_set_color(obj_hook.wireColor);
+					draw_line_width(q0[0],q0[1],q1[0],q1[1], 1);
+					draw_set_color(#FFFFFF);
+					q0=q1;
+					i++;
+				}
+				
+			}
+		
+		}
+		
+		// Anchor
+
+		if (obj_hook.state != hookState.onPlayer) {
+		
+			draw_sprite_ext(spr_hook, 0, obj_hook.drawX, obj_hook.drawY, 1, 1, (obj_hook.state == hookState.embedded ? point_direction(x, y, obj_hook.anchorX, obj_hook.anchorY) : obj_hook.hookAngle), #FFFFFF, 1);
+		
+		}
 
 	}
 
-	// Hook
+	// Hook Launcher
 
 	switch (obj_inventory.equipped) {
 	

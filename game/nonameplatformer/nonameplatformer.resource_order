@@ -60,6 +60,7 @@
     {"name":"spr_semislope_8_dr","order":2,"path":"sprites/spr_semislope_8_dr/spr_semislope_8_dr.yy",},
     {"name":"spr_player_respawn","order":7,"path":"sprites/spr_player_respawn/spr_player_respawn.yy",},
     {"name":"scr_hook_logic","order":1,"path":"scripts/scr_hook_logic/scr_hook_logic.yy",},
+    {"name":"spr_bg_bluesky_0","order":1,"path":"sprites/spr_bg_bluesky_0/spr_bg_bluesky_0.yy",},
     {"name":"obj_cameraborder_8","order":4,"path":"objects/obj_cameraborder_8/obj_cameraborder_8.yy",},
     {"name":"obj_hook","order":2,"path":"objects/obj_hook/obj_hook.yy",},
     {"name":"obj_slope_8_dr","order":1,"path":"objects/obj_slope_8_dr/obj_slope_8_dr.yy",},
