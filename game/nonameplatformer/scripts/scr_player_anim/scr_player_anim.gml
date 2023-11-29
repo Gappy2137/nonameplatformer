@@ -167,7 +167,7 @@ function scr_player_anim() {
 				
 			} else {
 			
-				spriteInd = runSprite;
+				spriteInd = jumpSprite;
 				bodySpriteInd = bodySprite[playerSprite.jump];
 				if (weaponAngle > 60) && (weaponAngle < 120) {
 					
@@ -190,7 +190,7 @@ function scr_player_anim() {
 		break;
 		case playerState.offhook:
 		
-			spriteInd = runSprite;
+			spriteInd = jumpSprite;
 			bodySpriteInd = bodySprite[playerSprite.jump];
 			headSpriteInd = headSprite[playerSprite.jump];
 			weaponSpriteInd = weaponSprite[obj_inventory.equipped];
@@ -296,6 +296,7 @@ function scr_player_anim() {
 			
 			juiceT = 1;
 			landed = false;
+			landingAnim = false;
 			
 		} else {
 			

@@ -14,8 +14,19 @@ scr_player_movement();
 // Process animations
 scr_player_anim();
 
+// FX
+if (landed) && (justLanded) && (!inAir) && (isGrounded) {
+	
+	if (instance_place(x, y, obj_dustpart_8)) {
+		
+		newParticle(x, y + sprite_yoffset, spr_dust_part, #885041, 3, 0);
+
+	}
+	
+	justLanded = false;
+
+}
+
 if keyboard_check(ord("J")) v-=.1;
 if keyboard_check(ord("K")) v+=.1;
 
-if (!landingAnim)
-	landed = false;

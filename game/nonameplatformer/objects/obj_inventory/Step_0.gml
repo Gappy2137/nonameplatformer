@@ -1,23 +1,36 @@
 
+if (obj_player.state == playerState.onhook) {
 
-if (mouse_wheel_down()) {
+	canChange = false;
 
-	if (equipped < array_length(dsInv) - 1) {
-		
-		equipped++;
-		obj_player.weaponSpriteInd = obj_player.weaponSprite[equipped];
-		
-	}
+} else {
+
+	canChange = true;
 
 }
 
-if (mouse_wheel_up()) {
+if (canChange) {
+	
+	if (mouse_wheel_down()) {
 
-	if (equipped > 0) {
+		if (equipped < array_length(dsInv) - 1) {
 		
-		equipped--;
-		obj_player.weaponSpriteInd = obj_player.weaponSprite[equipped];
+			equipped++;
+			obj_player.weaponSpriteInd = obj_player.weaponSprite[equipped];
 		
+		}
+
 	}
 
+	if (mouse_wheel_up()) {
+
+		if (equipped > 0) {
+		
+			equipped--;
+			obj_player.weaponSpriteInd = obj_player.weaponSprite[equipped];
+		
+		}
+
+	}
+	
 }

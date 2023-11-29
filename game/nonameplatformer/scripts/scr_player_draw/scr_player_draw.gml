@@ -16,20 +16,53 @@ function scr_player_draw() {
 	realPos[2] = [x + ((facing != -1 ? sprPos[2][0] : sprPos[3][0]) * cosine) - (sprPos[2][1] * sine), y + ((facing != -1 ? sprPos[2][0] : sprPos[3][0]) * sine) + (sprPos[2][1] * cosine)];
 	realPos[3] = [x + ((facing != -1 ? sprPos[3][0] : sprPos[2][0]) * cosine) - (sprPos[3][1] * sine), y + ((facing != -1 ? sprPos[3][0] : sprPos[2][0]) * sine) + (sprPos[3][1] * cosine)];
 
+	var doubleJumpAuraCheck = ( (jumpsMax > 1) && (jumps != jumpsMax) && (state != playerState.dead) );
 
 	switch (obj_inventory.equipped) {
 	
 		case weaponEnum.none:
 		
+			if (doubleJumpAuraCheck) {
+			
+				shader_set(sh_outline);
+				var tex = sprite_get_texture(spriteInd, animFrame);
+				var texWidth = texture_get_texel_width(tex);
+				var texHeight = texture_get_texel_height(tex);
+				
+				shader_set_uniform_f(uTexel, texWidth, texHeight);
+				shader_set_uniform_f(uColor, 0.475, 0.392, 0.729, 1.0);
+				shader_set_uniform_f(uThickness, 2.0);
+			
+			}
+		
 			draw_sprite_pos(spriteInd, animFrame, realPos[0][0] + juicePos[0][0] * facing, realPos[0][1] + juicePos[0][1],
 												  realPos[1][0] + juicePos[1][0] * facing, realPos[1][1] + juicePos[1][1],
 												  realPos[2][0] + juicePos[2][0] * facing, realPos[2][1] + juicePos[2][1],
 												  realPos[3][0] + juicePos[3][0] * facing, realPos[3][1] + juicePos[3][1],
-												  1);
+												  1); 
+												  
+			if (doubleJumpAuraCheck) {
+			
+				shader_reset();
+			
+			}
 												  
 		break;
 		
 		case weaponEnum.hook:
+		
+			if (doubleJumpAuraCheck) {
+			
+				shader_set(sh_outline);
+				var tex = sprite_get_texture(spriteInd, animFrame);
+				var texWidth = texture_get_texel_width(tex);
+				var texHeight = texture_get_texel_height(tex);
+				
+				shader_set_uniform_f(uTexel, texWidth, texHeight);
+				shader_set_uniform_f(uColor, 0.475, 0.392, 0.729, 1.0);
+				shader_set_uniform_f(uThickness, 2.0);
+			
+			}
 		
 			draw_sprite_pos(bodySpriteInd, animFrame, realPos[0][0] + juicePos[0][0] * facing, realPos[0][1] + juicePos[0][1],
 												  realPos[1][0] + juicePos[1][0] * facing, realPos[1][1] + juicePos[1][1],
@@ -41,7 +74,13 @@ function scr_player_draw() {
 												  realPos[1][0] + juicePos[1][0] * facing, realPos[1][1] + juicePos[1][1],
 												  realPos[2][0] + juicePos[2][0] * facing, realPos[2][1] + juicePos[2][1],
 												  realPos[3][0] + juicePos[3][0] * facing, realPos[3][1] + juicePos[3][1],
-												  1);												  
+												  1);			
+												  
+			if (doubleJumpAuraCheck) {
+			
+				shader_reset();
+			
+			}
 
 		break;
 		
@@ -126,5 +165,7 @@ function scr_player_draw() {
 		break;
 		
 	}
+	
+	if (justLanded) draw_sprite(spr_box, 0, x,y);
 
 }

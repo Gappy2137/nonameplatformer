@@ -47,6 +47,9 @@ function scr_player_logic() {
 	
 	if (state == playerState.dead) {
 		
+		jumpsMax = 1;
+		jumps = 0;
+		
 		if (deadTimer < 1) {
 			obj_hook.state = hookState.released;
 		}
@@ -105,12 +108,16 @@ function scr_player_logic() {
 	
 	var jumpOrb = instance_place(x, y, obj_jump_orb);
 	
-	if (jumpOrb) {
+	if (jumpOrb) && (allowMovement) {
 		
-		if (jumpOrb.animFrame == 0) {
+		if (!jumpOrb.collected) {
 			
+			jumpOrb.collected = true;
 			jumpOrb.animFrame = 1;
+			with (jumpOrb) event_user(0);
 			jumpsMax = 2;
+			if (state == playerState.onhook)
+				jumps = 1;
 			
 		}
 	

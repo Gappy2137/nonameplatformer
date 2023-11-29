@@ -160,6 +160,7 @@ curveJumpUp = animcurve_get_channel(curve_jumpUp, "squish");
 
 landed = false;
 landingAnim = false;
+justLanded = false;
 
 area = 0;
 
@@ -172,6 +173,10 @@ _prev = 0;
 xPrev[0] = x;
 yPrev[0] = y;
 rewind = false;
+
+uTexel = shader_get_uniform(sh_outline, "texel");
+uColor = shader_get_uniform(sh_outline, "color");
+uThickness = shader_get_uniform(sh_outline, "thickness");
 
 v = 0;
 

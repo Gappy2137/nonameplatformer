@@ -16,6 +16,43 @@ function scr_player_movement() {
 	var horKeypress = keyRight - keyLeft;
 	var verKeypress = keyDown - keyUp;
 	
+	//--------------------------------------------------------------------------------
+	// Grounded state
+	
+	var semisolidCollision =  collision_rectangle(bbox_left, bbox_bottom, bbox_right, bbox_bottom + 1, par_semisolid, true, false);
+	var semiSlopeCollision =  collision_rectangle(bbox_left, bbox_bottom, bbox_right, bbox_bottom + 1, par_semislope, true, false);
+	
+	if ( (instance_place(x, y + 1, par_solid))
+	|| (collision_rectangle(bbox_left, bbox_bottom, bbox_right, bbox_bottom + 1, par_slope, true, false)) )
+	|| ( (vsp >= 0) && (semisolidCollision) && (bbox_bottom <= semisolidCollision.bbox_top) && (jumpOffTime == 0) )
+	|| ( (vsp >= 0) && (semiSlopeCollision) && (bbox_bottom <= semiSlopeCollision.bbox_top) && (jumpOffTime == 0) )
+		isGrounded = true;
+	 else
+		isGrounded = false;
+	
+	if (isGrounded) {
+	
+		landed = true;
+		
+		// Landing frame
+		justLanded = true;
+		
+		vsp = 0;
+		inAir = false;
+		jumpThreshold = 0;
+		canJump = true;
+		jumpTime = 0;
+		isJumping = false;
+		offHookTrigger = false;
+		coyoteTime = coyoteMax;
+		jumps = 0;
+		jumpTrigger = false;
+		jumpsMax = 1;
+		
+	}
+	
+	//--------------------------------------------------------------------------------
+	
 	if (obj_game.roomTrigger) exit;
 	
 	isFalling = vsp > 0 ? true : false;
@@ -45,7 +82,6 @@ function scr_player_movement() {
 		
 	}
 
-	
 	switch(state) {
 	
 		case playerState.idle:
@@ -165,39 +201,8 @@ function scr_player_movement() {
 		
 	//--------------------------------------------------------------------------------
 	
-	
-	//--------------------------------------------------------------------------------
-	// Grounded state
-	
-	var semisolidCollision =  collision_rectangle(bbox_left, bbox_bottom, bbox_right, bbox_bottom + 1, par_semisolid, true, false);
-	var semiSlopeCollision =  collision_rectangle(bbox_left, bbox_bottom, bbox_right, bbox_bottom + 1, par_semislope, true, false);
-	
-	if ( (instance_place(x, y + 1, par_solid))
-	|| (collision_rectangle(bbox_left, bbox_bottom, bbox_right, bbox_bottom + 1, par_slope, true, false)) )
-	|| ( (vsp >= 0) && (semisolidCollision) && (bbox_bottom <= semisolidCollision.bbox_top) && (jumpOffTime == 0) )
-	|| ( (vsp >= 0) && (semiSlopeCollision) && (bbox_bottom <= semiSlopeCollision.bbox_top) && (jumpOffTime == 0) )
-		isGrounded = true;
-	 else
-		isGrounded = false;
-	
-	if (isGrounded) {
-	
-		landed = true;
-		vsp = 0;
-		inAir = false;
-		jumpThreshold = 0;
-		canJump = true;
-		jumpTime = 0;
-		isJumping = false;
-		offHookTrigger = false;
-		coyoteTime = coyoteMax;
-		jumps = 0;
-		jumpTrigger = false;
-		jumpsMax = 1;
-		
-	}
-	
-	//--------------------------------------------------------------------------------
+	//grounded bylo tu xd
+
 	
 	// Blisko scian nie uzywamy ulamkowych czesci pozycji zeby nie bylo problemow z kolizjami
 	
@@ -211,7 +216,7 @@ function scr_player_movement() {
 		
 	jumpForce = clamp(jumpForce, 0, (state == playerState.onhook ? 2.8 : 4));
 
-	if ( (isFalling) && (!isJumping) && (coyoteTime == 0) ) || (obj_hook.state == hookState.embedded) jumps = 1;
+	if ( (isFalling) && (!isJumping) && (coyoteTime == 0) ) || ( (obj_hook.state == hookState.embedded) && (jumpsMax <= 1) ) jumps = 1;
 
 	if (jumps >= jumpsMax) canJump = false;
 

@@ -29,3 +29,8 @@ if (obj_inventory.equipped != weaponEnum.none) {
 	weaponEndY = y + weaponOY - 1 + lengthdir_y(5, weaponAngle);
 	
 }
+
+if (!landingAnim)
+	landed = false;
+
+justLanded = false;

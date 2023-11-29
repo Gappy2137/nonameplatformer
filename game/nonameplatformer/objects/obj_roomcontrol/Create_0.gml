@@ -40,7 +40,7 @@ windDir = -1;
 // Filter Effects
 
 	// Waves
-	
+	/*
 	var fxWaves = fx_create("_filter_underwater");
 	fx_set_parameter(fxWaves, "g_Distort1Speed", .03);
 	fx_set_parameter(fxWaves, "g_Distort2Speed", 0);
@@ -69,7 +69,41 @@ windDir = -1;
 		i++;
 	
 	}
-	
+	*/
+// test
+
+
+
+
+// Particle system
+
+	// Dust
+	/*
+	partDustColors[0] = #885041;
+	partDustColors[1] = #583126;
+
+	partDustSystem = part_system_create_layer(LAYER_INST, true);
+	part_system_draw_order(partDustSystem, true);
+
+	partDustType = part_type_create();
+	part_type_sprite(partDustType, spr_dust_part, false, false, false)
+	part_type_size(partDustType, 0.5, 1.5, -0.1, 0);
+	part_type_scale(partDustType, 1, 1);
+	part_type_speed(partDustType, 1, 1, 0, 0);
+	part_type_direction(partDustType, 0, 180, 0, 0);
+	part_type_gravity(partDustType, 0.1, 270);
+	part_type_orientation(partDustType, 0, 180, 0, 3, false);
+	part_type_colour1(partDustType, partDustColors[irandom_range(0, array_length(partDustColors) - 1)]);
+	part_type_alpha3(partDustType, 1, 1, 1);
+	part_type_blend(partDustType, false);
+	part_type_life(partDustType, 8, 16);
+
+	partDustEmitter = part_emitter_create(partDustSystem);
+	part_emitter_region(partDustSystem, partDustEmitter, -8, 8, -1, 1, ps_shape_ellipse, ps_distr_gaussian);
+	//part_emitter_burst(partSystem, partDustEmitter, partDustType, 8);
+*/
+	//part_system_position(_ps, room_width/2, room_height/2);
+
 
 // Camera borders
 

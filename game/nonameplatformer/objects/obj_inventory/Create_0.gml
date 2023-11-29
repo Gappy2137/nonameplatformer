@@ -11,3 +11,5 @@ dsInv = [];
 dsInv[0] = weaponEnum.none;
 dsInv[1] = weaponEnum.hook;
 dsInv[2] = weaponEnum.pistol;
+
+canChange = true;
