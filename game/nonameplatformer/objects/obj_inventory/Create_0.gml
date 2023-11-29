@@ -13,3 +13,5 @@ dsInv[1] = weaponEnum.hook;
 dsInv[2] = weaponEnum.pistol;
 
 canChange = true;
+
+posY = 0;

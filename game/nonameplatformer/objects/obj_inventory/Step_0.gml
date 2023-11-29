@@ -9,6 +9,8 @@ if (obj_player.state == playerState.onhook) {
 
 }
 
+posY = (obj_player.y < 80 ? 232 : 0);
+
 if (canChange) {
 	
 	if (mouse_wheel_down()) {
