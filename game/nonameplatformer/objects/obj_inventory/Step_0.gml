@@ -1,4 +1,6 @@
 
+if (!instance_exists(obj_player)) exit;
+
 if (obj_player.state == playerState.onhook) {
 
 	canChange = false;
@@ -9,7 +11,7 @@ if (obj_player.state == playerState.onhook) {
 
 }
 
-posY = (obj_player.y < 80 ? 232 : 0);
+posY = (obj_player.y < 96 ? 232 : 0);
 
 if (canChange) {
 	
