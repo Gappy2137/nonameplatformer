@@ -64,18 +64,18 @@ function scr_player_draw() {
 			
 			}
 		
+			draw_sprite_pos(headSpriteInd, animFrame, realPos[0][0] + juicePos[0][0] * facing, realPos[0][1] + juicePos[0][1],
+												  realPos[1][0] + juicePos[1][0] * facing, realPos[1][1] + juicePos[1][1],
+												  realPos[2][0] + juicePos[2][0] * facing, realPos[2][1] + juicePos[2][1],
+												  realPos[3][0] + juicePos[3][0] * facing, realPos[3][1] + juicePos[3][1],
+												  1);		
+		
 			draw_sprite_pos(bodySpriteInd, animFrame, realPos[0][0] + juicePos[0][0] * facing, realPos[0][1] + juicePos[0][1],
 												  realPos[1][0] + juicePos[1][0] * facing, realPos[1][1] + juicePos[1][1],
 												  realPos[2][0] + juicePos[2][0] * facing, realPos[2][1] + juicePos[2][1],
 												  realPos[3][0] + juicePos[3][0] * facing, realPos[3][1] + juicePos[3][1],
 												  1);
-												  
-			draw_sprite_pos(headSpriteInd, animFrame, realPos[0][0] + juicePos[0][0] * facing, realPos[0][1] + juicePos[0][1],
-												  realPos[1][0] + juicePos[1][0] * facing, realPos[1][1] + juicePos[1][1],
-												  realPos[2][0] + juicePos[2][0] * facing, realPos[2][1] + juicePos[2][1],
-												  realPos[3][0] + juicePos[3][0] * facing, realPos[3][1] + juicePos[3][1],
-												  1);			
-												  
+													 
 			if (doubleJumpAuraCheck) {
 			
 				shader_reset();
@@ -134,7 +134,7 @@ function scr_player_draw() {
 					var t = i / seg;
 					var q1 = bezier_points(t, p0, p1, p2, p3);
 					draw_set_color(obj_hook.wireColor);
-					draw_line_width(q0[0],q0[1],q1[0],q1[1], 1);
+					draw_line_width(q0[0], q0[1], q1[0], q1[1], 1);
 					draw_set_color(#FFFFFF);
 					q0=q1;
 					i++;
@@ -165,7 +165,5 @@ function scr_player_draw() {
 		break;
 		
 	}
-	
-	if (justLanded) draw_sprite(spr_box, 0, x,y);
 
 }

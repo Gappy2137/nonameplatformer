@@ -15,7 +15,7 @@ scr_player_movement();
 scr_player_anim();
 
 // FX
-if (landed) && (justLanded) && (!inAir) && (isGrounded) {
+if (landed) && (justLanded) {
 	
 	if (instance_place(x, y, obj_dustpart_8)) {
 		
