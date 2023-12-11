@@ -181,6 +181,7 @@ uThickness = shader_get_uniform(sh_outline, "thickness");
 v = 0;
 
 instance_create_layer(x,y,LAYER_INST,obj_hook);
+
 /*
 var _my_method = function(){
 	instance_create_layer(x,y,"Instances",obj_trail);
