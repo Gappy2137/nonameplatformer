@@ -9,10 +9,6 @@ slopedown = 0;
 state = playerState.idle;
 hookedState = playerHookedState.none;
 ignoreGravity = false;
-hookAtMax = false;
-onHookVel = 0;
-onHookAngle = 0;
-hookSetAngle = 0;
 
 spdBase = 2;
 spd = spdBase;
@@ -189,4 +185,5 @@ var _my_method = function(){
 
 var trail = time_source_create(time_source_game, 1, time_source_units_frames, _my_method, [], -1);
 time_source_start(trail);
+
 */

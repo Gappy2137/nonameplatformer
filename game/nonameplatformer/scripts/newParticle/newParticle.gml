@@ -1,4 +1,4 @@
-function newParticle(xx, yy, spr, color, img, type){
+function newParticle(xx, yy, spr, color, img, type) {
 
 	var part = new obj_particlesystem.particleFX(xx, yy, spr, color, img, type);
 	

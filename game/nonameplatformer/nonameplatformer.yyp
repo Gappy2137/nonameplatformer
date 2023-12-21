@@ -57,7 +57,7 @@
   "isEcma": false,
   "LibraryEmitters": [],
   "MetaData": {
-    "IDEVersion": "2023.11.0.121",
+    "IDEVersion": "2023.11.1.129",
   },
   "resources": [
     {"id":{"name":"spr_player_snow_jump","path":"sprites/spr_player_snow_jump/spr_player_snow_jump.yy",},},
@@ -70,6 +70,7 @@
     {"id":{"name":"spr_halo_fx","path":"sprites/spr_halo_fx/spr_halo_fx.yy",},},
     {"id":{"name":"obj_camera","path":"objects/obj_camera/obj_camera.yy",},},
     {"id":{"name":"obj_decor_grass","path":"objects/obj_decor_grass/obj_decor_grass.yy",},},
+    {"id":{"name":"Script11","path":"scripts/Script11/Script11.yy",},},
     {"id":{"name":"obj_testcube","path":"objects/obj_testcube/obj_testcube.yy",},},
     {"id":{"name":"spr_jump_orb","path":"sprites/spr_jump_orb/spr_jump_orb.yy",},},
     {"id":{"name":"spr_player_snow_lose","path":"sprites/spr_player_snow_lose/spr_player_snow_lose.yy",},},
@@ -100,6 +101,7 @@
     {"id":{"name":"curve_jumpUp","path":"animcurves/curve_jumpUp/curve_jumpUp.yy",},},
     {"id":{"name":"spr_inv_bg","path":"sprites/spr_inv_bg/spr_inv_bg.yy",},},
     {"id":{"name":"spr_player_snow_run","path":"sprites/spr_player_snow_run/spr_player_snow_run.yy",},},
+    {"id":{"name":"rm_performance","path":"rooms/rm_performance/rm_performance.yy",},},
     {"id":{"name":"spr_semislope_8_dl","path":"sprites/spr_semislope_8_dl/spr_semislope_8_dl.yy",},},
     {"id":{"name":"obj_hazard_8","path":"objects/obj_hazard_8/obj_hazard_8.yy",},},
     {"id":{"name":"spr_tileset_decor","path":"sprites/spr_tileset_decor/spr_tileset_decor.yy",},},
@@ -173,6 +175,7 @@
     {"roomId":{"name":"rm_devroom","path":"rooms/rm_devroom/rm_devroom.yy",},},
     {"roomId":{"name":"rm_devroom2","path":"rooms/rm_devroom2/rm_devroom2.yy",},},
     {"roomId":{"name":"rm_devroom3","path":"rooms/rm_devroom3/rm_devroom3.yy",},},
+    {"roomId":{"name":"rm_performance","path":"rooms/rm_performance/rm_performance.yy",},},
   ],
   "templateType": null,
   "TextureGroups": [

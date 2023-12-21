@@ -118,10 +118,6 @@ global.game = {
 	
 	debug: false,
 	
-	currentRoom: undefined,
-	
-	nextRoom: undefined,
-	
 	game_set_size : function(newSize) {
 		
 		windowSize = newSize;

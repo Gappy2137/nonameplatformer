@@ -1,6 +1,6 @@
 depth = 0;
 
-// Particle system based on structs
+// Particle system based on constructors
 // If _image is set to -1 it picks random subimage from _spr
 // Type: 0 - particle goes in random direction with gravity - landing dust
 // Type: 1 - stationary particle, grows and disappears - jump orb halo

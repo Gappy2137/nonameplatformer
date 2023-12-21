@@ -1,13 +1,12 @@
 function cullScreen() {
 	
-	obj_game.c++;
-	
-	if (!instance_exists(obj_camera)) exit;
+	//if (!instance_exists(obj_camera)) exit;
 	
 	var cullDist = 32;
 
 	instance_deactivate_object(par_collision);
 	instance_deactivate_object(par_entity);
+	instance_deactivate_object(par_grass);
 	instance_deactivate_object(obj_walljump_8);
 	instance_deactivate_object(obj_doublejump_8);
 	instance_deactivate_object(obj_roomtrans_8);

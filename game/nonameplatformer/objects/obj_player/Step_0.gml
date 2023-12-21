@@ -267,9 +267,7 @@ sprPos[3] = [-sprOffset, +sprOffset];
 			
 			if (!wallJumpTrigger)
 				hsp = lerp(hsp, spd * horKeypress, accel);
-			//if (slideTime > 0)
-				
-				//hsp = lerp(hsp, clamp(hspAtRelease, spd, hspMax) * horKeypress, accel * ( (abs(hsp) > spdBase) ? .1 : .25 ) );
+			
 		}
 		
 		facing = horKeypress;
@@ -426,8 +424,7 @@ sprPos[3] = [-sprOffset, +sprOffset];
 		if ((jumpTime >= jumpTimeThreshold) || (!isJumping)) {
 			
 			inAir = true;
-			if (!ignoreGravity)
-				vsp += grav;
+			vsp += grav;
 			
 		}
 		
