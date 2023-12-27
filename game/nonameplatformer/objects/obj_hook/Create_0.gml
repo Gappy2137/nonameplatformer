@@ -46,3 +46,7 @@ ropeID = noone;
 ropeDrawTimer = 3;
 
 wireColor = #2D3136;
+
+soundTrigger = false;
+soundTimerMax = 20;
+soundTimer = soundTimerMax;

@@ -32,6 +32,17 @@ if ( (ray[0] != noone) && (ray[0].object_index == obj_attachable_8) ) {
 	global.game.cursorType = cursorSprite.hook;
 }
 	
+if (soundTrigger) {
+		
+	if (soundTimer <= 0) {
+				
+		soundTimer = soundTimerMax;
+		soundTrigger = false;
+				
+	} else soundTimer--;
+
+}
+	
 switch (state) {
 	
 	case hookState.onPlayer:
@@ -45,6 +56,8 @@ switch (state) {
 		ropeID = noone;
 			
 		if ( (keyLaunch) && (canUse) ) {
+	
+			if (obj_inventory.equipped != weaponEnum.hook) exit;
 	
 			launchAngle = angleToMouse;
 				
@@ -75,6 +88,8 @@ switch (state) {
 			
 	break;
 	case hookState.launched:
+		
+		if (obj_inventory.equipped != weaponEnum.hook) exit;
 		
 		launchTime++;
 		catchTime = 0;
@@ -131,10 +146,19 @@ switch (state) {
 				state = hookState.released;
 		}
 	
+		if (!soundTrigger) {
+			
+			audio_play_sound(snd_hook_launch, 1, false);
+			soundTrigger = true;
+			
+		}
+		
 
 			
 	break;
 	case hookState.released:
+	
+		if (obj_inventory.equipped != weaponEnum.hook) exit;
 		
 		if (ropeID != noone) {
 				
@@ -176,20 +200,17 @@ switch (state) {
 		x = returnTo.x;
 		y = returnTo.y;
 			
-		/*
-		var angleReturn = point_direction(x, y, returnToX, returnToY);
-
-		hsp = lengthdir_x(releaseSpd, angleReturn);
-		vsp = lengthdir_y(releaseSpd, angleReturn);
-	
-		x += hsp;
-		y += vsp;
-		drawX = x;
-		drawY = y;
+		if (!soundTrigger) {
 			
-		*/
+			audio_play_sound(snd_hook_release, 1, false);
+			soundTrigger = true;
+			
+		}
+		
 	break;
 	case hookState.embedded:
+	
+		if (obj_inventory.equipped != weaponEnum.hook) exit;
 		
 		if (obj_player.inAir) obj_player.isJumping = true;
 		
@@ -209,6 +230,8 @@ switch (state) {
 				anchorY = aY;
 					
 			}
+				
+			audio_play_sound(snd_hook_embed, 1, false);
 				
 			ropeImpulse = 2;
 			

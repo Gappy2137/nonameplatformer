@@ -1175,6 +1175,7 @@ sprPos[3] = [-sprOffset, +sprOffset];
 #endregion
 
 // FX
+
 if (landed) && (justLanded) {
 	
 	if (instance_place(x, y, obj_dustpart_8)) {
@@ -1182,7 +1183,10 @@ if (landed) && (justLanded) {
 		newParticle(x, y + sprite_yoffset, spr_dust_part, #885041, 3, 0);
 
 	}
-	
+	/*
+	if (!audio_is_playing(snd_ground_impact))
+		audio_play_sound(snd_ground_impact, 1, false, .5);
+	*/
 	//justLanded = false;
 
 }
