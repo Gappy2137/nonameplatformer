@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "Script11",
-  "isCompatibility": false,
-  "isDnD": false,
-  "parent": {
-    "name": "Scripts",
-    "path": "folders/Base_Group/Scripts.yy",
+  "$GMScript":"",
+  "%Name":"Script11",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"Script11",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Base_Group/Scripts.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

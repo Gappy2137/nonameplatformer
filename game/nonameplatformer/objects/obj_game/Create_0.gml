@@ -1,6 +1,6 @@
 /// @description Setup
 
-//show_debug_overlay(true);
+show_debug_overlay(true);
 
 application_surface_draw_enable(true);
 

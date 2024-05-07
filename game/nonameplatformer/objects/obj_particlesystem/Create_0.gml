@@ -53,7 +53,7 @@ function particleFX(_x, _y, _spr, _color, _image, _type) constructor {
 		break;
 	}
 	
-	Step = function() {
+	static Step = function() {
 	
 		switch (type) {
 		
@@ -103,7 +103,7 @@ function particleFX(_x, _y, _spr, _color, _image, _type) constructor {
 	
 	}
 	
-	Draw = function() {
+	static Draw = function() {
 		
 		draw_sprite_ext(sprite, image, xx, yy, size, size, angle, color, alpha);
 		

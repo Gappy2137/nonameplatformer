@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "bezier_points",
-  "isCompatibility": false,
-  "isDnD": false,
-  "parent": {
-    "name": "Functions",
-    "path": "folders/Base_Group/Scripts/Functions.yy",
+  "$GMScript":"",
+  "%Name":"bezier_points",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"bezier_points",
+  "parent":{
+    "name":"Functions",
+    "path":"folders/Base_Group/Scripts/Functions.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

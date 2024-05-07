@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "doDie",
-  "isCompatibility": false,
-  "isDnD": false,
-  "parent": {
-    "name": "Player",
-    "path": "folders/Base_Group/Scripts/Player.yy",
+  "$GMScript":"",
+  "%Name":"doDie",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"doDie",
+  "parent":{
+    "name":"Player",
+    "path":"folders/Base_Group/Scripts/Player.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

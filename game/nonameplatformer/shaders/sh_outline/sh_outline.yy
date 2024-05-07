@@ -1,10 +1,12 @@
 {
-  "resourceType": "GMShader",
-  "resourceVersion": "1.0",
-  "name": "sh_outline",
-  "parent": {
-    "name": "Shaders",
-    "path": "folders/Second_Group/Shaders.yy",
+  "$GMShader":"",
+  "%Name":"sh_outline",
+  "name":"sh_outline",
+  "parent":{
+    "name":"Shaders",
+    "path":"folders/Second_Group/Shaders.yy",
   },
-  "type": 1,
+  "resourceType":"GMShader",
+  "resourceVersion":"2.0",
+  "type":1,
 }
